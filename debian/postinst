@@ -17,7 +17,7 @@ askyesno () {
 			a="y"
 		fi
 		a=`echo $a | tr A-Z a-z`
-		if [ "$a" = "y" -o "$a" = "n" ] ; then
+		if [ "$a" = "y" ] || [ "$a" = "n" ] ; then
 			break
 		fi
 		echo "Illegal answer"
@@ -57,7 +57,7 @@ if [ ! -e /etc/group ] ; then
 	cp /usr/share/base-passwd/group.master /etc/group
 fi
 
-if [ "$2" = "3.2.2" -a -f /etc/passwd.org ] ; then
+if [ "$2" = "3.2.2" ] && [ -f /etc/passwd.org ] ; then
 	cat <<EOF
 
 You are upgrading from version 3.2.2 of base-passwd which had a nasty
