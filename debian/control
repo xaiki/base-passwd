@@ -2,7 +2,7 @@ Source: base-passwd
 Section: base
 Priority: required
 Maintainer: Colin Watson <cjwatson@debian.org>
-Standards-Version: 3.5.10
+Standards-Version: 3.6.0
 Build-Depends: sgmltools-lite, w3m
 
 Package: base-passwd
