@@ -56,7 +56,8 @@ binary-arch: build
 	gzip -9 debian/tmp$(docdir)/*
 	install -p -m 644 -o root -g root README debian/tmp$(docdir)/
 	install -p -m 644 -o root -g root debian/copyright debian/tmp$(docdir)/
-	install -p -m 644 -o root -g root doc/users-and-groups.html \
+	install -p -m 644 -o root -g root \
+		doc/users-and-groups.html doc/users-and-groups.txt \
 		debian/tmp$(docdir)/
 
 	install -d -m 755 -o root -g root debian/tmp/DEBIAN

@@ -1,3 +1,9 @@
+base-passwd (3.4.6) UNRELEASED; urgency=low
+
+  * Build users-and-groups.txt as well as users-and-groups.html.
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 30 Dec 2002 01:42:42 +0000
+
 base-passwd (3.4.5) unstable; urgency=medium
 
   * Fix a thinko that caused update-passwd never to add new passwd/group
