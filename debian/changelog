@@ -5,6 +5,7 @@ base-passwd (3.4.7) UNRELEASED; urgency=low
     to the users-and-groups documentation (closes: #178460).
   * Make -v/--verbose, and thus the postinst, a little less verbose. A
     second -v option restores the previous level of verbosity.
+  * Improvements to nobody/nogroup documentation suggested by Tony Finch.
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 24 Jan 2003 09:39:44 +0000
 
