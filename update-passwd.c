@@ -37,7 +37,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.4.6"
+#define VERSION			"3.4.7"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
