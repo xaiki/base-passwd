@@ -1,5 +1,6 @@
 /* update-passwd - Safely update /etc/passwd, /etc/shadow and /etc/group
  * Copyright 1999-2002 Wichert Akkerman <wichert@deephackmode.org>
+ * Copyright 2002 Colin Watson <cjwatson@debian.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
