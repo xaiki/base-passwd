@@ -533,9 +533,11 @@
 	<term>utmp</term>
 	<listitem>
 	  <para>
-	    This group can write to <filename>/var/run/utmp</filename> and
-	    similar files. Programs that need to be able to write to it
-	    (such as X terminal emulators) are setgid utmp.
+	    This group can write to <filename>/var/run/utmp</filename>,
+	    <filename>/var/log/wtmp</filename>,
+	    <filename>/var/log/lastlog</filename>, and similar files.
+	    Programs that need to be able to write to them (such as X
+	    terminal emulators) are setgid utmp.
 	  </para>
 	</listitem>
       </varlistentry>
