@@ -112,6 +112,13 @@
 	    daemons certainly do this. The daemon user is also handy for
 	    locally installed daemons, probably.
 	  </para>
+	  <para>
+	    LSB 1.3 lists daemon as legacy, and says: "The 'daemon' UID/GID
+	    was used as an unprivileged UID/GID for daemons to execute under
+	    in order to limit their access to the system. Generally daemons
+	    should now run under individual UID/GIDs in order to further
+	    partition daemons from one another."
+	  </para>
 	</listitem>
       </varlistentry>
 
@@ -124,6 +131,11 @@
 	    binaries in <filename>/bin</filename>? It is not mentioned in
 	    the FHS, Debian Policy, or the changelogs of base-passwd or
 	    base-files.
+	  </para>
+	  <para>
+	    LSB 1.3 lists bin as legacy, and says: "The 'bin' UID/GID is
+	    included for compatibility with legacy applications. New
+	    applications should no longer use the 'bin' UID/GID."
 	  </para>
 	</listitem>
       </varlistentry>

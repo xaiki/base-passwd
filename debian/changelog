@@ -1,12 +1,14 @@
 base-passwd (3.4.7) UNRELEASED; urgency=low
 
   * Clarify description (thanks, Filip Van Raemdonck; closes: #178170).
-  * Add Robert Bihlmeyer's comments about daemon, sys, tty, lp, and nogroup
-    to the users-and-groups documentation (closes: #178460).
   * Make -v/--verbose, and thus the postinst, a little less verbose. A
     second -v option restores the previous level of verbosity.
-  * Improvements to nobody/nogroup and operator documentation suggested by
-    Tony Finch.
+  * users-and-groups:
+    - Add Robert Bihlmeyer's comments about daemon, sys, tty, lp, and
+      nogroup (closes: #178460).
+    - Improvements to nobody/nogroup and operator documentation suggested by
+      Tony Finch.
+    - Include LSB 1.3 comments on bin and daemon.
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 24 Jan 2003 09:39:44 +0000
 
