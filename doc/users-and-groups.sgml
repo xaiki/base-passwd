@@ -149,11 +149,6 @@
 	    anyone can sync the system at the console even if they have no
 	    account on the system.
 	  </para>
-	  <para>
-	    HELP: If that is the only purpose of user sync, then group sync
-	    seems not very useful. The sync user could just as well be in
-	    nogroup.
-	  </para>
 	</listitem>
       </varlistentry>
 
