@@ -4,7 +4,7 @@ set -e
 
 changes=0
 
-askyesno() {
+askyesno () {
 	if [ "$DEBIAN_FRONTEND" = "noninteractive" ] ; then
 		a=y
 		return
@@ -22,6 +22,26 @@ askyesno() {
 		fi
 		echo "Illegal answer"
 	done
+}
+
+# A cut-down version of 'which' from debianutils.
+searchpath () {
+	PROGRAM="$1"
+	IFS_SAVE="$IFS"
+	IFS=:
+	RET=1
+	for ELEMENT in $PATH; do
+		if [ -z "$ELEMENT" ]; then
+			ELEMENT=.
+		fi
+		if [ -f "$ELEMENT/$PROGRAM" ] && \
+		   [ -x "$ELEMENT/$PROGRAM" ]; then
+			RET=0
+			break
+		fi
+	done
+	IFS="$IFS_SAVE"
+	return "$RET"
 }
 
 
@@ -96,7 +116,7 @@ EOF
 fi
 
 if [ "$changes" -gt 0 ] ; then
-	if command -v nscd > /dev/null 2>&1 ; then
+	if searchpath nscd; then
 		nscd -i passwd -i group || true
 	fi
 fi
