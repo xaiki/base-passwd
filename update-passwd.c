@@ -41,6 +41,9 @@
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
+#define DEFAULT_PASSWD_SYSTEM	"/etc/passwd"
+#define DEFAULT_SHADOW_SYSTEM	_PATH_SHADOW
+#define DEFAULT_GROUP_SYSTEM	"/etc/group"
 
 #define	WRITE_EXTENSION		".upwd-write"
 #define	BACKUP_EXTENSION	".org"
@@ -114,9 +117,9 @@ struct _node {
 
 const char*	master_passwd	= DEFAULT_PASSWD_MASTER;
 const char*	master_group	= DEFAULT_GROUP_MASTER;
-const char*	sys_passwd	= "/etc/passwd";
-const char*	sys_shadow	= _PATH_SHADOW;
-const char*	sys_group	= "/etc/group";
+const char*	sys_passwd	= DEFAULT_PASSWD_SYSTEM;
+const char*	sys_shadow	= DEFAULT_SHADOW_SYSTEM;
+const char*	sys_group	= DEFAULT_GROUP_SYSTEM;
 
 struct _node*	master_accounts	= NULL;
 struct _node*	master_groups	= NULL;
