@@ -1,3 +1,12 @@
+base-passwd (3.5.3) unstable; urgency=low
+
+  * The noautoadd flag has been broken since 3.2.0: update-passwd was
+    looking at the wrong id. Fortunately, since noautoadd entries aren't in
+    the master files, this didn't matter except that it caused a segfault on
+    empty system files (closes: #189196).
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 16 Apr 2003 13:44:55 +0100
+
 base-passwd (3.5.2) unstable; urgency=low
 
   * Fix groff problems, mainly the use of "-", throughout update-passwd(8).

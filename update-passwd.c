@@ -607,8 +607,10 @@ void process_new_entries(const struct _info* lst, struct _node** passwd, struct 
 	if (find_by_named_entry(*passwd, master)==NULL) {
 	    struct _node* newnode;
 
-	    if (noautoadd(lst, (*passwd)->id))
+	    if (noautoadd(lst, master->id)) {
+		master=master->next;
 		continue;
+	    }
 
 	    newnode=copy_node(master);
 	    add_node(passwd, newnode, 1);
