@@ -5,7 +5,7 @@ sys:*:3:
 adm:*:4:
 tty:*:5:
 disk:*:6:
-lp:*:7:lp
+lp:*:7:
 mail:*:8:
 news:*:9:
 uucp:*:10:
