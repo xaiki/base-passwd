@@ -260,7 +260,7 @@ struct _node* copy_node(const struct _node* node) {
 
 /* Add a new item to a list
  */
-void add_node(struct _node** head, struct _node* node) {
+void add_node(struct _node** head, struct _node* node, int new_entry) {
     node->next=NULL;
 
     if (*head==NULL) {
@@ -269,15 +269,31 @@ void add_node(struct _node** head, struct _node* node) {
 	return;
     }
 
-    /* Make sure NIS compat entries stay at the end.
-     */
-    if (strcmp((*head)->last->name, "+")==0) {
-	struct _node*	walk=(*head)->last;
-	while (walk->prev && strcmp(walk->prev->name, "+")==0)
-	    walk=walk->prev;
-	node->prev=walk->prev;
-	node->next=walk;
-	walk->prev->next=node;
+    if (new_entry) {
+	/* Make sure NIS compat entries stay at the end when adding new
+	 * entries.
+	 */
+	struct _node*	walk;
+	for (walk=*head; walk; walk=walk->next) {
+	    if (strcmp(walk->name, "+")==0)
+		break;
+	}
+	/* Was there a "+" entry at all?
+	 */
+	if (walk) {
+	    node->prev=walk->prev;
+	    node->next=walk;
+	    if (walk->prev)
+		walk->prev->next=node;
+	    walk->prev=node;
+	    if (walk==*head) {
+		node->last=(*head)->last;
+		*head=node;
+	    }
+	    return;
+	}
+	/* Otherwise fall through and add as normal.
+	 */
     } else {
 	(*head)->last->next=node;
 	node->prev=(*head)->last;
@@ -376,7 +392,7 @@ int read_passwd(struct _node** list, const char* file) {
 	    node->id=0;
 	else
 	    node->id=node->d.pw.pw_uid;
-	add_node(list, node);
+	add_node(list, node, 0);
 	node=create_node();
     }
 
@@ -418,7 +434,7 @@ int read_group(struct _node** list, const char* file) {
 	    node->id=0;
 	else
 	    node->id=node->d.gr.gr_gid;
-	add_node(list, node);
+	add_node(list, node, 0);
 	node=create_node();
     }
 
@@ -426,6 +442,7 @@ int read_group(struct _node** list, const char* file) {
 	fprintf(stderr, "Error reading group file %s: %s\n", file, strerror(errno));
 	return 2;
     }
+
     free(node);
     fclose(input);
 
@@ -457,7 +474,7 @@ int read_shadow(struct _node** list, const char* file) {
 	node->name=node->d.sp.sp_namp;
 	if (!node->name)
 	    break;
-	add_node(list, node);
+	add_node(list, node, 0);
 	node=create_node();
     }
 
@@ -572,7 +589,7 @@ void process_new_entries(const struct _info* lst, struct _node** passwd, struct 
 		continue;
 
 	    newnode=copy_node(master);
-	    add_node(passwd, newnode);
+	    add_node(passwd, newnode, 1);
 	    flag_dirty++;
 
 	    if (opt_verbose)

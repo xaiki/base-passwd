@@ -4,6 +4,9 @@ base-passwd (3.4.4) UNRELEASED; urgency=low
   * Add initial informative documentation of the global static users and
     groups (closes: #50304). This is a work in progress, so feel free to
     send suggestions and corrections.
+  * Ensure that "+" entries (which ignore the rest of the file and switch to
+    NIS) are always at the end of passwd/group/shadow (closes: #166756).
+    Existing entries are not reordered; see #130735.
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 30 Nov 2002 17:44:45 +0000
 
