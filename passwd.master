@@ -10,7 +10,6 @@ mail:*:8:8:mail:/var/mail:/bin/sh
 news:*:9:9:news:/var/spool/news:/bin/sh
 uucp:*:10:10:uucp:/var/spool/uucp:/bin/sh
 proxy:*:13:13:proxy:/bin:/bin/sh
-postgres:*:31:32:postgres:/var/lib/postgres:/bin/sh
 www-data:*:33:33:www-data:/var/www:/bin/sh
 backup:*:34:34:backup:/var/backups:/bin/sh
 operator:*:37:37:Operator:/var:/bin/sh

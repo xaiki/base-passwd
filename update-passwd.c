@@ -37,7 +37,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.4.7"
+#define VERSION			"3.5.0"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
@@ -68,6 +68,7 @@ const struct _info specialusers[] = {
     {  0, (FL_KEEPALL|FL_NOAUTOREMOVE)			},  /* root	*/
     { 11, (FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* ftp	*/
     { 30, (FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* majordom	*/
+    { 31, (FL_NOAUTOREMOVE)				},  /* postgres */
     { 33, (FL_KEEPHOME)					},  /* www-data	*/
     { 35, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* dos	*/
     { 36, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* msql	*/
@@ -87,6 +88,7 @@ const struct _info specialgroups[] = {
     {  0, (FL_KEEPALL|FL_NOAUTOREMOVE)			},  /* root	*/
     { 11, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* ftp	*/
     { 31, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* majordom	*/
+    { 32, (FL_NOAUTOREMOVE)				},  /* postgres */
     { 35, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* dos	*/
     { 36, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* msql	*/
     { 70, (FL_NOAUTOREMOVE)				},  /* qmail	*/
