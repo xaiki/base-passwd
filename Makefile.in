@@ -29,7 +29,7 @@ install: all
 	mkdir -p $(DESTDIR)$(sbindir)
 	$(INSTALL) update-passwd $(DESTDIR)$(sbindir)/
 	mkdir -p $(DESTDIR)$(mandir)/man8
-	$(INSTALL_DATA) update-passwd.8 $(DESTDIR)$(mandir)/man8/
+	$(INSTALL_DATA) man/update-passwd.8 $(DESTDIR)$(mandir)/man8/
 
 update-passwd.o: version.h
 

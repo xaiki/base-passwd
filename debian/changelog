@@ -1,3 +1,9 @@
+base-passwd (3.5.4) UNRELEASED; urgency=low
+
+  * Move the man pages into their own directory in the source package.
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 24 May 2003 12:35:33 +0100
+
 base-passwd (3.5.3) unstable; urgency=low
 
   * The noautoadd flag has been broken since 3.2.0: update-passwd was
