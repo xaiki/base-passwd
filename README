@@ -55,3 +55,4 @@ Reserved gids:
     64010 | qmail     | qmail
     64020 | asterisk  | asterisk
 
+(Next uid/gid allocation: 64025.)
