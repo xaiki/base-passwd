@@ -97,7 +97,7 @@ fi
 
 if [ "$changes" -gt 0 ] ; then
 	if command -v nscd > /dev/null 2>&1 ; then
-		nscd -i passwd -i group
+		nscd -i passwd -i group || true
 	fi
 fi
 

@@ -36,7 +36,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.4.1"
+#define VERSION			"3.4.3"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
@@ -526,7 +526,7 @@ void usage() {
 	"  -n, --dry-run             Just say what we would do but do nothing\n"
 	"  -L, --no-locking          Don't try to lock files\n"
 	"  -h, --help                Display this information and exit\n"
-	"  -V, --version             Show versionnumer and exit\n"
+	"  -V, --version             Show version number and exit\n"
 	"\n"
 	" File locations used:\n"
 	"   master passwd: %s\n"
@@ -629,8 +629,10 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 
 	if (!keepgecos(specialusers, passwd->id))
 	    if ((passwd->d.pw.pw_gecos==NULL) || (strcmp(passwd->d.pw.pw_gecos, mc->d.pw.pw_gecos)!=0)) {
-		if (opt_verbose)
-		    printf("Changing GECOS of %s to \"%s\".\n", passwd->name, mc->d.pw.pw_gecos);
+		if (opt_verbose) {
+		    const char *oldgecos = passwd->d.pw.pw_gecos ? passwd->d.pw.pw_gecos : "";
+		    printf("Changing GECOS of %s from \"%s\" to \"%s\".\n", passwd->name, oldgecos, mc->d.pw.pw_gecos);
+		}
 		/* We update the pw_gecos entry of passwd so it now points into the
 		 * buffer from mc. This is safe for us, since we know we won't free
 		 * the data in mc until after we are done.
@@ -641,8 +643,10 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 
 	if (!keephome(specialusers, passwd->id))
 	    if ((passwd->d.pw.pw_dir==NULL) || (strcmp(passwd->d.pw.pw_dir, mc->d.pw.pw_dir)!=0)) {
-		if (opt_verbose)
-		    printf("Changing home-directory of %s to %s\n", passwd->name, mc->d.pw.pw_dir);
+		if (opt_verbose) {
+		    const char *olddir = passwd->d.pw.pw_dir ? passwd->d.pw.pw_dir : "(none)";
+		    printf("Changing home-directory of %s from %s to %s\n", passwd->name, olddir, mc->d.pw.pw_dir);
+		}
 		/* We update the pw_dir entry of passwd so it now points into the
 		 * buffer from mc. This is safe for us, since we know we won't free
 		 * the data in mc until after we are done.
@@ -653,8 +657,10 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 
 	if (!keepshell(specialusers, passwd->id))
 	    if ((passwd->d.pw.pw_shell==NULL) || (strcmp(passwd->d.pw.pw_shell, mc->d.pw.pw_shell)!=0)) {
-		if (opt_verbose)
-		    printf("Changing shell of %s to %s\n", passwd->name, mc->d.pw.pw_shell);
+		if (opt_verbose) {
+		    const char *oldshell = passwd->d.pw.pw_shell ? passwd->d.pw.pw_shell : "(none)";
+		    printf("Changing shell of %s to %s\n", passwd->name, oldshell, mc->d.pw.pw_shell);
+		}
 		/* We update the pw_shell entry of passwd so it now points into the
 		 * buffer from mc. This is safe for us, since we know we won't free
 		 * the data in mc until after we are done.

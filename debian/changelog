@@ -1,3 +1,14 @@
+base-passwd (3.4.3) unstable; urgency=low
+
+  * New maintainer. Thanks, Wichert.
+  * Don't fail to configure if nscd isn't running (closes: #166606).
+  * Fix typo in update-passwd's usage output (closes: #139981).
+  * Print old value of gecos / home directory / shell as well as new value
+    (closes: #136227).
+  * Fix strip argument typo in debian/rules.
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 28 Nov 2002 23:59:47 +0000
+
 base-passwd (3.4.2) unstable; urgency=low
 
   * Add new sasl group used to regulate access to the sasl secrets
