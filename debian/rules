@@ -33,7 +33,7 @@ binary-arch: build
 	-rm -rf debian/tmp debian/files debian/substvars
 
 	strip --strip-unneeded --remove-section=.comment \
-		--remove=section=.note update-passwd
+		--remove-section=.note update-passwd
 
 	install -d -m 755 -o root -g root debian/tmp/usr/sbin
 	install -p -m 755 -o root -g root update-passwd debian/tmp/usr/sbin/
