@@ -8,7 +8,7 @@ base-passwd (3.4.3) unstable; urgency=low
   * Fix strip argument typo in debian/rules.
   * Change gecos for list to "Mailing List Manager" (closes: #149466).
 
- -- Colin Watson <cjwatson@debian.org>  Fri, 29 Nov 2002 00:09:25 +0000
+ -- Colin Watson <cjwatson@debian.org>  Sat, 30 Nov 2002 03:15:06 +0000
 
 base-passwd (3.4.2) unstable; urgency=low
 
