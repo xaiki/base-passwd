@@ -18,10 +18,10 @@ make the necessary changes.
 There are some exceptions to this:
 * root is never removed or changed. If it doesn't exist a root account will
   be added though.
-* the homedirectory for the ftp user is preserved, and it is neither added
+* the home directory for the ftp user is preserved, and it is neither added
   nor removed automatically since this can affect how FTP daemons handle
   anonymous access
-* the homedirectory for the www-data user is preserved 
+* the home directory for the www-data user is preserved 
 * if a user or group exists but with an uid outside our reserved range
   we don't change it
 
