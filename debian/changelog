@@ -3,6 +3,11 @@ base-passwd (3.5.0) UNRELEASED; urgency=low
   * Remove the postgres user and group for new installations, although not
     on upgrades. postgresql 7.1release-3 and up will create a user and group
     for itself in the system range (closes: #81222, #95557).
+  * When using fget*ent_r(), we're supposed to reallocate larger and larger
+    chunks of memory until we find one in which each passwd/group/shadow
+    line fits, and there's an arbitrary limit on the length of lines because
+    we don't. Since update-passwd is single-threaded, this is unnecessary;
+    just use fget*ent() and copy the returned structures (closes: #109038).
 
  -- Colin Watson <cjwatson@debian.org>  Tue,  4 Feb 2003 23:10:27 +0000
 

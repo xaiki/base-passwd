@@ -1,6 +1,6 @@
 /* update-passwd - Safely update /etc/passwd, /etc/shadow and /etc/group
  * Copyright 1999-2002 Wichert Akkerman <wichert@deephackmode.org>
- * Copyright 2002 Colin Watson <cjwatson@debian.org>
+ * Copyright 2002, 2003 Colin Watson <cjwatson@debian.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -44,8 +44,6 @@
 
 #define	WRITE_EXTENSION		".upwd-write"
 #define	BACKUP_EXTENSION	".org"
-
-#define OUR_NSS_BUFSIZE		8192
 
 
 #define FL_KEEPHOME	0x0001
@@ -112,7 +110,6 @@ struct _node {
     struct _node*	next;
     struct _node*	prev;
     struct _node*	last;
-    char		buf[OUR_NSS_BUFSIZE];
 };
 
 const char*	master_passwd	= DEFAULT_PASSWD_MASTER;
@@ -135,12 +132,34 @@ int		opt_sanity	= 0;
 int		flag_dirty	= 0;
 
 
+/* malloc() with out-of-memory checking.
+ */
+void* xmalloc(size_t n) {
+    void *p=malloc(n);
+    if (p==0 && n==0) {
+	p=malloc((size_t)1);
+	if (p==0) {
+	    fprintf(stderr, "Out of memory!\n");
+	    exit(1);
+	}
+    }
+    return p;
+}
+
+/* Copy a string with out-of-memory checking.
+ */
+char* xstrdup(const char *string) {
+    if (!string)
+	return NULL;
+    return strcpy(xmalloc(strlen(string) + 1), string);
+}
+
 /* Create an empty list-entry
  */
 struct _node* create_node() {
     struct _node*	newnode;
 
-    newnode=(struct _node*)malloc(sizeof(struct _node));
+    newnode=(struct _node*)xmalloc(sizeof(struct _node));
     newnode->name=0;
     newnode->id=0;
     newnode->next=NULL;
@@ -152,87 +171,36 @@ struct _node* create_node() {
 }
 
 
-void copy_passwd(struct _node* newnode, const struct _node* node) {
-    int		idx	= 0;
-
-    assert(node->t==t_passwd);
-
-    newnode->d.pw.pw_uid=node->d.pw.pw_uid;
-    newnode->d.pw.pw_gid=node->d.pw.pw_gid;
-
-    newnode->d.pw.pw_name=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.pw.pw_name)+1;
-
-    newnode->d.pw.pw_passwd=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.pw.pw_passwd)+1;
-
-    newnode->d.pw.pw_gecos=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.pw.pw_gecos)+1;
-
-    newnode->d.pw.pw_dir=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.pw.pw_dir)+1;
-
-    newnode->d.pw.pw_shell=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.pw.pw_shell)+1;
-
-    if (idx>OUR_NSS_BUFSIZE) {
-	fprintf(stderr, "copy_passwd: Aaiieee, we overflowed an entry-buffer, "
-			"aborting\n");
-	exit(100);
-    }
+void copy_passwd(struct _node* newnode, const struct passwd* pw) {
+    newnode->d.pw=*pw;
+    newnode->d.pw.pw_name=xstrdup(pw->pw_name);
+    newnode->d.pw.pw_passwd=xstrdup(pw->pw_passwd);
+    newnode->d.pw.pw_gecos=xstrdup(pw->pw_gecos);
+    newnode->d.pw.pw_dir=xstrdup(pw->pw_dir);
+    newnode->d.pw.pw_shell=xstrdup(pw->pw_shell);
 }
 
 
-void copy_shadow(struct _node* newnode, const struct _node* node) {
-    int		idx	= 0;
-
-    assert(node->t==t_shadow);
-
-    newnode->d.sp.sp_lstchg=node->d.sp.sp_lstchg;
-    newnode->d.sp.sp_min=node->d.sp.sp_min;
-    newnode->d.sp.sp_max=node->d.sp.sp_max;
-    newnode->d.sp.sp_warn=node->d.sp.sp_warn;
-    newnode->d.sp.sp_inact=node->d.sp.sp_inact;
-    newnode->d.sp.sp_expire=node->d.sp.sp_expire;
-
-    newnode->d.sp.sp_namp=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.sp.sp_namp)+1;
-
-    newnode->d.sp.sp_pwdp=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.sp.sp_pwdp)+1;
-
-    if (idx>OUR_NSS_BUFSIZE) {
-	fprintf(stderr, "copy_shadow: Aaiieee, we overflowed an entry-buffer, "
-			"aborting\n");
-	exit(100);
-    }
+void copy_shadow(struct _node* newnode, const struct spwd* sp) {
+    newnode->d.sp=*sp;
+    newnode->d.sp.sp_namp=xstrdup(sp->sp_namp);
+    newnode->d.sp.sp_pwdp=xstrdup(sp->sp_pwdp);
 }
 
 
-void copy_group(struct _node* newnode, const struct _node* node) {
-    int		idx	= 0;
+void copy_group(struct _node* newnode, const struct group* gr) {
+    int		memcount, mem;
 
-    assert(node->t==t_group);
+    newnode->d.gr=*gr;
+    newnode->d.gr.gr_name=xstrdup(gr->gr_name);
+    newnode->d.gr.gr_passwd=xstrdup(gr->gr_passwd);
 
-    newnode->d.gr.gr_gid=node->d.gr.gr_gid;
-
-    newnode->d.gr.gr_name=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.gr.gr_name)+1;
-
-    newnode->d.gr.gr_passwd=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.gr.gr_passwd)+1;
-
-    newnode->d.gr.gr_name=(newnode->buf+idx);
-    idx+=sprintf((newnode->buf+idx), node->d.gr.gr_name)+1;
-
-    /* TODO: properly copy the memberlist. */
-    newnode->d.gr.gr_mem=node->d.gr.gr_mem;
-
-    if (idx>OUR_NSS_BUFSIZE) {
-	fprintf(stderr, "copy_group: Aaiieee, we overflowed an entry-buffer, "
-			"aborting\n");
-	exit(100);
-    }
+    for (memcount=0; gr->gr_mem[memcount]; ++memcount)
+	;
+    newnode->d.gr.gr_mem=xmalloc((memcount+1) * sizeof(char*));
+    for (mem=0; mem<memcount; ++mem)
+	newnode->d.gr.gr_mem[mem]=xstrdup(gr->gr_mem[mem]);
+    newnode->d.gr.gr_mem[memcount]=NULL;
 }
 
 /* Make a copy of a list-entry
@@ -247,13 +215,13 @@ struct _node* copy_node(const struct _node* node) {
 
     switch (newnode->t) {
 	case t_passwd:
-	    copy_passwd(newnode, node);
+	    copy_passwd(newnode, &node->d.pw);
 	    break;
 	case t_shadow:
-	    copy_shadow(newnode, node);
+	    copy_shadow(newnode, &node->d.sp);
 	    break;
 	case t_group:
-	    copy_group(newnode, node);
+	    copy_group(newnode, &node->d.gr);
 	    break;
 	default:
 	    fprintf(stderr, "Internal error: unexpected entrytype %d\n", newnode->t);
@@ -401,7 +369,6 @@ int read_passwd(struct _node** list, const char* file) {
     FILE*		input;
     struct _node*	node;
     struct passwd*	result;
-    int			success;
 
     if (opt_verbose>2)
 	printf("Reading passwd from %s\n", file);
@@ -411,9 +378,9 @@ int read_passwd(struct _node** list, const char* file) {
 	return 1;
     }
 
-    node=create_node();
-
-    while ((success=fgetpwent_r(input, &(node->d.pw), node->buf, OUR_NSS_BUFSIZE, &result))==0) {
+    while ((result=fgetpwent(input))!=NULL) {
+	node=create_node();
+	copy_passwd(node, result);
 	node->t=t_passwd;
 	node->name=node->d.pw.pw_name;
 	if (!node->name)
@@ -423,15 +390,13 @@ int read_passwd(struct _node** list, const char* file) {
 	else
 	    node->id=node->d.pw.pw_uid;
 	add_node(list, node, 0);
-	node=create_node();
     }
 
-    if ((success!=0) && (errno!=ENOENT)) {
+    if ((result==NULL) && (errno!=ENOENT)) {
 	fprintf(stderr, "Error reading passwd file %s: %s\n", file, strerror(errno));
 	return 2;
     }
 
-    free(node);
     fclose(input);
 
     return 0;
@@ -443,7 +408,6 @@ int read_group(struct _node** list, const char* file) {
     FILE*		input;
     struct _node*	node;
     struct group*	result;
-    int			success;
 
     if (opt_verbose>2)
 	printf("Reading group from %s\n", file);
@@ -453,9 +417,9 @@ int read_group(struct _node** list, const char* file) {
 	return 1;
     }
 
-    node=create_node();
-
-    while ((success=fgetgrent_r(input, &(node->d.gr), node->buf, OUR_NSS_BUFSIZE, &result))==0) {
+    while ((result=fgetgrent(input))!=NULL) {
+	node=create_node();
+	copy_group(node, result);
 	node->t=t_group;
 	node->name=node->d.gr.gr_name;
 	if (!node->name)
@@ -465,15 +429,13 @@ int read_group(struct _node** list, const char* file) {
 	else
 	    node->id=node->d.gr.gr_gid;
 	add_node(list, node, 0);
-	node=create_node();
     }
 
-    if ((success!=0) && (errno!=ENOENT)) {
+    if ((result==NULL) && (errno!=ENOENT)) {
 	fprintf(stderr, "Error reading group file %s: %s\n", file, strerror(errno));
 	return 2;
     }
 
-    free(node);
     fclose(input);
 
     return 0;
@@ -485,7 +447,6 @@ int read_shadow(struct _node** list, const char* file) {
     FILE*		input;
     struct _node*	node;
     struct spwd*	result;
-    int			success;
 
     if (opt_verbose>2)
 	printf("Reading shadow from %s\n", file);
@@ -496,24 +457,22 @@ int read_shadow(struct _node** list, const char* file) {
 	return 1;
     }
 
-    node=create_node();
-
-    while ((success=fgetspent_r(input, &(node->d.sp), node->buf, OUR_NSS_BUFSIZE, &result))==0) {
+    while ((result=fgetspent(input))!=NULL) {
+	node=create_node();
+	copy_shadow(node, result);
 	node->t=t_shadow;
 	node->id=0;
 	node->name=node->d.sp.sp_namp;
 	if (!node->name)
 	    break;
 	add_node(list, node, 0);
-	node=create_node();
     }
 
-    if ((success!=0) && (errno!=ENOENT)) {
+    if ((result==NULL) && (errno!=ENOENT)) {
 	fprintf(stderr, "Error reading group file %s: %s\n", file, strerror(errno));
 	return 2;
     }
 
-    free(node);
     fclose(input);
 
     return 0;
