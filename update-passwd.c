@@ -745,7 +745,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 	    if ((passwd->d.pw.pw_shell==NULL) || (strcmp(passwd->d.pw.pw_shell, mc->d.pw.pw_shell)!=0)) {
 		if (opt_verbose) {
 		    const char *oldshell = passwd->d.pw.pw_shell ? passwd->d.pw.pw_shell : "(none)";
-		    printf("Changing shell of %s to %s\n", passwd->name, oldshell, mc->d.pw.pw_shell);
+		    printf("Changing shell of %s from %s to %s\n", passwd->name, oldshell, mc->d.pw.pw_shell);
 		}
 		/* We update the pw_shell entry of passwd so it now points into the
 		 * buffer from mc. This is safe for us, since we know we won't free

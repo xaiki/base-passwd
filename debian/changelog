@@ -5,6 +5,8 @@ base-passwd (3.4.6) UNRELEASED; urgency=low
   * Per Debian policy, utmp can write to /var/log/wtmp and /var/log/lastlog
     as well, so document this.
   * Update Standards-Version: to 3.5.8.
+  * Correct "changing shell" message to print both the original and new
+    values (thanks, Joost van Baal; closes: #178057).
 
  -- Colin Watson <cjwatson@debian.org>  Mon, 30 Dec 2002 01:42:42 +0000
 
