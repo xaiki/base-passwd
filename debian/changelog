@@ -7,6 +7,8 @@ base-passwd (3.4.6) UNRELEASED; urgency=low
   * Update Standards-Version: to 3.5.8.
   * Correct "changing shell" message to print both the original and new
     values (thanks, Joost van Baal; closes: #178057).
+  * Include Polish translation of update-passwd(8) (thanks, Marcin Owsiany;
+    closes: #160146).
 
  -- Colin Watson <cjwatson@debian.org>  Mon, 30 Dec 2002 01:42:42 +0000
 
