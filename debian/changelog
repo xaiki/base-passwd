@@ -1,3 +1,9 @@
+base-passwd (3.4.4) UNRELEASED; urgency=low
+
+  * Downcase the short description, apart from "Debian" (closes: #134614).
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 30 Nov 2002 17:44:45 +0000
+
 base-passwd (3.4.3) unstable; urgency=low
 
   * New maintainer. Thanks, Wichert.

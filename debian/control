@@ -9,7 +9,7 @@ Architecture: any
 Depends: ${shlibs:Pre-Depends}
 Essential: yes
 Replaces: base
-Description: Debian Base System Password/Group Files
+Description: Debian base system password/group files
  This package provides the master /etc/passwd and /etc/group files, 
  containing Debian-allocated user and group IDs, plus the update-passwd
  utility to keep them up to date.
