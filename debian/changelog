@@ -6,7 +6,7 @@ base-passwd (3.4.4) UNRELEASED; urgency=low
     send suggestions and corrections.
   * Ensure that new entries are added before "+" entries (which ignore the
     rest of the file and switch to NIS) (closes: #166756). Existing entries
-    are not reordered; see #130735.
+    are reordered if and only if they're in the master files. See #130735.
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 30 Nov 2002 17:44:45 +0000
 

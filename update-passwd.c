@@ -261,6 +261,7 @@ struct _node* copy_node(const struct _node* node) {
 /* Add a new item to a list
  */
 void add_node(struct _node** head, struct _node* node, int new_entry) {
+    node->prev=NULL;
     node->next=NULL;
 
     if (*head==NULL) {
@@ -302,7 +303,30 @@ void add_node(struct _node** head, struct _node* node, int new_entry) {
 }
 
 
-/* Locate an entry with a specific name in the last
+/* Remove an item from a list
+ */
+void remove_node(struct _node** head, struct _node* node) {
+    if (node==*head) {
+	if (node->next) {
+	    node->next->last=(*head)->last;
+	    node->next->prev=NULL;
+	}
+	*head=node->next;
+    } else {
+	if (node==(*head)->last)
+	    (*head)->last=node->prev;
+	if (node->prev)
+	    node->prev->next=node->next;
+	if (node->next)
+	    node->next->prev=node->prev;
+    }
+
+    node->prev=NULL;
+    node->next=NULL;
+}
+
+
+/* Locate an entry with a specific name in the list
  */
 struct _node* find_by_name(struct _node* head, const char* name) {
     while (head) {
@@ -573,6 +597,38 @@ void usage() {
  */
 void version() {
     printf("update-passwd %s\n", VERSION);
+}
+
+
+/* Check if we need to move any master file entries above NIS compat
+ * switching entries ("+").
+ */
+void process_moved_entries(const struct _info* lst, struct _node** passwd, struct _node* master, const char* descr) {
+    struct _node*	walk=*passwd;
+
+    while (walk) {
+	if (strcmp(walk->name, "+")==0) {
+	    walk=walk->next;
+	    break;
+	}
+	walk=walk->next;
+    }
+    while (walk) {
+	if (find_by_named_entry(master, walk)) {
+	    if (!noautoadd(lst, walk->id)) {
+		struct _node*	movednode=walk;
+		walk=walk->next;
+		remove_node(passwd, movednode);
+		add_node(passwd, movednode, 1);
+		flag_dirty++;
+
+		if (opt_verbose)
+		    printf("Moving %s \"%s\" (%u) to before \"+\" entry\n", descr, movednode->name, movednode->id);
+		continue;
+	    }
+	}
+	walk=walk->next;
+    }
 }
 
 
@@ -1139,10 +1195,12 @@ int main(int argc, char** argv) {
     if (read_group(&system_groups, sys_group)!=0)
 	return 2;
 
+    process_moved_entries(specialusers, &system_accounts, master_accounts, "user");
     process_new_entries(specialusers, &system_accounts, master_accounts, "user");
     process_old_entries(specialusers, &system_accounts, master_accounts, "user");
     process_changed_accounts(system_accounts, master_accounts);
 
+    process_moved_entries(specialgroups, &system_groups, master_groups, "group");
     process_new_entries(specialgroups, &system_groups, master_groups, "group");
     process_old_entries(specialgroups, &system_groups, master_groups, "group");
     process_changed_groups(system_groups, master_groups);
