@@ -16,5 +16,5 @@ backup:*:34:34:backup:/var/backups:/bin/sh
 operator:*:37:37:Operator:/var:/bin/sh
 list:*:38:38:SmartList:/var/list:/bin/sh
 irc:*:39:39:ircd:/var:/bin/sh
-gnats:*:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats/gnats-db:/bin/sh
+gnats:*:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/bin/sh
 nobody:*:65534:65534:nobody:/home:/bin/sh

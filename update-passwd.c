@@ -36,7 +36,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.4.0"
+#define VERSION			"3.4.1"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
@@ -70,6 +70,7 @@ const struct _info specialusers[] = {
     { 33, (FL_KEEPHOME)					},  /* www-data	*/
     { 35, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* dos	*/
     { 36, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* msql	*/
+    { 41, (FL_KEEPHOME)					},  /* gnats	*/
     { 70, (FL_NOAUTOREMOVE)				},  /* alias	*/
     { 71, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmaild	*/
     { 72, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmails	*/

@@ -1,3 +1,10 @@
+base-passwd (3.4.1) unstable; urgency=low
+
+  * Change directory for gnats to /var/lib/gnats on new installs. Do
+    not change it for existing systems. Closes: Bug#133121
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Sat,  9 Feb 2002 19:44:57 +0100
+
 base-passwd (3.4.0) unstable; urgency=medium
 
   * Don't reorder entries while reading them. Closes: Bug#130735
