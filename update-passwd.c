@@ -660,7 +660,7 @@ void process_old_entries(const struct _info* lst, struct _node** passwd, struct 
 
 /* Check if account-information needs to be updated.
  */
-void process_changed_accounts(struct _node* passwd, struct _node* master) {
+void process_changed_accounts(struct _node* passwd, struct _node* group, struct _node* master) {
     for (;passwd; passwd=passwd->next) {
 	struct _node*	mc;	/* mastercopy of this account */
 
@@ -680,8 +680,13 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 	}
 
 	if (passwd->d.pw.pw_gid!=mc->d.pw.pw_gid) {
-	    if (opt_verbose)
-		printf("Changing gid of %s from %u to %u\n", passwd->name, passwd->d.pw.pw_gid, mc->d.pw.pw_gid);
+	    if (opt_verbose) {
+		const struct _node* oldentry = find_by_id(group, passwd->d.pw.pw_gid);
+		const struct _node* newentry = find_by_id(group, mc->d.pw.pw_gid);
+		const char* oldname = oldentry ? oldentry->name : "ABSENT";
+		const char* newname = newentry ? newentry->name : "ABSENT";
+		printf("Changing gid of %s from %u (%s) to %u (%s)\n", passwd->name, passwd->d.pw.pw_gid, oldname, mc->d.pw.pw_gid, newname);
+	    }
 	    passwd->d.pw.pw_gid=mc->d.pw.pw_gid;
 	    flag_dirty++;
 	}
@@ -1183,15 +1188,15 @@ int main(int argc, char** argv) {
     if (read_group(&system_groups, sys_group)!=0)
 	return 2;
 
-    process_moved_entries(specialusers, &system_accounts, master_accounts, "user");
-    process_new_entries(specialusers, &system_accounts, master_accounts, "user");
-    process_old_entries(specialusers, &system_accounts, master_accounts, "user");
-    process_changed_accounts(system_accounts, master_accounts);
-
     process_moved_entries(specialgroups, &system_groups, master_groups, "group");
     process_new_entries(specialgroups, &system_groups, master_groups, "group");
     process_old_entries(specialgroups, &system_groups, master_groups, "group");
     process_changed_groups(system_groups, master_groups);
+
+    process_moved_entries(specialusers, &system_accounts, master_accounts, "user");
+    process_new_entries(specialusers, &system_accounts, master_accounts, "user");
+    process_old_entries(specialusers, &system_accounts, master_accounts, "user");
+    process_changed_accounts(system_accounts, system_groups, master_accounts);
 
     if (opt_sanity)
 	return 0;
