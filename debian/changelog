@@ -1,3 +1,13 @@
+base-passwd (3.1.9) stable unstable; urgency=low
+
+  * Fix typo: we run update-passwsd instead of uppdate-modules.
+    Closes: Bug#73668,#74209
+  * Modify postinst to not output anything if we're not doing anything,
+    and clarify the messages in case something does need to be done.
+    Closes: Bug#74106
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Sun,  8 Oct 2000 00:50:21 +0200
+
 base-passwd (3.1.8) stable unstable; urgency=low
 
   * Leave a backup file for modified files. Closes: Bug#72916
