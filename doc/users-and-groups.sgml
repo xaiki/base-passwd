@@ -103,11 +103,12 @@
 	  <para>
 	    Some unprivileged daemons that need to be able to write to some
 	    files on disk run as daemon.daemon (<command>portmap</command>,
-	    <command>atd</command>, probably others). Daemons that don't
-	    need to own any files can run as nobody.nogroup instead, and
-	    more complex or security-conscious daemons run as dedicated
-	    users. The daemon user is also handy for locally installed
-	    daemons, probably.
+	    <command>atd</command>, <command>jabberd</command>,
+	    <command>lambdamoo</command>, <command>mon</command>, and
+	    others). Daemons that don't need to own any files can run as
+	    nobody.nogroup instead, and more complex or security-conscious
+	    daemons run as dedicated users. The daemon user is also handy
+	    for locally installed daemons, probably.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -133,9 +134,8 @@
 	    historically.
 	  </para>
 	  <para>
-	    I'm told that <filename>/dev/vcs*</filename> and
-	    <filename>/var/spool/cups</filename> are owned by group sys,
-	    dunno why.
+	    I'm told that <filename>/var/spool/cups</filename> is owned by
+	    group sys, dunno why.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -177,15 +177,19 @@
 	<term>lp</term>
 	<listitem>
 	  <para>
-	    Used by printer daemons.
+	    The <filename>lp*</filename> devices are writable by this group
+	    so that users in it can access the parallel ports directly.
+	    Traditionally this job is taken by a printer daemon instead
+	    which will only need to run in this group.
 	  </para>
 	  <para>
-	    HELP: I assume it's used by <command>lpr</command>, as I have
-	    not owned a printer in years and have not used
-	    <command>lpr</command> in longer, I can't say what exactly the
-	    user is used for or what the group is used for. Or is the idea
-	    to make the printer device owned by one or the other, to let
-	    e.g. users in group lp cat files to it directly?
+	    The <command>lpr</command> system keeps its spool directories
+	    owned by lp/lp. Its daemon and frontend tools (through setuid)
+	    run as user root.
+	  </para>
+	  <para>
+	    HELP: what do other print systems (<command>rlpr</command>,
+	    <command>cupsys</command>, <command>lprng</command>, ...) do?
 	  </para>
 	</listitem>
       </varlistentry>
@@ -333,6 +337,12 @@
 	    nogroup. Thus, no files on a system should be owned by this user
 	    or group.
 	  </para>
+	  <para>
+	    (Technically speaking, it does no harm for a file to be owned by
+	    group nogroup as long as the ownership confers no additional
+	    privileges, that is if the group and other permission bits are
+	    equal. However, this is sloppy practice and should be avoided.)
+	  </para>
 	</listitem>
       </varlistentry>
     </variablelist>
@@ -368,9 +378,10 @@
 	<term>tty</term>
 	<listitem>
 	  <para>
-	    Tty devices are owned by this group. This is used by
-	    <command>write</command> and <command>wall</command> to enable
-	    them to write to other people's ttys.
+	    Tty devices and <filename>/dev/vcs*</filename> are owned by this
+	    group. This is used by <command>write</command> and
+	    <command>wall</command> to enable them to write to other
+	    people's ttys.
 	  </para>
 	</listitem>
       </varlistentry>
