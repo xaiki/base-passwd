@@ -1,4 +1,4 @@
-base-passwd (3.4.6) UNRELEASED; urgency=low
+base-passwd (3.4.6) unstable; urgency=low
 
   * Build users-and-groups.txt as well as users-and-groups.html.
   * Clarify the purpose of group mail a little.
@@ -10,7 +10,7 @@ base-passwd (3.4.6) UNRELEASED; urgency=low
   * Include Polish translation of update-passwd(8) (thanks, Marcin Owsiany;
     closes: #160146).
 
- -- Colin Watson <cjwatson@debian.org>  Mon, 30 Dec 2002 01:42:42 +0000
+ -- Colin Watson <cjwatson@debian.org>  Thu, 23 Jan 2003 19:27:09 +0000
 
 base-passwd (3.4.5) unstable; urgency=medium
 
