@@ -6,8 +6,9 @@ base-passwd (3.4.3) unstable; urgency=low
   * Print old value of gecos / home directory / shell as well as new value
     (closes: #136227).
   * Fix strip argument typo in debian/rules.
+  * Change gecos for list to "Mailing List Manager" (closes: #149466).
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 28 Nov 2002 23:59:47 +0000
+ -- Colin Watson <cjwatson@debian.org>  Fri, 29 Nov 2002 00:09:25 +0000
 
 base-passwd (3.4.2) unstable; urgency=low
 
