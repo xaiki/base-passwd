@@ -194,9 +194,10 @@
 	<term>mail</term>
 	<listitem>
 	  <para>
-	    Mailboxes in <filename>/var/mail</filename> are owned by group
-	    mail, as is explained in Debian Policy. The user and group is
-	    used for other purposes as well by various MTAs.
+	    Mailboxes in <filename>/var/mail</filename> are owned and
+	    writeable by group mail, as is explained in Debian Policy. The
+	    user and group is used for other purposes as well by various
+	    MTAs and MUAs.
 	  </para>
 	</listitem>
       </varlistentry>
