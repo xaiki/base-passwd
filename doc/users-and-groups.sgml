@@ -1,6 +1,6 @@
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V4.2//EN">
-<article id="users-and-groups">
-  <articleinfo>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.2//EN">
+<book id="users-and-groups">
+  <bookinfo>
     <title>Users and Groups in the Debian System</title>
     <edition>0.1</edition>
 
@@ -23,21 +23,52 @@
       <holder>Joey Hess</holder>
       <holder>Colin Watson</holder>
     </copyright>
-  </articleinfo>
 
-  <section id="introduction">
+    <legalnotice>
+      <para>
+	This document is free; you can redistribute it and/or modify it
+	under the terms of version 2 of the GNU General Public License as
+	published by the Free Software Foundation.
+      </para>
+
+      <para>
+	This document is distributed in the hope that it will be useful, but
+	WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+	General Public License for more details.
+      </para>
+
+      <para>
+	You should have received a copy of the GNU General Public License
+	along with this document; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+	02111-1307, USA.
+      </para>
+    </legalnotice>
+  </bookinfo>
+
+  <chapter id="introduction">
     <title>Introduction</title>
 
     <para>
       The Debian base-passwd package contains the master versions of
       <filename>/etc/passwd</filename> and <filename>/etc/group</filename>.
       The <command>update-passwd</command> tool keeps the entries in these
-      master files in sync on all Debian systems.
+      master files in sync on all Debian systems. They comprise only "global
+      static" ids: that is, those which are reserved globally for the
+      benefit of packages which need to include files owned by those users
+      or groups, or need the ids compiled into binaries. Since this
+      reservation is a serious restriction, these ids must be allocated by
+      the base-passwd maintainer on request. In general, packages should
+      avoid requesting such ids where possible and instead allocate system
+      users or groups dynamically. See Debian Policy for further details.
     </para>
 
     <para>
-      This document describes the purposes of the entries in these master
-      files.
+      The Debian Policy Manual reserves ranges for these global static users
+      and groups, but it makes no attempt to allocate individual numbers or
+      define their purposes. This document fills that gap by describing the
+      purposes of the individual entries in these master files.
     </para>
 
     <para>
@@ -46,9 +77,9 @@
       <email>base-passwd@packages.debian.org</email> if you have more
       information.
     </para>
-  </section>
+  </chapter>
 
-  <section id="entries">
+  <chapter id="entries">
     <title>Users and Groups</title>
 
     <para>
@@ -547,8 +578,8 @@
 	</listitem>
       </varlistentry>
     </variablelist>
-  </section>
-</article>
+  </chapter>
+</book>
 
 <!-- vi: sts=2 sw=2 tw=76
 -->
