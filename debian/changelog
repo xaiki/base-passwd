@@ -3,6 +3,8 @@ base-passwd (3.4.7) UNRELEASED; urgency=low
   * Clarify description (thanks, Filip Van Raemdonck; closes: #178170).
   * Add Robert Bihlmeyer's comments about daemon, sys, tty, lp, and nogroup
     to the users-and-groups documentation (closes: #178460).
+  * Make -v/--verbose, and thus the postinst, a little less verbose. A
+    second -v option restores the previous level of verbosity.
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 24 Jan 2003 09:39:44 +0000
 

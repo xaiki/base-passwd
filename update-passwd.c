@@ -398,7 +398,7 @@ int read_passwd(struct _node** list, const char* file) {
     struct passwd*	result;
     int			success;
 
-    if (opt_verbose>1)
+    if (opt_verbose>2)
 	printf("Reading passwd from %s\n", file);
 
     if ((input=fopen(file, "r"))==NULL) {
@@ -440,7 +440,7 @@ int read_group(struct _node** list, const char* file) {
     struct group*	result;
     int			success;
 
-    if (opt_verbose>1)
+    if (opt_verbose>2)
 	printf("Reading group from %s\n", file);
 
     if ((input=fopen(file, "r"))==NULL) {
@@ -482,7 +482,7 @@ int read_shadow(struct _node** list, const char* file) {
     struct spwd*	result;
     int			success;
 
-    if (opt_verbose>1)
+    if (opt_verbose>2)
 	printf("Reading shadow from %s\n", file);
 
     if ((input=fopen(file, "r"))==NULL) {
@@ -786,7 +786,7 @@ void process_changed_groups(struct _node* group, struct _node* master) {
 int write_passwd(const struct _node* passwd, const char* file) {
     FILE*	output;
 
-    if (opt_verbose>1)
+    if (opt_verbose>2)
 	printf("Writing passwd-file to %s\n", file);
 
     if ((output=fopen(file, "wt"))==NULL) {
@@ -815,7 +815,7 @@ int write_passwd(const struct _node* passwd, const char* file) {
 int write_shadow(const struct _node* shadow, const char* file) {
     FILE*	output;
 
-    if (opt_verbose>1)
+    if (opt_verbose>2)
 	printf("Writing shadow-file to %s\n", file);
 
     if ((output=fopen(file, "wt"))==NULL) {
@@ -857,7 +857,7 @@ int putgrent(const struct group* g, FILE* f) {
 int write_group(const struct _node* group, const char* file) {
     FILE*	output;
 
-    if (opt_verbose>1)
+    if (opt_verbose>2)
 	printf("Writing group-file to %s\n", file);
 
     if ((output=fopen(file, "wt"))==NULL) {
@@ -993,7 +993,7 @@ int put_file_in_place(const char* source, const char* target) {
     char*	uf;
     int		ret;
 
-    if (opt_verbose>1)
+    if (opt_verbose>2)
 	printf("Replacing \"%s\" with \"%s\"\n", target, source);
 
     asprintf(&uf, "%s%s", target, BACKUP_EXTENSION);
@@ -1040,6 +1040,9 @@ int commit_files() {
 	return 0;
     }
 
+    if (opt_verbose==2)
+	printf("Writing passwd-file to %s\n", sys_passwd);
+
     if (!write_passwd(system_accounts, wf)) {
 	free(wf);
 	return 0;
@@ -1060,6 +1063,9 @@ int commit_files() {
 	    return 0;
 	}
 
+	if (opt_verbose==2)
+	    printf("Writing shadow-file to %s\n", sys_shadow);
+
 	if (!write_shadow(system_shadow, wf)) {
 	    free(wf);
 	    return 0;
@@ -1079,6 +1085,9 @@ int commit_files() {
 	fprintf(stderr, "Not enough memory available\n");
 	return 0;
     }
+
+    if (opt_verbose==2)
+	printf("Writing group-file to %s\n", sys_group);
 
     if (!write_group(system_groups, wf)) {
 	free(wf);
@@ -1158,7 +1167,9 @@ int main(int argc, char** argv) {
 		sys_group=optarg;
 		break;
 	    case 'v':
-		opt_verbose+=2;
+		opt_verbose++;
+		if (opt_verbose==1)
+		    opt_verbose++;
 		break;
 	    case 's':
 		opt_sanity=1;
