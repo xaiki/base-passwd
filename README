@@ -1,4 +1,4 @@
-base-passwd for DEBIAN
+base-passwd for Debian
 ----------------------
 
 This package supplies the "master" copies of /etc/passwd and /etc/group,
