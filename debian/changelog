@@ -1,4 +1,4 @@
-base-passwd (3.5.0) UNRELEASED; urgency=low
+base-passwd (3.5.0) unstable; urgency=low
 
   * Remove the postgres user and group for new installations, although not
     on upgrades. postgresql 7.1release-3 and up will create a user and group
@@ -9,7 +9,7 @@ base-passwd (3.5.0) UNRELEASED; urgency=low
     we don't. Since update-passwd is single-threaded, this is unnecessary;
     just use fget*ent() and copy the returned structures (closes: #109038).
 
- -- Colin Watson <cjwatson@debian.org>  Tue,  4 Feb 2003 23:10:27 +0000
+ -- Colin Watson <cjwatson@debian.org>  Sat,  8 Feb 2003 00:25:32 +0000
 
 base-passwd (3.4.7) unstable; urgency=low
 
