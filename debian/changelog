@@ -1,3 +1,19 @@
+base-passwd (3.3.0) unstable; urgency=medium
+
+  * Fix typo in postinst prompt. Closes: Bug#130662
+  * Remove ancient code from Galen from the source
+  * Relicense under just version 2 of the GNU GPL
+  * Check for noninteractive debconf frontend and handle redirected
+    input in the postinst. Closes: Bug#130362
+  * Correct extension of backup file in postinst. Closes: Bug#130366
+  * Remove all Linux references
+  * Be even more paranoid in fputpwent so we can handle syntactically
+    incorrect entries as well. Closes: Bug#130192
+  * Remove bashisms from debian/rules
+  * Do a better job at stripping update-passwd
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Thu, 24 Jan 2002 16:44:28 +0100
+ 
 base-passwd (3.2.3) unstable; urgency=high
 
   * Major paper brown bag release

@@ -6,9 +6,14 @@ pkg=base-passwd
 changes=0
 
 askyesno() {
+	if [ "$DEBIAN_FRONTEND" = "noninteractive" ] ; then
+		a=y
+		return
+	fi
+
 	while : ; do
 		echo -n "$1 "
-		read a
+		read a || true
 		if [ "$a" = "" ] ; then
 			a="y"
 		fi
@@ -65,7 +70,7 @@ to change your system; without those changes some packages might not work
 correctly.  For more documentation on the Debian account policies please
 see /usr/share/doc/base-passwd/README.
 
-The last of proposed changes is:
+The list of proposed changes is:
 
 EOF
 	
@@ -73,7 +78,7 @@ EOF
 	cat <<EOF
 
 It is highly recommend that you allow update-passwd to make these changes
-(a backup file of modified files is made with the extension .old so you can
+(a backup file of modified files is made with the extension .org so you can
 always restore the current settings).
 
 EOF

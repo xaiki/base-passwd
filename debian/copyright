@@ -1,17 +1,13 @@
-This is the Debian GNU/Linux prepackaged version of the Debian Base
+This is the Debian prepackaged version of the Debian Base
 Password and Group files, plus the update-passwd utility to handle
 upgrades. The master files were originally written by Ian Murdock
 <imurdock@debian.org> and Bruce Perens <bruce@pixar.com>.
 
-update-passwd was written by Galen Hazelwood <galenh@micron.net>,
-and later rewritten from scratch by Wichert Akkerman <wakkerma@debian.org> .
-
-update-passwd is copyright (C) 1997,1999 Software in the Public Interest
+update-passwd is copyright 1999-2002 Wichert Akkerman
 
    This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+   it under the terms of version 2 of the the GNU General Public License
+   as published by the Free Software Foundation.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,5 +18,5 @@ update-passwd is copyright (C) 1997,1999 Software in the Public Interest
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. 
 
-On Debian GNU/Linux systems, the complete text of the GNU General
-Public License can be found in `/usr/share/common-licenses/GPL'.
+On Debian systems, the complete text of the GNU General Public License
+can be found in `/usr/share/common-licenses/GPL'.

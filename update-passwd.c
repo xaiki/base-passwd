@@ -1,10 +1,9 @@
 /* update-passwd - Safely update /etc/passwd, /etc/shadow and /etc/group
- * Copyright (C) 1999,2000 Wichert Akkerman
+ * Copyright 1999-2002 Wichert Akkerman <wichert@deephackmode.org>
  *
  * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
+ * it under the terms of version 2 of the GNU General Public License as
+ * published by the Free Software Foundation.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -14,9 +13,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. 
- *
- * Written by Wichert Akkerman <wakkerma@debian.org>, based on an earlier
- * attempt from Galen Hazelwood <galenh@micron.net>.
  *
  */
 
@@ -40,7 +36,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.2.2"
+#define VERSION			"3.3.0"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
@@ -468,6 +464,15 @@ int read_shadow(struct _node** list, const char* file) {
 }
 
 
+/* Small helper functions to safely print strings that might be NULL.
+ */
+const char* safestr(const char* str) {
+    if (str==NULL)
+	return "";
+    else
+	return str;
+}
+
 
 /* Implement our own putpwent(3). The version in GNU libc is stupid enough
  * to not recognize NIS compat entries and will happily turn entry like this:
@@ -483,20 +488,24 @@ int read_shadow(struct _node** list, const char* file) {
 int fputpwent(const struct passwd *passwd, FILE * f) {
     int res;
 
-    if ((passwd==NULL) || (f==NULL)) {
-	errno=EINVAL;
-	return -1;
-    }
+    assert(passwd!=NULL);
+    assert(f!=NULL);
 
     if (passwd->pw_name[0]=='+')
-	res=fprintf(f, "%s:%s:::%s:%s:%s\n", passwd->pw_name,
-		passwd->pw_passwd, passwd->pw_gecos,
-		passwd->pw_dir, passwd->pw_shell);
+	res=fprintf(f, "%s:%s:::%s:%s:%s\n",
+		safestr(passwd->pw_name),
+		safestr(passwd->pw_passwd),
+		safestr(passwd->pw_gecos),
+		safestr(passwd->pw_dir),
+		safestr(passwd->pw_shell));
     else
-	res=fprintf(f, "%s:%s:%u:%u:%s:%s:%s\n", passwd->pw_name, 
-		passwd->pw_passwd, passwd->pw_uid, 
-		passwd->pw_gid, passwd->pw_gecos, 
-		passwd->pw_dir, passwd->pw_shell); 
+	res=fprintf(f, "%s:%s:%u:%u:%s:%s:%s\n",
+		safestr(passwd->pw_name),
+		safestr(passwd->pw_passwd),
+		passwd->pw_uid, passwd->pw_gid,
+		safestr(passwd->pw_gecos),
+		safestr(passwd->pw_dir),
+		safestr(passwd->pw_shell));
 
     if (res<0)
 	return -1;
