@@ -627,25 +627,31 @@ void process_new_entries(const struct _info* lst, struct _node** passwd, struct 
  * We will only remove accounts in our range (uids 0-99).
  */
 void process_old_entries(const struct _info* lst, struct _node** passwd, struct _node* master, const char* descr) {
-    for (;*passwd; passwd=&((*passwd)->next)) {
-	if (((*passwd)->id<0) || ((*passwd)->id>99))
+    struct _node*	walk=*passwd;
+
+    while (walk) {
+	if ((walk->id<0) || (walk->id>99)) {
+	    walk=walk->next;
 	    continue;
+	}
 
-	if (noautoremove(lst, (*passwd)->id))
+	if (noautoremove(lst, walk->id)) {
+	    walk=walk->next;
 	    continue;
+	}
 
-	if (find_by_named_entry(master, *passwd)==NULL) {
-	    struct _node*	oldnode;
-
-	    oldnode=*passwd;
+	if (find_by_named_entry(master, walk)==NULL) {
+	    struct _node*	oldnode=walk;
 
 	    if (opt_verbose)
 		printf("Removing %s \"%s\" (%u)\n", descr, oldnode->name, oldnode->id);
 
-	    *passwd=(*passwd)->next;
-	    free(oldnode);
+	    walk=walk->next;
+	    remove_node(passwd, oldnode);
 	    flag_dirty++;
+	    continue;
 	}
+	walk=walk->next;
     }
 }
 

@@ -14,6 +14,7 @@ base-passwd (3.5.1) UNRELEASED; urgency=low
     documentation purposes), following the BSDs (closes: #135732).
   * Strip update-passwd after installing it into the temporary tree, not
     before.
+  * Fix a segfault while removing accounts.
 
  -- Colin Watson <cjwatson@debian.org>  Sun,  9 Feb 2003 11:39:40 +0000
 
