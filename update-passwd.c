@@ -21,6 +21,8 @@
 #include "config.h"
 #endif
 
+#include "version.h"
+
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,8 +38,6 @@
 #include <pwd.h>
 #include <shadow.h>
 #include <grp.h>
-
-#define VERSION			"3.5.0"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
