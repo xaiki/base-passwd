@@ -1,0 +1,554 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V4.2//EN">
+<article id="users-and-groups">
+  <articleinfo>
+    <title>Users and Groups in the Debian System</title>
+    <edition>0.1</edition>
+
+    <authorgroup>
+      <author>
+	<firstname>Joey</firstname>
+	<surname>Hess</surname>
+	<email>joeyh@debian.org</email>
+      </author>
+      <author>
+	<firstname>Colin</firstname>
+	<surname>Watson</surname>
+	<email>cjwatson@debian.org</email>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2001</year>
+      <year>2002</year>
+      <holder>Joey Hess</holder>
+      <holder>Colin Watson</holder>
+    </copyright>
+  </articleinfo>
+
+  <section id="introduction">
+    <title>Introduction</title>
+
+    <para>
+      The Debian base-passwd package contains the master versions of
+      <filename>/etc/passwd</filename> and <filename>/etc/group</filename>.
+      The <command>update-passwd</command> tool keeps the entries in these
+      master files in sync on all Debian systems.
+    </para>
+
+    <para>
+      This document describes the purposes of the entries in these master
+      files.
+    </para>
+
+    <para>
+      This is a work in progress. Items in need of feedback are marked with
+      the "HELP" tag. Please send mail to
+      <email>base-passwd@packages.debian.org</email> if you have more
+      information.
+    </para>
+  </section>
+
+  <section id="entries">
+    <title>Users and Groups</title>
+
+    <para>
+      Many users have a corresponding group, and these pairs will be treated
+      together.
+    </para>
+
+    <variablelist>
+      <varlistentry>
+	<term>root</term>
+	<listitem>
+	  <para>
+	    Root is (typically) the superuser.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>daemon</term>
+	<listitem>
+	  <para>
+	    Some unprivileged daemons that need to be able to write to some
+	    files on disk run as daemon.daemon (<command>portmap</command>,
+	    <command>atd</command>, probably others). Daemons that don't
+	    need to own any files can run as nobody.nogroup instead, and
+	    more complex or security-conscious daemons run as dedicated
+	    users. The daemon user is also handy for locally installed
+	    daemons, probably.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>bin</term>
+	<listitem>
+	  <para>
+	    HELP: No files on my system are owned by user or group bin. What
+	    good are they? Historically they were probably the owners of
+	    binaries in <filename>/bin</filename>? It is not mentioned in
+	    the FHS, Debian Policy, or the changelogs of base-passwd or
+	    base-files.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>sys</term>
+	<listitem>
+	  <para>
+	    HELP: As with bin, except I don't even know what it was good for
+	    historically.
+	  </para>
+	  <para>
+	    I'm told that <filename>/dev/vcs*</filename> and
+	    <filename>/var/spool/cups</filename> are owned by group sys,
+	    dunno why.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>sync</term>
+	<listitem>
+	  <para>
+	    The shell of user sync is <filename>/bin/sync</filename>. Thus,
+	    if its password is set to something easy to guess (such as ""),
+	    anyone can sync the system at the console even if they have no
+	    account on the system.
+	  </para>
+	  <para>
+	    HELP: If that is the only purpose of user sync, then group sync
+	    seems not very useful. The sync user could just as well be in
+	    nogroup.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>games</term>
+	<listitem>
+	  <para>
+	    Many games are sgid to games so they can write their high score
+	    files. This is explained in Debian Policy.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>man</term>
+	<listitem>
+	  <para>
+	    The <command>man</command> program (sometimes) runs as user man,
+	    so it can write cat pages to <filename>/var/cache/man</filename>
+	    and update its databases there.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>lp</term>
+	<listitem>
+	  <para>
+	    Used by printer daemons.
+	  </para>
+	  <para>
+	    HELP: I assume it's used by <command>lpr</command>, as I have
+	    not owned a printer in years and have not used
+	    <command>lpr</command> in longer, I can't say what exactly the
+	    user is used for or what the group is used for. Or is the idea
+	    to make the printer device owned by one or the other, to let
+	    e.g. users in group lp cat files to it directly?
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>mail</term>
+	<listitem>
+	  <para>
+	    Mailboxes in <filename>/var/mail</filename> are owned by group
+	    mail, as is explained in Debian Policy. The user and group is
+	    used for other purposes as well by various MTAs.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>news</term>
+	<listitem>
+	  <para>
+	    Various news servers and other associated programs (such as
+	    <command>suck</command>) use user and group news in various
+	    ways. Files in the news spool are often owned by user and group
+	    news. Programs such as <command>inews</command> that can be used
+	    to post news are typically sgid news.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>uucp</term>
+	<listitem>
+	  <para>
+	    The uucp user and group is used by the UUCP subsystem. It owns
+	    spool and configuration files. Users in the uucp group may run
+	    <command>uucico</command>.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>proxy</term>
+	<listitem>
+	  <para>
+	    Like daemon, this user and group is used by some daemons
+	    (specifically, proxy daemons) that don't have dedicated user ids
+	    and that need to own files. For example, group proxy is used by
+	    <command>pdnsd</command>, and <command>squid</command> runs as
+	    user proxy.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>majordom</term>
+	<listitem>
+	  <para>
+	    Majordomo has a statically allocated uid on Debian systems for
+	    historical reasons. It is not installed on new systems.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>postgres</term>
+	<listitem>
+	  <para>
+	    Postgresql databases are owned by this user and group.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>www-data</term>
+	<listitem>
+	  <para>
+	    Some web servers run as www-data. Web content should
+	    <emphasis>not</emphasis> be owned by this user, or a compromised
+	    web server would be able to rewrite a web site. Data written out
+	    by web servers, including log files, will be owned by www-data.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>backup</term>
+	<listitem>
+	  <para>
+	    Presumably so backup/restore responsibilities can be locally
+	    delegated to someone without full root permissions?
+	  </para>
+	  <para>
+	    HELP: Is that right? Amanda reportedly uses this, details?
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>operator</term>
+	<listitem>
+	  <para>
+	    Operator is historically (and practically) the only "user"
+	    account that can login remotely, and doesn't depend on NIS/NFS.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>list</term>
+	<listitem>
+	  <para>
+	    Mailing list archives and data are owned by this user and group.
+	    Some mailing list programs may run as this user as well.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>irc</term>
+	<listitem>
+	  <para>
+	    Used by IRC daemons. A statically allocated user is needed only
+	    because of a bug in <command>ircd</command>: it
+	    <function>setuid()</function>s itself to a compiled-in user id
+	    on startup.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>gnats</term>
+	<listitem>
+	  <para>
+	    HELP: Evidently used by <command>gnats</command>. And it needs a
+	    static set why?
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>nobody, nogroup</term>
+	<listitem>
+	  <para>
+	    Daemons that need not own any files run as user nobody and group
+	    nogroup. Thus, no files on a system should be owned by this user
+	    or group.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>
+      Other groups have no associated user.
+    </para>
+
+    <variablelist>
+      <varlistentry>
+	<term>adm</term>
+	<listitem>
+	  <para>
+	    Group adm is used for system monitoring tasks. Members of this
+	    group can read many log files in <filename>/var/log</filename>,
+	    and can use <command>xconsole</command>.
+	  </para>
+	  <para>
+	    Historically, <filename>/var/log</filename> was
+	    <filename>/usr/adm</filename> (and later
+	    <filename>/var/adm</filename>), thus the name of the group.
+	  </para>
+	  <para>
+	    HELP: Perhaps policy should state the purpose of this group so
+	    users may be safely added to it, in certanty that all they'll be
+	    able to do is read logs. Wouldn't hurt to rename it 'log' either
+	    ...
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>tty</term>
+	<listitem>
+	  <para>
+	    Tty devices are owned by this group. This is used by
+	    <command>write</command> and <command>wall</command> to enable
+	    them to write to other people's ttys.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>disk</term>
+	<listitem>
+	  <para>
+	    Raw access to disks. Mostly equivalent to root access.
+	  </para>
+	  <para>
+	    HELP: Well, I have some disk devices in
+	    <filename>/dev</filename> owned by the group, but I can't see
+	    the point. On another system, I noticed that some of the files
+	    <command>lilo</command> puts in <filename>/boot</filename> are
+	    also owned by disk. I can imagine local uses for such a group,
+	    like if you want to give some users in the group direct access
+	    to some hard disk. But these uses I've found on my systems seem
+	    to preclude doing that easily; if I put a user in group disk
+	    here, they'd have write access to the root filesystem.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>kmem</term>
+	<listitem>
+	  <para>
+	    <filename>/dev/kmem</filename> and similar files are readable by
+	    this group. This is mostly a BSD relic, but any programs that
+	    need direct read access to the system's memory can thus be made
+	    setgid kmem.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>dialout</term>
+	<listitem>
+	  <para>
+	    Full and direct access to serial ports. Members of this group
+	    can reconfigure the modem, dial anywhere, etc.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>dip</term>
+	<listitem>
+	  <para>
+	    The group's name stands for "Dialup IP". Being in group dip
+	    allows you to use a tool such as ppp or dip to dial up a
+	    connection.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>fax</term>
+	<listitem>
+	  <para>
+	    Allows members to use fax software to send or receive faxes.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>voice</term>
+	<listitem>
+	  <para>
+	    Voicemail, useful for systems that use modems as answering
+	    machines.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>cdrom</term>
+	<listitem>
+	  <para>
+	    This group can be used locally to give a set of users access to
+	    a CD-ROM drive.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>floppy</term>
+	<listitem>
+	  <para>
+	    This group can be used locally to give a set of users access to
+	    a floppy drive.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>tape</term>
+	<listitem>
+	  <para>
+	    This group can be used locally to give a set of users access to
+	    a tape drive.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>sudo</term>
+	<listitem>
+	  <para>
+	    Members of this group do not need to type their password when
+	    using <command>sudo</command>. See
+	    <filename>/usr/share/doc/sudo/OPTIONS</filename>.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>audio</term>
+	<listitem>
+	  <para>
+	    This group can be used locally to give a set of users access to
+	    an audio device.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>src</term>
+	<listitem>
+	  <para>
+	    This group owns source code, including files in
+	    <filename>/usr/src</filename>. It can be used locally to give a
+	    user the ability to manage system source code.
+	  </para>
+	  <para>
+	    HELP: <filename>/usr/src</filename> is owned by group src and is
+	    setgid. This doesn't make files put there by foo-src packages
+	    necessarily be owned by group src though. If the intent is to
+	    make group src be able to manage source code, perhaps policy
+	    should say that foo-src packages make files in
+	    <filename>/usr/src</filename> owned and writeable by the group
+	    (and files in tarballs dropped there likewise)?
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>shadow</term>
+	<listitem>
+	  <para>
+	    <filename>/etc/shadow</filename> is readable by this group. Some
+	    programs that need to be able to access the file are setgid
+	    shadow.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>utmp</term>
+	<listitem>
+	  <para>
+	    This group can write to <filename>/var/run/utmp</filename> and
+	    similar files. Programs that need to be able to write to it
+	    (such as X terminal emulators) are setgid utmp.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>video</term>
+	<listitem>
+	  <para>
+	    This group can be used locally to give a set of users access to
+	    a video device.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>staff</term>
+	<listitem>
+	  <para>
+	    Allows users to add local modifications to the system
+	    (<filename>/usr/local</filename>, <filename>/home</filename>)
+	    without needing root privileges. Compare with group 'adm', which
+	    is more related to monitoring/security.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>users</term>
+	<listitem>
+	  <para>
+	    While Debian systems use the user-group system by default (each
+	    user has their own group), some prefer to use a more traditional
+	    group system. In that system, each user is a member of the
+	    'users' group.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+</article>
+
+<!-- vi: sts=2 sw=2 tw=76
+-->
