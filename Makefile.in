@@ -40,7 +40,7 @@ clean:
 mrproper realclean: clean
 	$(RM) $(gen_configure)
 
-cvslean: mrproper
+cvsclean: mrproper
 	for i in $(gen_autoconf) $(gen_autoheader) ; do \
 	    $(RM) $(srcdir)/$$i ; \
 	done
