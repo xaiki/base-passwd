@@ -1,0 +1,20 @@
+#! /usr/bin/make -f
+%:
+	dh $@ --with autoreconf
+
+export DEB_CFLAGS_MAINT_APPEND := -Wall
+
+override_dh_installdebconf:
+	touch debian/base-passwd.substvars
+	mv debian/base-passwd.substvars debian/base-passwd.substvars.real
+	dh_installdebconf
+	sed 's/^misc:Depends=/misc:Recommends=/' \
+		debian/base-passwd.substvars \
+		>debian/base-passwd.substvars.real
+	mv debian/base-passwd.substvars.real debian/base-passwd.substvars
+
+override_dh_shlibdeps:
+	dh_shlibdeps -- -dPre-Depends
+
+override_dh_builddeb:
+	dh_builddeb -- -Zgzip
