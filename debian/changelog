@@ -1,6 +1,9 @@
 base-passwd (3.4.4) UNRELEASED; urgency=low
 
   * Downcase the short description, apart from "Debian" (closes: #134614).
+  * Add initial informative documentation of the global static users and
+    groups (closes: #50304). This is a work in progress, so feel free to
+    send suggestions and corrections.
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 30 Nov 2002 17:44:45 +0000
 

@@ -3,6 +3,7 @@ Section: base
 Priority: required
 Maintainer: Colin Watson <cjwatson@debian.org>
 Standards-Version: 3.2.1
+Build-Depends: docbook-dsssl, sgmltools-lite
 
 Package: base-passwd
 Architecture: any

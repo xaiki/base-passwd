@@ -11,10 +11,12 @@ SHELL		= /bin/bash
 .PHONY: all build
 all build: Makefile
 	$(MAKE) 
+	$(MAKE) -C doc
 
 .PHONY: clean
 clean:
-	-make mrproper
+	-$(MAKE) mrproper
+	$(MAKE) -C doc clean
 	rm -rf debian/tmp debian/files debian/substvars
 
 Makefile: Makefile.in configure.in
@@ -54,6 +56,8 @@ binary-arch: build
 	gzip -9 debian/tmp$(docdir)/*
 	install -p -m 644 -o root -g root README debian/tmp$(docdir)/
 	install -p -m 644 -o root -g root debian/copyright debian/tmp$(docdir)/
+	install -p -m 644 -o root -g root doc/users-and-groups.html \
+		debian/tmp$(docdir)/
 
 	install -d -m 755 -o root -g root debian/tmp/DEBIAN
 	install -p -m 755 -o root -g root debian/preinst debian/tmp/DEBIAN/
