@@ -1,3 +1,9 @@
+base-passwd (3.4.7) UNRELEASED; urgency=low
+
+  * Clarify description (thanks, Filip Van Raemdonck; closes: #178170).
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 24 Jan 2003 09:39:44 +0000
+
 base-passwd (3.4.6) unstable; urgency=low
 
   * Build users-and-groups.txt as well as users-and-groups.html.
