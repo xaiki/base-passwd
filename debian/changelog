@@ -8,7 +8,7 @@ base-passwd (3.4.4) UNRELEASED; urgency=low
     rest of the file and switch to NIS) (closes: #166756). Existing entries
     are reordered if and only if they're in the master files. See #130735.
 
- -- Colin Watson <cjwatson@debian.org>  Sat, 30 Nov 2002 17:44:45 +0000
+ -- Colin Watson <cjwatson@debian.org>  Sat, 14 Dec 2002 13:21:46 +0000
 
 base-passwd (3.4.3) unstable; urgency=low
 
