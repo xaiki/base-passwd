@@ -2,9 +2,9 @@ root::0:0:root:/root:/bin/bash
 daemon:*:1:1:daemon:/usr/sbin:/bin/sh
 bin:*:2:2:bin:/bin:/bin/sh
 sys:*:3:3:sys:/dev:/bin/sh
-sync:*:4:100:sync:/bin:/bin/sync
-games:*:5:100:games:/usr/games:/bin/sh
-man:*:6:100:man:/var/cache/man:/bin/sh
+sync:*:4:65534:sync:/bin:/bin/sync
+games:*:5:60:games:/usr/games:/bin/sh
+man:*:6:12:man:/var/cache/man:/bin/sh
 lp:*:7:7:lp:/var/spool/lpd:/bin/sh
 mail:*:8:8:mail:/var/mail:/bin/sh
 news:*:9:9:news:/var/spool/news:/bin/sh

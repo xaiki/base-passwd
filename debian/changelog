@@ -2,6 +2,10 @@ base-passwd (3.5.1) UNRELEASED; urgency=low
 
   * For consistency with the rest of group.master, don't put the lp user in
     its group explicitly. We pick that up from passwd.master already.
+  * Avoid using the 'users' group for any system users (part of #25882):
+    - Change the sync user's group to nogroup.
+    - Change the games user's group to be the already-existing games group.
+    - Create a man group (gid 12) and set that as the man user's group.
 
  -- Colin Watson <cjwatson@debian.org>  Sun,  9 Feb 2003 11:39:40 +0000
 
