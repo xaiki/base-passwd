@@ -656,7 +656,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
     for (;passwd; passwd=passwd->next) {
 	struct _node*	mc;	/* mastercopy of this account */
 
-	if ((passwd->id<0) || (passwd->id>99))
+	if (((passwd->id<0) || (passwd->id>99)) && (passwd->id!=65534))
 	    continue;
 
 	mc=find_by_named_entry(master, passwd);
@@ -729,7 +729,7 @@ void process_changed_groups(struct _node* group, struct _node* master) {
     for (;group; group=group->next) {
 	struct _node*	mc;	/* mastercopy of this group */
 
-	if ((group->id<0) || (group->id>99))
+	if (((group->id<0) || (group->id>99)) && (group->id!=65534))
 	    continue;
 
 	mc=find_by_named_entry(master, group);
