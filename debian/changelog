@@ -1,6 +1,8 @@
 base-passwd (3.5.8) UNRELEASED; urgency=low
 
   * Fix typoes in README.
+  * Clarify in README that packages may not make use of ids in the
+    60000-64999 range without *first* having them allocated by this package.
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 24 Jul 2004 21:05:58 +0100
 

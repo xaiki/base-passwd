@@ -26,8 +26,8 @@ There are some exceptions to this:
   we don't change it
 
 The following uid/gid pairs have been allocated in the static range
-60000-64999.  They are created by their respective packages, and are listed
-here for reference.
+60000-64999. They are created by their respective packages. This is the
+registry of allocations.
 
 Reserved uids:
     uid   | name      | description
@@ -56,3 +56,7 @@ Reserved gids:
     64020 | asterisk  | asterisk
 
 (Next uid/gid allocation: 64025.)
+
+You *may not* use any uids or gids in the 60000-64999 range without *first*
+requesting an allocation from base-passwd@packages.debian.org and waiting
+for confirmation that the allocation has been granted.
