@@ -74,8 +74,8 @@
     <para>
       This is a work in progress. Items in need of feedback are marked with
       the "HELP" tag. Please send mail to
-      <email>base-passwd@packages.debian.org</email> if you have more
-      information.
+      <email>base-passwd@packages.debian.org</email> or file a bug with the
+      Debian bug tracking system if you have more information.
     </para>
   </chapter>
 
