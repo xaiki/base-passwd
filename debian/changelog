@@ -1,10 +1,10 @@
-base-passwd (3.5.9) UNRELEASED; urgency=low
+base-passwd (3.5.9) unstable; urgency=low
 
   * Add and document static group plugdev, gid 46, for use by pmount and
     similar tools to allow local users to mount removable devices without
     the need for entries in /etc/fstab (closes: #283233).
 
- -- Colin Watson <cjwatson@debian.org>  Sat,  4 Dec 2004 10:11:49 +0000
+ -- Colin Watson <cjwatson@debian.org>  Sat,  4 Dec 2004 10:15:06 +0000
 
 base-passwd (3.5.8) unstable; urgency=low
 
