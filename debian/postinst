@@ -2,7 +2,6 @@
 
 set -e
 
-pkg=base-passwd
 changes=0
 
 askyesno() {
@@ -28,10 +27,6 @@ askyesno() {
 
 if [ ! "$1" = "configure" ] ; then
     exit 0
-fi
-
-if [ -d /usr/doc -a ! -e /usr/doc/$pkg -a -d /usr/share/doc/$pkg ] ; then
-    ln -s ../share/doc/$pkg /usr/doc/$pkg
 fi
 
 if [ ! -e /etc/passwd ] ; then

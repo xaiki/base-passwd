@@ -1,3 +1,11 @@
+base-passwd (3.4.2) unstable; urgency=low
+
+  * Add new sasl group used to regulate access to the sasl secrets
+  * Drop prerm
+  * No longer make /usr/doc symlinks
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Fri, 27 Sep 2002 19:35:30 +0200
+
 base-passwd (3.4.1) unstable; urgency=low
 
   * Change directory for gnats to /var/lib/gnats on new installs. Do

@@ -31,6 +31,7 @@ gnats:*:41:
 shadow:*:42:
 utmp:*:43:
 video:*:44:
+sasl:*:45:
 staff:*:50:
 games:*:60:
 users:*:100:

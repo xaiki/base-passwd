@@ -58,7 +58,6 @@ binary-arch: build
 	install -d -m 755 -o root -g root debian/tmp/DEBIAN
 	install -p -m 755 -o root -g root debian/preinst debian/tmp/DEBIAN/
 	install -p -m 755 -o root -g root debian/postinst debian/tmp/DEBIAN/
-	install -p -m 755 -o root -g root debian/prerm debian/tmp/DEBIAN/
 
 	dpkg-shlibdeps -dPre-Depends debian/tmp/usr/sbin/update-passwd
 	dpkg-gencontrol -isp
