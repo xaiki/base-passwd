@@ -19,8 +19,14 @@ clean:
 	$(MAKE) -C doc clean
 	rm -rf debian/tmp debian/files debian/substvars
 
+ifeq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+CFLAGS := -g -O2 -Wall
+else
+CFLAGS := -g -Wall
+endif
+
 Makefile: Makefile.in configure.in
-	./configure
+	CFLAGS="$(CFLAGS)" ./configure
 
 .PHONY: binary
 binary: binary-arch binary-indep

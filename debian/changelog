@@ -3,6 +3,7 @@ base-passwd (3.4.7) UNRELEASED; urgency=low
   * Clarify description (thanks, Filip Van Raemdonck; closes: #178170).
   * Make -v/--verbose, and thus the postinst, a little less verbose. A
     second -v option restores the previous level of verbosity.
+  * Build with -Wall. Implement DEB_BUILD_OPTIONS=noopt.
   * users-and-groups:
     - Add Robert Bihlmeyer's comments about daemon, sys, tty, lp, and
       nogroup (closes: #178460).
