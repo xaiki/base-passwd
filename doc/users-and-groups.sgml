@@ -306,12 +306,19 @@
 	<listitem>
 	  <para>
 	    Operator is historically (and practically) the only "user"
-	    account that can login remotely, and doesn't depend on NIS/NFS.
+	    account that can login remotely and doesn't depend on NIS/NFS.
 	  </para>
 	  <para>
 	    In BSD, the operator user can read and write to tapes and read
 	    from disks, so that operators can perform backups. For some
 	    reason Linux seems to have lost this.
+	  </para>
+	  <para>
+	    The operator group is used by <command>dump -n</command> to
+	    notify logged-in operators via <command>wall</command> when it
+	    requires operator attention. This is a historical use, and new
+	    applications should not behave this way. (If nothing else, the
+	    group should be configurable.)
 	  </para>
 	</listitem>
       </varlistentry>
