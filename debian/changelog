@@ -1,3 +1,9 @@
+base-passwd (3.4.0) unstable; urgency=medium
+
+  * Don't reorder entries while reading them. Closes: Bug#130735
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Sun,  3 Feb 2002 22:36:13 +0100
+
 base-passwd (3.3.0) unstable; urgency=medium
 
   * Fix typo in postinst prompt. Closes: Bug#130662

@@ -36,7 +36,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.3.0"
+#define VERSION			"3.4.0"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
@@ -56,10 +56,10 @@
 #define FL_NOAUTOADD	0x0020
 
 /* This structure is actually used for both users and groups
- * we probably should split that sometime.
+ * we probably should split that someday.
  */
 struct _info {
-    unsigned	id;
+    uid_t	id;
     unsigned	flags;
 };
 
@@ -104,8 +104,9 @@ struct _node {
 	t_error
     } t;
     const char*		name;
-    unsigned int	id;
+    uid_t		id;
     struct _node*	next;
+    struct _node*	last;
     char		buf[OUR_NSS_BUFSIZE];
 };
 
@@ -138,6 +139,7 @@ struct _node* create_node() {
     newnode->name=0;
     newnode->id=0;
     newnode->next=NULL;
+    newnode->last=NULL;
     newnode->t=t_error;
 
     return newnode;
@@ -262,18 +264,12 @@ void add_node(struct _node** head, struct _node* node) {
 
     if (*head==NULL) {
 	*head=node;
+	node->last=node;
 	return;
     }
 
-    if ((*head)->id > node->id) {
-	*head=node;
-	return;
-    }
-
-    for (walk=*head; walk->next && (walk->next->id <= node->id); walk=walk->next)
-	;
-    node->next=walk->next;
-    walk->next=node;
+    (*head)->last->next=node;
+    (*head)->last=node;
 }
 
 
@@ -304,10 +300,10 @@ struct _node* find_by_named_entry(struct _node* head, const struct _node* entry)
 }
 
 
-/* Look for an entry in a list, using the name of _entry as the
+/* Look for an entry in a list, using the id of _entry as the
  * searchkey.
  */
-struct _node* find_by_id(struct _node* head, unsigned int id) {
+struct _node* find_by_id(struct _node* head, uid_t id) {
     while (head) {
 	if (id==head->id)
 	    return head;
@@ -321,7 +317,7 @@ struct _node* find_by_id(struct _node* head, unsigned int id) {
 /* Function to scan the list of special users or groups to see if a an
  * entry has a certain flag set.
  */
-int scan_infos(const struct _info *lst, unsigned id, unsigned flag) {
+int scan_infos(const struct _info *lst, uid_t id, unsigned flag) {
     const struct _info*	walk;
     for (walk=lst; !((walk->id==0) && (walk->flags==0)); walk++)
 	if (walk->id==id)
@@ -330,15 +326,15 @@ int scan_infos(const struct _info *lst, unsigned id, unsigned flag) {
 }
 
 /* Just for our convenience */
-int keephome(const struct _info* lst, unsigned id) {
+int keephome(const struct _info* lst, uid_t id) {
     return scan_infos(lst, id, FL_KEEPHOME); }
-int keepshell(const struct _info* lst, unsigned id) {
+int keepshell(const struct _info* lst, uid_t id) {
     return scan_infos(lst, id, FL_KEEPSHELL); }
-int keepgecos(const struct _info* lst, unsigned id) {
+int keepgecos(const struct _info* lst, uid_t id) {
     return scan_infos(lst, id, FL_KEEPGECOS); }
-int noautoremove(const struct _info* lst, unsigned id) {
+int noautoremove(const struct _info* lst, uid_t id) {
     return scan_infos(lst, id, FL_NOAUTOREMOVE); }
-int noautoadd(const struct _info* lst, unsigned id) {
+int noautoadd(const struct _info* lst, uid_t id) {
     return scan_infos(lst, id, FL_NOAUTOADD); }
 
 /* Function to read passwd database */
@@ -364,7 +360,7 @@ int read_passwd(struct _node** list, const char* file) {
 	if (!node->name)
 	    break;
 	if (node->name[0]=='+')
-	    node->id=INT_MAX;
+	    node->id=0;
 	else
 	    node->id=node->d.pw.pw_uid;
 	add_node(list, node);
@@ -406,7 +402,7 @@ int read_group(struct _node** list, const char* file) {
 	if (!node->name)
 	    break;
 	if (node->name[0]=='+')
-	    node->id=INT_MAX;
+	    node->id=0;
 	else
 	    node->id=node->d.gr.gr_gid;
 	add_node(list, node);
@@ -645,7 +641,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 	if (!keephome(specialusers, passwd->id))
 	    if ((passwd->d.pw.pw_dir==NULL) || (strcmp(passwd->d.pw.pw_dir, mc->d.pw.pw_dir)!=0)) {
 		if (opt_verbose)
-		    printf("Changing homedirectory of %s to %s\n", passwd->name, mc->d.pw.pw_dir);
+		    printf("Changing home-directory of %s to %s\n", passwd->name, mc->d.pw.pw_dir);
 		/* We update the pw_dir entry of passwd so it now points into the
 		 * buffer from mc. This is safe for us, since we know we won't free
 		 * the data in mc until after we are done.
