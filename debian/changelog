@@ -1,4 +1,4 @@
-base-passwd (3.4.4) UNRELEASED; urgency=low
+base-passwd (3.4.4) unstable; urgency=low
 
   * Downcase the short description, apart from "Debian" (closes: #134614).
   * Add initial informative documentation of the global static users and
