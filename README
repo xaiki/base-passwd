@@ -35,7 +35,6 @@ Reserved uids:
     63434 | netplan   | netplan
     64000 | ftn       | fidogate
     64001 | mysql     | mysql-server
-    64002 | asterisk  | asterisk
     64005 | tac-plus  | tac-plus user
     64010 | alias     | qmail alias
     64011 | qmaild    | qmail daemon
@@ -44,6 +43,7 @@ Reserved uids:
     64015 | qmailq    | qmail queue
     64016 | qmaill    | qmail log
     64017 | qmailp    | qmail pw
+    64020 | asterisk  | asterisk
 
 Reserved gids:
     gid   | name      | description
@@ -51,7 +51,7 @@ Reserved gids:
     63434 | netplan   | netplan
     64000 | ftn       | fidogate
     64001 | mysql     | mysql-server
-    64002 | asterisk  | asterisk
     64005 | tac-plus  | tac-plus group
     64010 | qmail     | qmail
+    64020 | asterisk  | asterisk
 

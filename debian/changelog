@@ -2,7 +2,7 @@ base-passwd (3.5.2) UNRELEASED; urgency=low
 
   * Fix groff problems, mainly the use of "-", throughout update-passwd(8).
     I've attempted to keep the Polish translation in step.
-  * Allocate static uid/gid 64002 for asterisk (Jeff Noxon).
+  * Allocate static uid/gid 64020 for asterisk (Jeff Noxon).
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 28 Mar 2003 09:39:12 +0000
 
