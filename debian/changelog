@@ -12,6 +12,8 @@ base-passwd (3.5.1) UNRELEASED; urgency=low
     with it.
   * Change nobody's home directory to /nonexistent (the name is mostly for
     documentation purposes), following the BSDs (closes: #135732).
+  * Strip update-passwd after installing it into the temporary tree, not
+    before.
 
  -- Colin Watson <cjwatson@debian.org>  Sun,  9 Feb 2003 11:39:40 +0000
 

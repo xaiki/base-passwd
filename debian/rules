@@ -40,11 +40,11 @@ binary-arch: build
 	test "`id -u`" -eq 0
 	-rm -rf debian/tmp debian/files debian/substvars
 
-	strip --strip-unneeded --remove-section=.comment \
-		--remove-section=.note update-passwd
-
 	install -d -m 755 -o root -g root debian/tmp/usr/sbin
 	install -p -m 755 -o root -g root update-passwd debian/tmp/usr/sbin/
+
+	strip --strip-unneeded --remove-section=.comment \
+		--remove-section=.note debian/tmp/usr/sbin/update-passwd
 
 	install -d -m 755 -o root -g root \
 		debian/tmp/usr/share/man/man8 debian/tmp/usr/share/man/pl/man8
