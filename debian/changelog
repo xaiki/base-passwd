@@ -4,6 +4,7 @@ base-passwd (3.4.6) UNRELEASED; urgency=low
   * Clarify the purpose of group mail a little.
   * Per Debian policy, utmp can write to /var/log/wtmp and /var/log/lastlog
     as well, so document this.
+  * Update Standards-Version: to 3.5.8.
 
  -- Colin Watson <cjwatson@debian.org>  Mon, 30 Dec 2002 01:42:42 +0000
 
