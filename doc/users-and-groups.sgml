@@ -296,6 +296,11 @@
 	    Operator is historically (and practically) the only "user"
 	    account that can login remotely, and doesn't depend on NIS/NFS.
 	  </para>
+	  <para>
+	    In BSD, the operator user can read and write to tapes and read
+	    from disks, so that operators can perform backups. For some
+	    reason Linux seems to have lost this.
+	  </para>
 	</listitem>
       </varlistentry>
 
