@@ -1,3 +1,20 @@
+base-passwd (3.2.1) unstable; urgency=low
+
+  * Use a 8192 byte buffer for reading passwd and group entries. If
+    someone has a group with over 8kb of group members we will still
+    break (libc has no way to prevent that), but such a system will
+    be so rate I doubt we will even run into it.
+    Closes: Bug#51577,#51692,#69819
+  * Tell nscd to invalidate the user and group cache if we make any
+    changes. Closes: Bug#51943
+  * Fix a typo in the update-passwd manpage. Closes: Bug#53857,#75791
+  * Don't create the msql user and group anymore by default.
+    Closes: Bug#55878,#87213
+  * Don't create the dos user and group anymore by default. Closes: Bug#69485
+  * Note that tac-plus uses the static uid and gid 64005. Closes: Bug#63759
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Sat, 21 Apr 2001 20:30:49 +0200
+
 base-passwd (3.2.0) unstable; urgency=low
 
   * Update Standards-Version to 3.2.1

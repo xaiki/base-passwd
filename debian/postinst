@@ -60,6 +60,9 @@ rm -f $tmp
 if [ "$a" = "y" ] ; then
 	echo "Okay, I am going to make the necessary updates now"
 	update-passwd --verbose
+	if command nscd 2>/dev/null ; then
+		nscd -i passwd -i group
+	fi
 elif [ "$a" = "n" ] ; then
 	cat <<EOF
 

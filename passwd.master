@@ -14,7 +14,6 @@ majordom:*:30:31:Majordomo:/usr/lib/majordomo:/bin/sh
 postgres:*:31:32:postgres:/var/lib/postgres:/bin/sh
 www-data:*:33:33:www-data:/var/www:/bin/sh
 backup:*:34:34:backup:/var/backups:/bin/sh
-msql:*:36:36:Mini SQL Database Manager:/var/lib/msql:/bin/sh
 operator:*:37:37:Operator:/var:/bin/sh
 list:*:38:38:SmartList:/var/list:/bin/sh
 irc:*:39:39:ircd:/var:/bin/sh

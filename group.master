@@ -24,7 +24,6 @@ majordom:*:31:majordom
 postgres:*:32:
 www-data:*:33:
 backup:*:34:
-msql:*:36:
 operator:*:37:
 list:*:38:
 irc:*:39:

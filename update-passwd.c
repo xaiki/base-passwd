@@ -48,7 +48,7 @@
 #define	WRITE_EXTENSION		".upwd-write"
 #define	BACKUP_EXTENSION	".org"
 
-#define LINESIZE		1024
+#define OUR_NSS_BUFSIZE		8192
 
 
 #define FL_KEEPHOME	0x0001
@@ -72,6 +72,8 @@ const struct _info specialusers[] = {
     { 11, (FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* ftp	*/
     { 30, (FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* majordom	*/
     { 33, (FL_KEEPHOME)					},  /* www-data	*/
+    { 35, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* dos	*/
+    { 36, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* msql	*/
     { 70, (FL_NOAUTOREMOVE)				},  /* alias	*/
     { 71, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmaild	*/
     { 72, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmails	*/
@@ -87,6 +89,8 @@ const struct _info specialgroups[] = {
     {  0, (FL_KEEPALL|FL_NOAUTOREMOVE)			},  /* root	*/
     { 11, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* ftp	*/
     { 31, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* majordom	*/
+    { 35, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* dos	*/
+    { 36, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* msql	*/
     { 70, (FL_NOAUTOREMOVE)				},  /* qmail	*/
     { 0, 0}
 };
@@ -106,7 +110,7 @@ struct _node {
     const char*		name;
     unsigned int	id;
     struct _node*	next;
-    char		buf[NSS_BUFLEN_PASSWD];
+    char		buf[OUR_NSS_BUFSIZE];
 };
 
 const char*	master_passwd	= DEFAULT_PASSWD_MASTER;
@@ -167,7 +171,7 @@ void copy_passwd(struct _node* newnode, const struct _node* node) {
     newnode->d.pw.pw_shell=(newnode->buf+idx);
     idx+=sprintf((newnode->buf+idx), node->d.pw.pw_shell)+1;
 
-    if (idx>NSS_BUFLEN_PASSWD) {
+    if (idx>OUR_NSS_BUFSIZE) {
 	fprintf(stderr, "Aaiieee, we overflowed an entry-buffer, aborting\n");
 	exit(100);
     }
@@ -192,7 +196,7 @@ void copy_shadow(struct _node* newnode, const struct _node* node) {
     newnode->d.sp.sp_pwdp=(newnode->buf+idx);
     idx+=sprintf((newnode->buf+idx), node->d.sp.sp_pwdp)+1;
 
-    if (idx>NSS_BUFLEN_PASSWD) {
+    if (idx>OUR_NSS_BUFSIZE) {
 	fprintf(stderr, "Aaiieee, we overflowed an entry-buffer, aborting\n");
 	exit(100);
     }
@@ -218,7 +222,7 @@ void copy_group(struct _node* newnode, const struct _node* node) {
     /* TODO: properly copy the memberlist. */
     newnode->d.gr.gr_mem=node->d.gr.gr_mem;
 
-    if (idx>NSS_BUFLEN_PASSWD) {
+    if (idx>OUR_NSS_BUFSIZE) {
 	fprintf(stderr, "Aaiieee, we overflowed an entry-buffer, aborting\n");
 	exit(100);
     }
@@ -358,7 +362,7 @@ int read_passwd(struct _node** list, const char* file) {
 
     node=create_node();
 
-    while ((success=fgetpwent_r(input, &(node->d.pw), node->buf, NSS_BUFLEN_PASSWD, &result))==0) {
+    while ((success=fgetpwent_r(input, &(node->d.pw), node->buf, OUR_NSS_BUFSIZE, &result))==0) {
 	node->t=t_passwd;
 	node->name=node->d.pw.pw_name;
 	if (!node->name)
@@ -400,7 +404,7 @@ int read_group(struct _node** list, const char* file) {
 
     node=create_node();
 
-    while ((success=fgetgrent_r(input, &(node->d.gr), node->buf, NSS_BUFLEN_PASSWD, &result))==0) {
+    while ((success=fgetgrent_r(input, &(node->d.gr), node->buf, OUR_NSS_BUFSIZE, &result))==0) {
 	node->t=t_group;
 	node->name=node->d.gr.gr_name;
 	if (!node->name)
@@ -442,7 +446,7 @@ int read_shadow(struct _node** list, const char* file) {
 
     node=create_node();
 
-    while ((success=fgetspent_r(input, &(node->d.sp), node->buf, NSS_BUFLEN_PASSWD, &result))==0) {
+    while ((success=fgetspent_r(input, &(node->d.sp), node->buf, OUR_NSS_BUFSIZE, &result))==0) {
 	node->t=t_shadow;
 	node->id=0;
 	node->name=node->d.sp.sp_namp;
