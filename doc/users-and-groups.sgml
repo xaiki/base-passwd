@@ -20,6 +20,7 @@
     <copyright>
       <year>2001</year>
       <year>2002</year>
+      <year>2003</year>
       <holder>Joey Hess</holder>
       <holder>Colin Watson</holder>
     </copyright>
@@ -105,10 +106,11 @@
 	    files on disk run as daemon.daemon (<command>portmap</command>,
 	    <command>atd</command>, <command>jabberd</command>,
 	    <command>lambdamoo</command>, <command>mon</command>, and
-	    others). Daemons that don't need to own any files can run as
-	    nobody.nogroup instead, and more complex or security-conscious
-	    daemons run as dedicated users. The daemon user is also handy
-	    for locally installed daemons, probably.
+	    others). Daemons that don't need to own any files sometimes run
+	    as nobody.nogroup instead; it is generally better practice to
+	    use a dedicated user, and more complex or security-conscious
+	    daemons certainly do this. The daemon user is also handy for
+	    locally installed daemons, probably.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -333,15 +335,20 @@
 	<term>nobody, nogroup</term>
 	<listitem>
 	  <para>
-	    Daemons that need not own any files run as user nobody and group
-	    nogroup. Thus, no files on a system should be owned by this user
-	    or group.
+	    Daemons that need not own any files sometimes run as user nobody
+	    and group nogroup, although using a dedicated user is far
+	    preferable. Thus, no files on a system should be owned by this
+	    user or group.
 	  </para>
 	  <para>
 	    (Technically speaking, it does no harm for a file to be owned by
 	    group nogroup as long as the ownership confers no additional
 	    privileges, that is if the group and other permission bits are
 	    equal. However, this is sloppy practice and should be avoided.)
+	  </para>
+	  <para>
+	    If root-squashing is in use over NFS, root access from the
+	    client is performed as user nobody on the server.
 	  </para>
 	</listitem>
       </varlistentry>
