@@ -63,6 +63,7 @@ binary-arch: build
 	install -p -m 644 -o root -g root \
 		doc/users-and-groups.html doc/users-and-groups.txt \
 		debian/tmp$(docdir)/
+	gzip -9 debian/tmp$(docdir)/users-and-groups.txt
 
 	install -d -m 755 -o root -g root debian/tmp/DEBIAN
 	install -p -m 755 -o root -g root debian/preinst debian/tmp/DEBIAN/
