@@ -1,3 +1,10 @@
+base-passwd (3.5.2) UNRELEASED; urgency=low
+
+  * Fix groff problems, mainly the use of "-", throughout update-passwd(8).
+    I've attempted to keep the Polish translation in step.
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 28 Mar 2003 09:39:12 +0000
+
 base-passwd (3.5.1) unstable; urgency=low
 
   * For consistency with the rest of group.master, don't put the lp user in
