@@ -21,7 +21,7 @@ if [ ! -e /etc/group ] ; then
 fi
 
 tmp=`tempfile`
-if ! update-passwd > $tmp ; then
+if ! update-passwd --dry-run > $tmp ; then
 	cat <<EOF
 update-passwd has found some differences between your system accounts
 and the current Debian defaults. It is advisable to allow update-passwd

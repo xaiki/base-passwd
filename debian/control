@@ -2,7 +2,7 @@ Source: base-passwd
 Section: base
 Priority: required
 Maintainer: Wichert Akkerman <wakkerma@debian.org>
-Standards-Version: 3.1.1
+Standards-Version: 3.2.1
 
 Package: base-passwd
 Architecture: any

@@ -40,7 +40,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.1.8"
+#define VERSION			"3.2.0"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
@@ -62,23 +62,34 @@
 /* This structure is actually used for both users and groups
  * we probably should split that sometime.
  */
-const struct _userinfo {
+struct _info {
     unsigned	id;
     unsigned	flags;
-} specialusers[] = {
-    { /* root */     0,	(FL_KEEPALL|FL_NOAUTOREMOVE)			},
-    { /* ftp  */    11,	(FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},
-    { /* www-data*/ 33,	(FL_KEEPHOME)					},
-    { /* alias:qmail */   70, (FL_NOAUTOREMOVE)				},
-    { /* qmaild*/   71, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
-    { /* qmails*/   72, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
-    { /* qmailr*/   73, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
-    { /* qmailq*/   74, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
-    { /* qmaill*/   75, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE) 	}, /* actually only a user */
-    { /* qmailp*/   76, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
+};
+
+const struct _info specialusers[] = {
+    {  0, (FL_KEEPALL|FL_NOAUTOREMOVE)			},  /* root	*/
+    { 11, (FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* ftp	*/
+    { 30, (FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* majordom	*/
+    { 33, (FL_KEEPHOME)					},  /* www-data	*/
+    { 70, (FL_NOAUTOREMOVE)				},  /* alias	*/
+    { 71, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmaild	*/
+    { 72, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmails	*/
+    { 73, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmailr	*/
+    { 74, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmailq	*/
+    { 75, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE) 	},  /* qmaill	*/
+    { 76, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmailp	*/
     { 0, 0}
 };
 
+
+const struct _info specialgroups[] = {
+    {  0, (FL_KEEPALL|FL_NOAUTOREMOVE)			},  /* root	*/
+    { 11, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* ftp	*/
+    { 31, (FL_NOAUTOADD|FL_NOAUTOREMOVE)		},  /* majordom	*/
+    { 70, (FL_NOAUTOREMOVE)				},  /* qmail	*/
+    { 0, 0}
+};
 
 struct _node {
     union {
@@ -307,23 +318,28 @@ struct _node* find_by_id(struct _node* head, unsigned int id) {
 }
 
 
-/* Function to scan the list of special users to see if a user has a certain
- * flag set.
+/* Function to scan the list of special users or groups to see if a an
+ * entry has a certain flag set.
  */
-int scan_users(unsigned id, unsigned flag) {
-    const struct _userinfo*	walk;
-    for (walk=specialusers; !((walk->id==0) && (walk->flags==0)); walk++)
+int scan_infos(const struct _info *lst, unsigned id, unsigned flag) {
+    const struct _info*	walk;
+    for (walk=lst; !((walk->id==0) && (walk->flags==0)); walk++)
 	if (walk->id==id)
 	    return ((walk->flags&flag)!=0);
     return 0;
 }
 
 /* Just for our convenience */
-int keephome(unsigned id) { return scan_users(id, FL_KEEPHOME); }
-int keepshell(unsigned id) { return scan_users(id, FL_KEEPSHELL); }
-int keepgecos(unsigned id) { return scan_users(id, FL_KEEPGECOS); }
-int noautoremove(unsigned id) { return scan_users(id, FL_NOAUTOREMOVE); }
-int noautoadd(unsigned id) { return scan_users(id, FL_NOAUTOREMOVE); }
+int keephome(const struct _info* lst, unsigned id) {
+    return scan_infos(lst, id, FL_KEEPHOME); }
+int keepshell(const struct _info* lst, unsigned id) {
+    return scan_infos(lst, id, FL_KEEPSHELL); }
+int keepgecos(const struct _info* lst, unsigned id) {
+    return scan_infos(lst, id, FL_KEEPGECOS); }
+int noautoremove(const struct _info* lst, unsigned id) {
+    return scan_infos(lst, id, FL_NOAUTOREMOVE); }
+int noautoadd(const struct _info* lst, unsigned id) {
+    return scan_infos(lst, id, FL_NOAUTOADD); }
 
 /* Function to read passwd database */
 int read_passwd(struct _node** list, const char* file) {
@@ -490,10 +506,13 @@ void version() {
  * add accounts to shadow here; those will be made automatically at a later
  * stage where we verify the contents of the shadow database
  */
-void process_new_entries(struct _node** passwd, struct _node* master, const char* descr) {
+void process_new_entries(const struct _info* lst, struct _node** passwd, struct _node* master, const char* descr) {
     while (master) {
 	if (find_by_named_entry(*passwd, master)==NULL) {
 	    struct _node* newnode;
+
+	    if (noautoadd(lst, (*passwd)->id))
+		continue;
 
 	    newnode=copy_node(master);
 	    add_node(passwd, newnode);
@@ -511,12 +530,12 @@ void process_new_entries(struct _node** passwd, struct _node* master, const char
  * don't update shadow here since it is verified at a later stage anyway.
  * We will only remove accounts in our range (uids 0-99).
  */
-void process_old_entries(struct _node** passwd, struct _node* master, const char* descr) {
+void process_old_entries(const struct _info* lst, struct _node** passwd, struct _node* master, const char* descr) {
     for (;*passwd; passwd=&((*passwd)->next)) {
 	if (((*passwd)->id<0) || ((*passwd)->id>99))
 	    continue;
 
-	if (noautoremove((*passwd)->id))
+	if (noautoremove(lst, (*passwd)->id))
 	    continue;
 
 	if (find_by_named_entry(master, *passwd)==NULL) {
@@ -563,7 +582,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 	    flag_dirty++;
 	}
 
-	if (!keepgecos(passwd->id))
+	if (!keepgecos(specialusers, passwd->id))
 	    if ((passwd->d.pw.pw_gecos==NULL) || (strcmp(passwd->d.pw.pw_gecos, mc->d.pw.pw_gecos)!=0)) {
 		if (opt_verbose)
 		    printf("Changing GECOS of %s to \"%s\".\n", passwd->name, mc->d.pw.pw_gecos);
@@ -575,7 +594,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 		flag_dirty++;
 	    }
 
-	if (!keephome(passwd->id))
+	if (!keephome(specialusers, passwd->id))
 	    if ((passwd->d.pw.pw_dir==NULL) || (strcmp(passwd->d.pw.pw_dir, mc->d.pw.pw_dir)!=0)) {
 		if (opt_verbose)
 		    printf("Changing homedirectory of %s to %s\n", passwd->name, mc->d.pw.pw_dir);
@@ -587,7 +606,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 		flag_dirty++;
 	    }
 
-	if (!keepshell(passwd->id))
+	if (!keepshell(specialusers, passwd->id))
 	    if ((passwd->d.pw.pw_shell==NULL) || (strcmp(passwd->d.pw.pw_shell, mc->d.pw.pw_shell)!=0)) {
 		if (opt_verbose)
 		    printf("Changing shell of %s to %s\n", passwd->name, mc->d.pw.pw_shell);
@@ -767,7 +786,7 @@ int copy_filemodes(const char* source, const char* target) {
 	return 0;
     }
 
-    if (lchown(target, st.st_uid, st.st_gid)!=0)
+    if (lchown(target, st.st_uid, st.st_gid)!=0) {
 	/* Hmm, this failed. Lets try a normal chown in case we
 	 * are running on a kernel that doesn't support lchown
 	 */
@@ -791,6 +810,7 @@ int copy_filemodes(const char* source, const char* target) {
 		    source, strerror(errno));
 	    return 0;
 	}
+    }
 
     return 1;
 }
@@ -832,24 +852,35 @@ int replace_file(const char* org, const char* new, const char* backup) {
  * new copy, since it's useless anyway.
  */
 int put_file_in_place(const char* source, const char* target) {
-    char	uf[PATH_MAX];
+    char*	uf;
+    int		ret;
 
     if (opt_verbose>1)
 	printf("Replacing \"%s\" with \"%s\"\n", target, source);
 
-    snprintf(uf, PATH_MAX, "%s%s", target, BACKUP_EXTENSION);
+    asprintf(&uf, "%s%s", target, BACKUP_EXTENSION);
 
-    if (!copy_filemodes(target, source))
+    if (uf==NULL) {
+	fprintf(stderr, "Not enough memory available\n");
 	return 0;
+    }
 
-    return replace_file(target, source, uf);
+    if (!copy_filemodes(target, source)) {
+	free(uf);
+	return 0;
+    }
+
+    ret=replace_file(target, source, uf);
+    free(uf);
+
+    return ret;
 }
 
 
 /* Rewrite the account-database if we made any changes
  */
 int commit_files() {
-    char	wf[PATH_MAX];
+    char*	wf;
 
     if (!flag_dirty) {
 	if (opt_verbose)
@@ -864,25 +895,64 @@ int commit_files() {
 
     printf("%d changes have been made, rewriting files\n", flag_dirty);
 
-    snprintf(wf, PATH_MAX, "%s%s", sys_passwd, WRITE_EXTENSION);
-    if (!write_passwd(system_accounts, wf))
-	return 0;
-    if (!put_file_in_place(wf, sys_passwd))
-	return 0;
+    asprintf(&wf, "%s%s", sys_passwd, WRITE_EXTENSION);
 
-    if (system_shadow!=NULL) {
-	snprintf(wf, PATH_MAX, "%s%s", sys_shadow, WRITE_EXTENSION);
-	if (!write_shadow(system_shadow, wf))
-	    return 0;
-	if (!put_file_in_place(wf, sys_shadow))
-	    return 0;
+    if (wf==NULL) {
+	fprintf(stderr, "Not enough memory available\n");
+	return 0;
     }
 
-    snprintf(wf, PATH_MAX, "%s%s", sys_group, WRITE_EXTENSION);
-    if (!write_group(system_groups, wf))
+    if (!write_passwd(system_accounts, wf)) {
+	free(wf);
 	return 0;
-    if (!put_file_in_place(wf, sys_group))
+    }
+
+    if (!put_file_in_place(wf, sys_passwd)) {
+	free(wf);
 	return 0;
+    }
+
+    free(wf);
+
+    if (system_shadow!=NULL) {
+	asprintf(&wf, "%s%s", sys_shadow, WRITE_EXTENSION);
+
+	if (wf==NULL) {
+	    fprintf(stderr, "Not enough memory available\n");
+	    return 0;
+	}
+
+	if (!write_shadow(system_shadow, wf)) {
+	    free(wf);
+	    return 0;
+	}
+
+	if (!put_file_in_place(wf, sys_shadow)) {
+	    free(wf);
+	    return 0;
+	}
+
+	free(wf);
+    }
+
+    asprintf(&wf, "%s%s", sys_group, WRITE_EXTENSION);
+
+    if (wf==NULL) {
+	fprintf(stderr, "Not enough memory available\n");
+	return 0;
+    }
+
+    if (!write_group(system_groups, wf)) {
+	free(wf);
+	return 0;
+    }
+
+    if (!put_file_in_place(wf, sys_group)) {
+	free(wf);
+	return 0;
+    }
+
+    free(wf);
 
     return 1;
 }
@@ -989,12 +1059,12 @@ int main(int argc, char** argv) {
     if (read_group(&system_groups, sys_group)!=0)
 	return 2;
 
-    process_new_entries(&system_accounts, master_accounts, "user");
-    process_old_entries(&system_accounts, master_accounts, "user");
+    process_new_entries(specialusers, &system_accounts, master_accounts, "user");
+    process_old_entries(specialusers, &system_accounts, master_accounts, "user");
     process_changed_accounts(system_accounts, master_accounts);
 
-    process_new_entries(&system_groups, master_groups, "group");
-    process_old_entries(&system_groups, master_groups, "group");
+    process_new_entries(specialgroups, &system_groups, master_groups, "group");
+    process_old_entries(specialgroups, &system_groups, master_groups, "group");
     process_changed_groups(system_groups, master_groups);
 
     if (opt_sanity)

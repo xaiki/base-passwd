@@ -1,3 +1,15 @@
+base-passwd (3.2.0) unstable; urgency=low
+
+  * Update Standards-Version to 3.2.1
+  * Modify update-passwd to use seperate flag lists for users and
+    groups
+  * Actually honour noautoadd flag
+  * Use asprintf so we are no longer bound by PATH_MAX limits. This
+    has the unfortunate side effect of making update-passwd dependent
+    on glibc. We'll deal with that when somebody files a bugreport.
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Sun, 15 Oct 2000 14:09:52 +0200
+
 base-passwd (3.1.9) stable unstable; urgency=low
 
   * Fix typo: we run update-passwsd instead of uppdate-modules.
