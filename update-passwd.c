@@ -526,7 +526,8 @@ const char* safestr(const char* str) {
 
 
 /* Implement our own putpwent(3). The version in GNU libc is stupid enough
- * to not recognize NIS compat entries and will happily turn entry like this:
+ * to not recognize NIS compat entries and will happily turn an entry like
+ * this:
  *
  *    +@staff::::::
  *
@@ -565,7 +566,7 @@ int fputpwent(const struct passwd *passwd, FILE * f) {
 }
 
 
-/* Simple function to usage information */
+/* Simple function to print usage information */
 void usage() {
     printf(
 	"Usage: update-passwd [OPTION]...\n"
@@ -953,7 +954,7 @@ int copy_filemodes(const char* source, const char* target) {
 }
 
 
-/* Atomically replace a file with another, possible keeping a backup file.
+/* Atomically replace a file with another, possibly keeping a backup file.
  * Taken from the dpkg2 sourcetree.
  */
 int replace_file(const char* org, const char* new, const char* backup) {
