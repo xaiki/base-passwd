@@ -36,7 +36,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.4.4"
+#define VERSION			"3.4.5"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
@@ -295,11 +295,11 @@ void add_node(struct _node** head, struct _node* node, int new_entry) {
 	}
 	/* Otherwise fall through and add as normal.
 	 */
-    } else {
-	(*head)->last->next=node;
-	node->prev=(*head)->last;
-	(*head)->last=node;
     }
+
+    (*head)->last->next=node;
+    node->prev=(*head)->last;
+    (*head)->last=node;
 }
 
 

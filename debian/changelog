@@ -1,3 +1,10 @@
+base-passwd (3.4.5) unstable; urgency=medium
+
+  * Fix a thinko that caused update-passwd never to add new passwd/group
+    entries unless a NIS compat entry was present (closes: #174187).
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 24 Dec 2002 17:46:39 +0000
+
 base-passwd (3.4.4) unstable; urgency=low
 
   * Downcase the short description, apart from "Debian" (closes: #134614).
