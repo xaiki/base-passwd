@@ -6,11 +6,10 @@ sync:*:4:100:sync:/bin:/bin/sync
 games:*:5:100:games:/usr/games:/bin/sh
 man:*:6:100:man:/var/cache/man:/bin/sh
 lp:*:7:7:lp:/var/spool/lpd:/bin/sh
-mail:*:8:8:mail:/var/spool/mail:/bin/sh
+mail:*:8:8:mail:/var/mail:/bin/sh
 news:*:9:9:news:/var/spool/news:/bin/sh
 uucp:*:10:10:uucp:/var/spool/uucp:/bin/sh
 proxy:*:13:13:proxy:/bin:/bin/sh
-majordom:*:30:31:Majordomo:/usr/lib/majordomo:/bin/sh
 postgres:*:31:32:postgres:/var/lib/postgres:/bin/sh
 www-data:*:33:33:www-data:/var/www:/bin/sh
 backup:*:34:34:backup:/var/backups:/bin/sh

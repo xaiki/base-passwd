@@ -1,3 +1,17 @@
+base-passwd (3.2.2) unstable; urgency=high
+
+  * Implement our own putpwent since the GNU libc version will happily 
+    give root access to everyone when encountering NIS compat entries.
+    Closes: Bug#123345
+  * Fix typo in error message when reading group files
+  * Remove majordomo user and group from master passwd and group files
+    Closes: Bug#108071,#87214
+  * Change mail homedirectory to /var/mail. Closes: Bug#95670
+  * Improve test for nscd presence. Hopefully Closes: Bug#95479
+  * Include section and priority in control file
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Sat, 19 Jan 2002 18:18:17 +0100
+
 base-passwd (3.2.1) unstable; urgency=low
 
   * Use a 8192 byte buffer for reading passwd and group entries. If

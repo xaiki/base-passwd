@@ -40,7 +40,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.2.0"
+#define VERSION			"3.2.2"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
@@ -418,7 +418,7 @@ int read_group(struct _node** list, const char* file) {
     }
 
     if ((success!=0) && (errno!=ENOENT)) {
-	fprintf(stderr, "Error reading shadow file %s: %s\n", file, strerror(errno));
+	fprintf(stderr, "Error reading group file %s: %s\n", file, strerror(errno));
 	return 2;
     }
     free(node);
@@ -469,8 +469,43 @@ int read_shadow(struct _node** list, const char* file) {
 
 
 
-/* Simple function to usage information
+/* Implement our own putpwent(3). The version in GNU libc is stupid enough
+ * to not recognize NIS compat entries and will happily turn entry like this:
+ *
+ *    +@staff::::::
+ *
+ * into this:
+ *
+ *    +@staff::0:0:::
+ *
  */
+
+int fputpwent(const struct passwd *passwd, FILE * f) {
+    int res;
+
+    if ((passwd==NULL) || (f==NULL)) {
+	errno=EINVAL;
+	return -1;
+    }
+
+    if (passwd->pw_name[0]=='+')
+	res=fprintf(f, "%s:%s:::%s:%s:%s\n", passwd->pw_name,
+		passwd->pw_passwd, passwd->pw_gecos,
+		passwd->pw_dir, passwd->pw_shell);
+    else
+	res=fprintf(f, "%s:%s:%u:%u:%s:%s:%s\n", passwd->pw_name, 
+		passwd->pw_passwd, passwd->pw_gid, 
+		passwd->pw_uid, passwd->pw_gecos, 
+		passwd->pw_dir, passwd->pw_shell); 
+
+    if (res<0)
+	return -1;
+
+    return 0;
+}
+
+
+/* Simple function to usage information */
 void usage() {
     printf(
 	"Usage: update-passwd [OPTION]...\n"
@@ -663,7 +698,7 @@ int write_passwd(const struct _node* passwd, const char* file) {
 
     for (;passwd; passwd=passwd->next) {
 	assert(passwd->t==t_passwd);
-	if (putpwent(&(passwd->d.pw), output)!=0) {
+	if (fputpwent(&(passwd->d.pw), output)!=0) {
 	    fprintf(stderr, "Error writing passwd-entry: %s\n", strerror(errno));
 	    return 0;
 	}

@@ -55,5 +55,6 @@ binary-arch: build
 	install -p -m 755 -o root -g root debian/prerm debian/tmp/DEBIAN
 
 	dpkg-shlibdeps -dPre-Depends debian/tmp/usr/sbin/update-passwd
-	dpkg-gencontrol
+	dpkg-gencontrol -isp
 	dpkg --build debian/tmp ..
+
