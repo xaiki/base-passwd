@@ -374,7 +374,7 @@ int read_passwd(struct _node** list, const char* file) {
 	printf("Reading passwd from %s\n", file);
 
     if ((input=fopen(file, "r"))==NULL) {
-	fprintf(stderr, "Error opening password file %s: %s\n", file, strerror(errno));
+	fprintf(stderr, "Error opening passwd file %s: %s\n", file, strerror(errno));
 	return 1;
     }
 
@@ -453,7 +453,7 @@ int read_shadow(struct _node** list, const char* file) {
 
     if ((input=fopen(file, "r"))==NULL) {
 	if (errno!=ENOENT)
-	    fprintf(stderr, "Error opening group file %s: %s\n", file, strerror(errno));
+	    fprintf(stderr, "Error opening shadow file %s: %s\n", file, strerror(errno));
 	return 1;
     }
 
@@ -469,7 +469,7 @@ int read_shadow(struct _node** list, const char* file) {
     }
 
     if ((result==NULL) && (errno!=ENOENT)) {
-	fprintf(stderr, "Error reading group file %s: %s\n", file, strerror(errno));
+	fprintf(stderr, "Error reading shadow file %s: %s\n", file, strerror(errno));
 	return 2;
     }
 
