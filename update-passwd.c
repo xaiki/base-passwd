@@ -494,8 +494,8 @@ int fputpwent(const struct passwd *passwd, FILE * f) {
 		passwd->pw_dir, passwd->pw_shell);
     else
 	res=fprintf(f, "%s:%s:%u:%u:%s:%s:%s\n", passwd->pw_name, 
-		passwd->pw_passwd, passwd->pw_gid, 
-		passwd->pw_uid, passwd->pw_gecos, 
+		passwd->pw_passwd, passwd->pw_uid, 
+		passwd->pw_gid, passwd->pw_gecos, 
 		passwd->pw_dir, passwd->pw_shell); 
 
     if (res<0)

@@ -1,3 +1,12 @@
+base-passwd (3.2.3) unstable; urgency=high
+
+  * Major paper brown bag release
+  * Do not swap uid and gid in putpwent. Closes: Bug#130032
+  * If we are upgrading from 3.2.2 explain the uid/gid problem and
+    offer to restore the previous passwd file
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Sun, 20 Jan 2002 17:08:01 +0100
+
 base-passwd (3.2.2) unstable; urgency=high
 
   * Implement our own putpwent since the GNU libc version will happily 
