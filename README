@@ -4,7 +4,7 @@ base-passwd for Debian
 This package supplies the "master" copies of /etc/passwd and /etc/group,
 in /usr/share/base-passwd. It also supplies the utility "update-passwd",
 which automatically makes sure that uids and gids in the 0-99 range on
-your system are consistant with the Debian master copies. This means
+your system are consistent with the Debian master copies. This means
 that all entries in the masterfiles in that range have to be present on
 your system, and only those entries. The reason for not allowing other
 entries is that Debian reserves that range for future use.
@@ -16,13 +16,13 @@ correct you can use the update-passwd utility to check it and optionally
 make the necessary changes.
 
 There are some exceptions to this:
-* root is never removed or changed. If it doesn't exist a root-account will
+* root is never removed or changed. If it doesn't exist a root account will
   be added though.
-* the homedirectory for the ftp-user is preserved, and it is neither added
+* the homedirectory for the ftp user is preserved, and it is neither added
   nor removed automatically since this can affect how FTP daemons handle
   anonymous access
-* the homedirectory for the www-data is preserved 
-* if a user or group exists but with an uid outside our reserved ranged
+* the homedirectory for the www-data user is preserved 
+* if a user or group exists but with an uid outside our reserved range
   we don't change it
 
 The following uid/gid pairs have been allocated in the static range
