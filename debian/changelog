@@ -1,10 +1,11 @@
-base-passwd (3.5.4) UNRELEASED; urgency=low
+base-passwd (3.5.4) unstable; urgency=low
 
   * Move the man pages into their own directory in the source package.
   * Change irc's home directory to /var/run/ircd, which seems to exist in
     most ircd-providing packages (closes: #198913).
+  * Update Standards-Version: to 3.5.10.
 
- -- Colin Watson <cjwatson@debian.org>  Sat, 24 May 2003 12:35:33 +0100
+ -- Colin Watson <cjwatson@debian.org>  Fri, 27 Jun 2003 23:45:58 +0100
 
 base-passwd (3.5.3) unstable; urgency=low
 
