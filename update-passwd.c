@@ -36,7 +36,7 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.4.3"
+#define VERSION			"3.4.4"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
@@ -107,6 +107,7 @@ struct _node {
     const char*		name;
     uid_t		id;
     struct _node*	next;
+    struct _node*	prev;
     struct _node*	last;
     char		buf[OUR_NSS_BUFSIZE];
 };
@@ -140,6 +141,7 @@ struct _node* create_node() {
     newnode->name=0;
     newnode->id=0;
     newnode->next=NULL;
+    newnode->prev=NULL;
     newnode->last=NULL;
     newnode->t=t_error;
 
@@ -259,8 +261,6 @@ struct _node* copy_node(const struct _node* node) {
 /* Add a new item to a list
  */
 void add_node(struct _node** head, struct _node* node) {
-    struct _node*	walk;
-
     node->next=NULL;
 
     if (*head==NULL) {
@@ -269,8 +269,20 @@ void add_node(struct _node** head, struct _node* node) {
 	return;
     }
 
-    (*head)->last->next=node;
-    (*head)->last=node;
+    /* Make sure NIS compat entries stay at the end.
+     */
+    if (strcmp((*head)->last->name, "+")==0) {
+	struct _node*	walk=(*head)->last;
+	while (walk->prev && strcmp(walk->prev->name, "+")==0)
+	    walk=walk->prev;
+	node->prev=walk->prev;
+	node->next=walk;
+	walk->prev->next=node;
+    } else {
+	(*head)->last->next=node;
+	node->prev=(*head)->last;
+	(*head)->last=node;
+    }
 }
 
 
