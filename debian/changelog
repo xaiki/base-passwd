@@ -1,3 +1,9 @@
+base-passwd (3.5.5) unstable; urgency=low
+
+  * Add md5sums control file.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue,  9 Dec 2003 02:24:15 +0000
+
 base-passwd (3.5.4) unstable; urgency=low
 
   * Move the man pages into their own directory in the source package.

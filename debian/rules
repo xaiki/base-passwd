@@ -77,5 +77,10 @@ binary-arch: build
 
 	dpkg-shlibdeps -dPre-Depends debian/tmp/usr/sbin/update-passwd
 	dpkg-gencontrol -isp
+	(cd debian/tmp && \
+		find . -name DEBIAN -prune -o -type f -printf '%P\0' | \
+		xargs -r0 md5sum) > debian/tmp/DEBIAN/md5sums
+	chown root:root debian/tmp/DEBIAN/md5sums
+	chmod 644 debian/tmp/DEBIAN/md5sums
 	dpkg --build debian/tmp ..
 
