@@ -21,6 +21,7 @@
       <year>2001</year>
       <year>2002</year>
       <year>2003</year>
+      <year>2004</year>
       <holder>Joey Hess</holder>
       <holder>Colin Watson</holder>
     </copyright>
@@ -305,13 +306,13 @@
 	<term>operator</term>
 	<listitem>
 	  <para>
-	    Operator is historically (and practically) the only "user"
-	    account that can login remotely and doesn't depend on NIS/NFS.
-	  </para>
-	  <para>
-	    In BSD, the operator user can read and write to tapes and read
-	    from disks, so that operators can perform backups. For some
-	    reason Linux seems to have lost this.
+	    Historically, the operator user account was used by system
+	    operators with low privilege to dump filesystem backups to tape,
+	    and was in the root group so that it could do this. In Debian,
+	    the use of a utility such as <command>sudo</command> to gain
+	    privilege is preferred over such highly-special-purpose
+	    accounts, and the operator user is no longer created by default.
+	    It had uid 37.
 	  </para>
 	  <para>
 	    The operator group is used by <command>dump -n</command> to

@@ -12,7 +12,6 @@ uucp:*:10:10:uucp:/var/spool/uucp:/bin/sh
 proxy:*:13:13:proxy:/bin:/bin/sh
 www-data:*:33:33:www-data:/var/www:/bin/sh
 backup:*:34:34:backup:/var/backups:/bin/sh
-operator:*:37:37:Operator:/var:/bin/sh
 list:*:38:38:Mailing List Manager:/var/list:/bin/sh
 irc:*:39:39:ircd:/var/run/ircd:/bin/sh
 gnats:*:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/bin/sh

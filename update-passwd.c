@@ -73,6 +73,7 @@ const struct _info specialusers[] = {
     { 33, (FL_KEEPHOME)					},  /* www-data	*/
     { 35, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* dos	*/
     { 36, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* msql	*/
+    { 37, (FL_NOAUTOREMOVE)				},  /* operator */
     { 41, (FL_KEEPHOME)					},  /* gnats	*/
     { 70, (FL_NOAUTOREMOVE)				},  /* alias	*/
     { 71, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},  /* qmaild	*/

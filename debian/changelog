@@ -1,6 +1,12 @@
 base-passwd (3.5.7) UNRELEASED; urgency=low
 
   * Improve documentation of 'operator' (Peter Benie).
+  * In fact, remove the 'operator' user (not group) entirely from new
+    installations. It will not be automatically removed from existing
+    installations. Its uses are historical and not well-supported by Debian
+    anyway, and a local administrator can easily set up something
+    appropriate without it having to be in everyone's /etc/passwd file
+    (closes: #198943).
 
  -- Colin Watson <cjwatson@debian.org>  Tue, 20 Jan 2004 00:38:04 +0000
 
