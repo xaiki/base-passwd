@@ -1,4 +1,4 @@
-base-passwd (3.5.6) UNRELEASED; urgency=low
+base-passwd (3.5.6) unstable; urgency=low
 
   * Show names of groups when changing users' group ids (closes: #217511).
     This incidentally means that group has to be updated before passwd,
@@ -7,7 +7,7 @@ base-passwd (3.5.6) UNRELEASED; urgency=low
     prompting via debconf, which is a major code change that hasn't been
     done yet.
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 15 Jan 2004 20:04:02 +0000
+ -- Colin Watson <cjwatson@debian.org>  Sat, 17 Jan 2004 11:58:19 +0000
 
 base-passwd (3.5.5) unstable; urgency=low
 
