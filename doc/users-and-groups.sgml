@@ -367,9 +367,9 @@
 	  </para>
 	  <para>
 	    HELP: Perhaps policy should state the purpose of this group so
-	    users may be safely added to it, in certanty that all they'll be
-	    able to do is read logs. Wouldn't hurt to rename it 'log' either
-	    ...
+	    users may be safely added to it, in certainty that all they'll
+	    be able to do is read logs. Wouldn't hurt to rename it 'log'
+	    either ...
 	  </para>
 	</listitem>
       </varlistentry>
