@@ -174,7 +174,8 @@ void copy_passwd(struct _node* newnode, const struct _node* node) {
     idx+=sprintf((newnode->buf+idx), node->d.pw.pw_shell)+1;
 
     if (idx>OUR_NSS_BUFSIZE) {
-	fprintf(stderr, "Aaiieee, we overflowed an entry-buffer, aborting\n");
+	fprintf(stderr, "copy_passwd: Aaiieee, we overflowed an entry-buffer, "
+			"aborting\n");
 	exit(100);
     }
 }
@@ -199,7 +200,8 @@ void copy_shadow(struct _node* newnode, const struct _node* node) {
     idx+=sprintf((newnode->buf+idx), node->d.sp.sp_pwdp)+1;
 
     if (idx>OUR_NSS_BUFSIZE) {
-	fprintf(stderr, "Aaiieee, we overflowed an entry-buffer, aborting\n");
+	fprintf(stderr, "copy_shadow: Aaiieee, we overflowed an entry-buffer, "
+			"aborting\n");
 	exit(100);
     }
 }
@@ -225,7 +227,8 @@ void copy_group(struct _node* newnode, const struct _node* node) {
     newnode->d.gr.gr_mem=node->d.gr.gr_mem;
 
     if (idx>OUR_NSS_BUFSIZE) {
-	fprintf(stderr, "Aaiieee, we overflowed an entry-buffer, aborting\n");
+	fprintf(stderr, "copy_group: Aaiieee, we overflowed an entry-buffer, "
+			"aborting\n");
 	exit(100);
     }
 }
@@ -999,7 +1002,7 @@ int put_file_in_place(const char* source, const char* target) {
     asprintf(&uf, "%s%s", target, BACKUP_EXTENSION);
 
     if (uf==NULL) {
-	fprintf(stderr, "Not enough memory available\n");
+	fprintf(stderr, "put_file_in_place: Not enough memory available\n");
 	return 0;
     }
 
@@ -1033,15 +1036,16 @@ int commit_files() {
 
     printf("%d changes have been made, rewriting files\n", flag_dirty);
 
+    if (opt_verbose==2)
+	printf("Writing passwd-file to %s\n", sys_passwd);
+
     asprintf(&wf, "%s%s", sys_passwd, WRITE_EXTENSION);
 
     if (wf==NULL) {
-	fprintf(stderr, "Not enough memory available\n");
+	fprintf(stderr, "Not enough memory available while committing "
+			"passwd-file\n");
 	return 0;
     }
-
-    if (opt_verbose==2)
-	printf("Writing passwd-file to %s\n", sys_passwd);
 
     if (!write_passwd(system_accounts, wf)) {
 	free(wf);
@@ -1056,15 +1060,16 @@ int commit_files() {
     free(wf);
 
     if (system_shadow!=NULL) {
+	if (opt_verbose==2)
+	    printf("Writing shadow-file to %s\n", sys_shadow);
+
 	asprintf(&wf, "%s%s", sys_shadow, WRITE_EXTENSION);
 
 	if (wf==NULL) {
-	    fprintf(stderr, "Not enough memory available\n");
+	    fprintf(stderr, "Not enough memory available while committing "
+			    "shadow-file\n");
 	    return 0;
 	}
-
-	if (opt_verbose==2)
-	    printf("Writing shadow-file to %s\n", sys_shadow);
 
 	if (!write_shadow(system_shadow, wf)) {
 	    free(wf);
@@ -1079,15 +1084,16 @@ int commit_files() {
 	free(wf);
     }
 
+    if (opt_verbose==2)
+	printf("Writing group-file to %s\n", sys_group);
+
     asprintf(&wf, "%s%s", sys_group, WRITE_EXTENSION);
 
     if (wf==NULL) {
-	fprintf(stderr, "Not enough memory available\n");
+	fprintf(stderr, "Not enough memory available while committing "
+			"group-file\n");
 	return 0;
     }
-
-    if (opt_verbose==2)
-	printf("Writing group-file to %s\n", sys_group);
 
     if (!write_group(system_groups, wf)) {
 	free(wf);
