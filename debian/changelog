@@ -1,3 +1,14 @@
+base-passwd (3.1.8) stable unstable; urgency=low
+
+  * Leave a backup file for modified files. Closes: Bug#72916
+  * Update code to atomically replace a file to be more modular
+  * Modified --dry-run output to only list modification instead of
+    detailed actions. This makes the postinst output simpler.
+  * Abort on errors in the postinst
+  * Update texts in postinst to better explain what we are doing
+
+ -- Wichert Akkerman <wakkerma@debian.org>  Mon,  2 Oct 2000 23:58:59 +0200
+
 base-passwd (3.1.7) unstable; urgency=low
 
   * Remove qmail accounts, but mark them as special in update-passwd so

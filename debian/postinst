@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 pkg=base-passwd
 
 if [ ! "$1" = "configure" ]; then
@@ -18,20 +20,28 @@ if [ ! -e /etc/group ] ; then
 	cp /usr/share/base-passwd/group.master /etc/group
 fi
 
-echo "Checking if your system passwd, shadow and group files are correct..."
+cat <<EOF
+Checking if your system passwd, shadow and group files are correct
+by asking update-modules which modifications it would make to your
+system:
+
+EOF
 
 answer=""
 if ! update-passwd --dry-run ; then
 	cat <<EOF
 
 It looks like I need to make some changes to your system. Without those
-changes some packages might not work correctly. The list of changes are
-listed above. For more documentation on the Debian account policies
-please read /usr/share/doc/base-passwd/README.
+changes some packages might not work correctly. For more documentation
+on the Debian account policies please see /usr/share/doc/base-passwd/README.
+
+It is highly recommend that you allow update-passwd to make these changes
+(a backup file of modified files is made with the extension .old so you can
+always restore the current settings).
 
 EOF
 	while : ; do
-		echo -n "Should I update your system? [Y/n] "
+		echo -n "May I update your system? [Y/n] "
 		read a
 		if [ "$a" = "" ] ; then
 			a="y"
@@ -54,11 +64,12 @@ Okay, I will not update your system. If you want to make this update later
 please check the update-passwd utility.
 
 EOF
+else
+	cat <<EOF
+
+Looks like update-passwd is happy with your existing settings.
+EOF
 fi
 
-#if grep "ftp:.*:11:" /etc/passwd > /dev/null; then
-#	echo "Moving user ftp to uid 999."
-#	update-passwd --sanity-check --move-ftp;
-#else
-#	update-passwd --sanity-check
-#fi
+exit 0
+

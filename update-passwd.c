@@ -1,5 +1,5 @@
 /* update-passwd - Safely update /etc/passwd, /etc/shadow and /etc/group
- * Copyright (C) 1999 Software in the Public Interest.
+ * Copyright (C) 1999,2000 Wichert Akkerman
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,13 +40,13 @@
 #include <shadow.h>
 #include <grp.h>
 
-#define VERSION			"3.1.1"
+#define VERSION			"3.1.8"
 
 #define DEFAULT_PASSWD_MASTER	"/usr/share/base-passwd/passwd.master"
 #define DEFAULT_GROUP_MASTER	"/usr/share/base-passwd/group.master"
 
 #define	WRITE_EXTENSION		".upwd-write"
-#define	UNLINK_EXTENSION	".upwd-unlink"
+#define	BACKUP_EXTENSION	".org"
 
 #define LINESIZE		1024
 
@@ -66,16 +66,16 @@ const struct _userinfo {
     unsigned	id;
     unsigned	flags;
 } specialusers[] = {
-    { /* root */     0,	(FL_KEEPALL|FL_NOAUTOREMOVE)				},
-    { /* ftp  */    11,	(FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)		},
-    { /* www-data*/ 33,	(FL_KEEPHOME)						},
-    { /* alias:qmail */   70, (FL_NOAUTOREMOVE)					},
-    { /* qmaild*/   71, (FL_KEEPALL|FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
-    { /* qmails*/   72, (FL_KEEPALL|FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
-    { /* qmailr*/   73, (FL_KEEPALL|FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
-    { /* qmailq*/   74, (FL_KEEPALL|FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
-    { /* qmaill*/   75, (FL_KEEPALL|FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE) 	}, /* actually only a user */
-    { /* qmailp*/   76, (FL_KEEPALL|FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
+    { /* root */     0,	(FL_KEEPALL|FL_NOAUTOREMOVE)			},
+    { /* ftp  */    11,	(FL_KEEPHOME|FL_NOAUTOADD|FL_NOAUTOREMOVE)	},
+    { /* www-data*/ 33,	(FL_KEEPHOME)					},
+    { /* alias:qmail */   70, (FL_NOAUTOREMOVE)				},
+    { /* qmaild*/   71, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
+    { /* qmails*/   72, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
+    { /* qmailr*/   73, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
+    { /* qmailq*/   74, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
+    { /* qmaill*/   75, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE) 	}, /* actually only a user */
+    { /* qmailp*/   76, (FL_KEEPALL|FL_NOAUTOADD|FL_NOAUTOREMOVE)	}, /* actually only a user */
     { 0, 0}
 };
 
@@ -332,7 +332,7 @@ int read_passwd(struct _node** list, const char* file) {
     struct passwd*	result;
     int			success;
 
-    if (opt_verbose)
+    if (opt_verbose>1)
 	printf("Reading passwd from %s\n", file);
 
     if ((input=fopen(file, "r"))==NULL) {
@@ -374,7 +374,7 @@ int read_group(struct _node** list, const char* file) {
     struct group*	result;
     int			success;
 
-    if (opt_verbose)
+    if (opt_verbose>1)
 	printf("Reading group from %s\n", file);
 
     if ((input=fopen(file, "r"))==NULL) {
@@ -415,7 +415,7 @@ int read_shadow(struct _node** list, const char* file) {
     struct spwd*	result;
     int			success;
 
-    if (opt_verbose)
+    if (opt_verbose>1)
 	printf("Reading shadow from %s\n", file);
 
     if ((input=fopen(file, "r"))==NULL) {
@@ -499,7 +499,7 @@ void process_new_entries(struct _node** passwd, struct _node* master, const char
 	    add_node(passwd, newnode);
 	    flag_dirty++;
 
-	    if (opt_dryrun || opt_verbose)
+	    if (opt_verbose)
 		printf("Adding %s \"%s\" (%u)\n", descr, newnode->name, newnode->id);
 	}
 	master=master->next;
@@ -524,7 +524,7 @@ void process_old_entries(struct _node** passwd, struct _node* master, const char
 
 	    oldnode=*passwd;
 
-	    if (opt_dryrun || opt_verbose)
+	    if (opt_verbose)
 		printf("Removing %s \"%s\" (%u)\n", descr, oldnode->name, oldnode->id);
 
 	    *passwd=(*passwd)->next;
@@ -549,7 +549,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 	    continue;
 
 	if (passwd->id!=mc->id) {
-	    if (opt_verbose || opt_dryrun)
+	    if (opt_verbose)
 		printf("Changing uid of %s from %u to %u\n", passwd->name, passwd->id, mc->id);
 	    passwd->id=mc->id;
 	    passwd->d.pw.pw_uid=mc->d.pw.pw_uid;
@@ -557,7 +557,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 	}
 
 	if (passwd->d.pw.pw_gid!=mc->d.pw.pw_gid) {
-	    if (opt_verbose || opt_dryrun)
+	    if (opt_verbose)
 		printf("Changing gid of %s from %u to %u\n", passwd->name, passwd->d.pw.pw_gid, mc->d.pw.pw_gid);
 	    passwd->d.pw.pw_gid=mc->d.pw.pw_gid;
 	    flag_dirty++;
@@ -565,7 +565,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 
 	if (!keepgecos(passwd->id))
 	    if ((passwd->d.pw.pw_gecos==NULL) || (strcmp(passwd->d.pw.pw_gecos, mc->d.pw.pw_gecos)!=0)) {
-		if (opt_verbose || opt_dryrun)
+		if (opt_verbose)
 		    printf("Changing GECOS of %s to \"%s\".\n", passwd->name, mc->d.pw.pw_gecos);
 		/* We update the pw_gecos entry of passwd so it now points into the
 		 * buffer from mc. This is safe for us, since we know we won't free
@@ -577,7 +577,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 
 	if (!keephome(passwd->id))
 	    if ((passwd->d.pw.pw_dir==NULL) || (strcmp(passwd->d.pw.pw_dir, mc->d.pw.pw_dir)!=0)) {
-		if (opt_verbose || opt_dryrun)
+		if (opt_verbose)
 		    printf("Changing homedirectory of %s to %s\n", passwd->name, mc->d.pw.pw_dir);
 		/* We update the pw_dir entry of passwd so it now points into the
 		 * buffer from mc. This is safe for us, since we know we won't free
@@ -589,7 +589,7 @@ void process_changed_accounts(struct _node* passwd, struct _node* master) {
 
 	if (!keepshell(passwd->id))
 	    if ((passwd->d.pw.pw_shell==NULL) || (strcmp(passwd->d.pw.pw_shell, mc->d.pw.pw_shell)!=0)) {
-		if (opt_verbose || opt_dryrun)
+		if (opt_verbose)
 		    printf("Changing shell of %s to %s\n", passwd->name, mc->d.pw.pw_shell);
 		/* We update the pw_shell entry of passwd so it now points into the
 		 * buffer from mc. This is safe for us, since we know we won't free
@@ -616,7 +616,7 @@ void process_changed_groups(struct _node* group, struct _node* master) {
 	    continue;
 
 	if (group->id!=mc->id) {
-	    if (opt_verbose || opt_dryrun)
+	    if (opt_verbose)
 		printf("Changing gid of %s from %u to %u\n", group->name, group->id, mc->id);
 	    group->id=mc->id;
 	    group->d.gr.gr_gid=mc->d.gr.gr_gid;
@@ -629,7 +629,7 @@ void process_changed_groups(struct _node* group, struct _node* master) {
 int write_passwd(const struct _node* passwd, const char* file) {
     FILE*	output;
 
-    if (opt_verbose)
+    if (opt_verbose>1)
 	printf("Writing passwd-file to %s\n", file);
 
     if ((output=fopen(file, "wt"))==NULL) {
@@ -658,7 +658,7 @@ int write_passwd(const struct _node* passwd, const char* file) {
 int write_shadow(const struct _node* shadow, const char* file) {
     FILE*	output;
 
-    if (opt_verbose)
+    if (opt_verbose>1)
 	printf("Writing shadow-file to %s\n", file);
 
     if ((output=fopen(file, "wt"))==NULL) {
@@ -700,7 +700,7 @@ int putgrent(const struct group* g, FILE* f) {
 int write_group(const struct _node* group, const char* file) {
     FILE*	output;
 
-    if (opt_verbose)
+    if (opt_verbose>1)
 	printf("Writing group-file to %s\n", file);
 
     if ((output=fopen(file, "wt"))==NULL) {
@@ -796,35 +796,53 @@ int copy_filemodes(const char* source, const char* target) {
 }
 
 
+/* Atomically replace a file with another, possible keeping a backup file.
+ * Taken from the dpkg2 sourcetree.
+ */
+int replace_file(const char* org, const char* new, const char* backup) {
+    if (backup) {
+	int res;
+
+	if ((res=link(org, backup))==-1) {
+	    if (errno==EEXIST) {
+		if (unlink(backup)==-1) {
+		    fprintf(stderr, "Error unlinking old backupfile %s: %s\n",
+			    backup, strerror(errno));
+		    return 0;
+		}
+		res=link(org, backup);
+	    }
+	    if (res==-1) {
+		fprintf(stderr, "Error making backupfile %s: %s\n", backup, strerror(errno));
+		return 0;
+	    }
+	}
+    }
+
+    if (rename(new, org)==-1) {
+	fprintf(stderr, "Error: failed to replace %s with %s: %s\n", org, new, strerror(errno));
+	return 0;
+    }
+
+    return 1;
+}
+
+
 /* Try to replace a file as safely as possible. If we fail unlink the
  * new copy, since it's useless anyway.
  */
 int put_file_in_place(const char* source, const char* target) {
     char	uf[PATH_MAX];
 
-    if (opt_verbose)
+    if (opt_verbose>1)
 	printf("Replacing \"%s\" with \"%s\"\n", target, source);
 
-    snprintf(uf, PATH_MAX, "%s%s", target, UNLINK_EXTENSION);
+    snprintf(uf, PATH_MAX, "%s%s", target, BACKUP_EXTENSION);
 
-    umask(0077);
-
-    if (!rename_file(target, uf)) {
-	unlink_file(source);
+    if (!copy_filemodes(target, source))
 	return 0;
-    }
 
-    if (!rename_file(source, target)) {
-	rename_file(uf, target);
-	return 0;
-    }
-
-    if (!copy_filemodes(uf, target)) {
-	unlink_file(uf);
-	return 0;
-    }
-
-    return unlink_file(uf);
+    return replace_file(target, source, uf);
 }
 
 
@@ -835,7 +853,7 @@ int commit_files() {
 
     if (!flag_dirty) {
 	if (opt_verbose)
-	    printf("No changes made, doing nothing\n");
+	    printf("No changes needed\n");
 	return 1;
     }
 
@@ -932,13 +950,14 @@ int main(int argc, char** argv) {
 		sys_group=optarg;
 		break;
 	    case 'v':
-		opt_verbose++;
+		opt_verbose+=2;
 		break;
 	    case 's':
 		opt_sanity=1;
 		break;
 	    case 'n':
 		opt_dryrun=1;
+		opt_verbose++;
 		break;
 	    case 'L':
 		opt_nolock=1;
@@ -985,6 +1004,8 @@ int main(int argc, char** argv) {
 	if (!lock_files())
 	    return 3;
 
+    umask(0077);
+
     if (!commit_files()) {
 	unlock_files();
 	return 4;
@@ -1000,3 +1021,5 @@ int main(int argc, char** argv) {
 	return 0;
 }
 
+/* vim: ts=8 sw=4 cindent si nowrap
+ */
