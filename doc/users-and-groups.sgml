@@ -596,6 +596,27 @@
       </varlistentry>
 
       <varlistentry>
+	<term>plugdev</term>
+	<listitem>
+	  <para>
+	    Members of this group can mount removable devices in limited
+	    ways via <command>pmount</command> without a matching entry in
+	    <filename>/etc/fstab</filename>. This is useful for local users
+	    who expect to be able to insert and use CDs, USB drives, and so
+	    on.
+	  </para>
+	  <para>
+	    Since <command>pmount</command> always mounts with the nodev and
+	    nosuid options and applies other checks, this group is not
+	    intended to be root-equivalent in the ways that the ability to
+	    mount filesystems might ordinarily allow. Implementors of
+	    semantics involving this group should be careful not to allow
+	    root-equivalence.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
 	<term>staff</term>
 	<listitem>
 	  <para>
