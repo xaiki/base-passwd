@@ -1,4 +1,4 @@
-base-passwd (3.5.10) UNRELEASED; urgency=low
+base-passwd (3.5.10) unstable; urgency=low
 
   * Remove preinst, for several reasons:
     - the 'dpkg --assert-support-predepends' check isn't guaranteed to be
@@ -14,7 +14,7 @@ base-passwd (3.5.10) UNRELEASED; urgency=low
     - Document lpadmin, sasl, scanner, and ssh groups.
     - Correct "writeable" to "writable" throughout.
 
- -- Colin Watson <cjwatson@debian.org>  Tue, 28 Jun 2005 14:26:27 +0100
+ -- Colin Watson <cjwatson@debian.org>  Tue, 28 Jun 2005 15:01:00 +0100
 
 base-passwd (3.5.9) unstable; urgency=low
 
