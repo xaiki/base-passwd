@@ -727,8 +727,9 @@
 	  <para>
 	    Users in this group have read/write access to
 	    <filename>/etc/sasldb</filename> and/or
-	    <filename>/etc/sasldb2</filename>, wich are used to authentication with sasl. This is
-	    commonly used by IMAP, POP, and SMTP servers for authentication.
+	    <filename>/etc/sasldb2</filename>, wich are used to
+	    authentication with sasl. This is commonly used by IMAP, POP,
+	    and SMTP servers for authentication.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -782,8 +783,8 @@
 	<term>cupsys</term>
 	<listitem>
 	  <para>
-	    <acronym>CUPS</acronym> (Common Un*x Printing System) runs as this user. It is in
-	    group lp, so it can access printer devices. 
+	    <acronym>CUPS</acronym> (Common Un*x Printing System) runs as
+	    this user. It is in group lp, so it can access printer devices. 
 	  </para>
 	</listitem>
       </varlistentry>
