@@ -7,6 +7,12 @@ base-passwd (3.5.10) UNRELEASED; urgency=low
     - dpkg has supported Pre-Depends since 1996;
     - it unnecessarily required dpkg to have been configured when running
       base-passwd.preinst (#316084).
+  * users-and-groups improvements from David Mandelberg (closes: #290237):
+    - Document messagebus, postfix, hal, gdm, saned, klog, and syslog users
+      and groups.
+    - Document sshd, fetchmail, and cupsys users.
+    - Document lpadmin, sasl, scanner, and ssh groups.
+    - Correct "writeable" to "writable" throughout.
 
  -- Colin Watson <cjwatson@debian.org>  Tue, 28 Jun 2005 14:26:27 +0100
 

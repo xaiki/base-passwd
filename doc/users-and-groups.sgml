@@ -2,7 +2,7 @@
 <book id="users-and-groups">
   <bookinfo>
     <title>Users and Groups in the Debian System</title>
-    <edition>0.1</edition>
+    <edition>0.2</edition>
 
     <authorgroup>
       <author>
@@ -15,6 +15,11 @@
 	<surname>Watson</surname>
 	<email>cjwatson@debian.org</email>
       </author>
+      <author>
+	<firstname>David</firstname>
+	<surname>Mandelberg</surname>
+	<email>mandelbergd@eth0.is-a-geek.org</email>
+      </author>
     </authorgroup>
 
     <copyright>
@@ -22,8 +27,10 @@
       <year>2002</year>
       <year>2003</year>
       <year>2004</year>
+      <year>2005</year>
       <holder>Joey Hess</holder>
       <holder>Colin Watson</holder>
+      <holder>David Mandelberg</holder>
     </copyright>
 
     <legalnotice>
@@ -204,7 +211,7 @@
 	  </para>
 	  <para>
 	    HELP: what do other print systems (<command>rlpr</command>,
-	    <command>cupsys</command>, <command>lprng</command>, ...) do?
+	    <command>lprng</command>, ...) do?
 	  </para>
 	</listitem>
       </varlistentry>
@@ -214,7 +221,7 @@
 	<listitem>
 	  <para>
 	    Mailboxes in <filename>/var/mail</filename> are owned and
-	    writeable by group mail, as is explained in Debian Policy. The
+	    writable by group mail, as is explained in Debian Policy. The
 	    user and group is used for other purposes as well by various
 	    MTAs and MUAs.
 	  </para>
@@ -374,6 +381,70 @@
 	  <para>
 	    If root-squashing is in use over NFS, root access from the
 	    client is performed as user nobody on the server.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>messagebus</term>
+	<listitem>
+	  <para>
+	    The dbus daemon (<command>dbus-daemon-1</command>) runs as this
+	    user and group.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>postfix</term>
+	<listitem>
+	  <para>
+	    Used by the <command>postfix</command> MTA.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>hal</term>
+	<listitem>
+	  <para>
+	    Used by the hardware abstraction layer (<command>hal</command>).
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>gdm</term>
+	<listitem>
+	  <para>
+	    GDM (GNOME Display Manager) runs as this user/group.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>saned</term>
+	<listitem>
+	  <para>
+	    Added by sane-utils, but appear to be unused.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>klog</term>
+	<listitem>
+	  <para>
+	    Used by <command>klogd</command>, the kernel logger.
+	  <para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>syslog</term>
+	<listitem>
+	  <para>
+	    Used by syslog, the general purpose logger.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -555,7 +626,7 @@
 	    necessarily be owned by group src though. If the intent is to
 	    make group src be able to manage source code, perhaps policy
 	    should say that foo-src packages make files in
-	    <filename>/usr/src</filename> owned and writeable by the group
+	    <filename>/usr/src</filename> owned and writable by the group
 	    (and files in tarballs dropped there likewise)?
 	  </para>
 	</listitem>
@@ -636,6 +707,84 @@
 	    user has their own group), some prefer to use a more traditional
 	    group system. In that system, each user is a member of the
 	    'users' group.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>lpadmin</term>
+	<listitem>
+	  <para>
+	    Allows a user to add, modify, and remove printers from foomatic,
+	    cups, and possibly other printer databases.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>sasl</term>
+	<listitem>
+	  <para>
+	    Users in this group have read/write access to
+	    <filename>/etc/sasldb</filename> and/or
+	    <filename>/etc/sasldb2</filename>, wich are used to authentication with sasl. This is
+	    commonly used by IMAP, POP, and SMTP servers for authentication.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>scanner</term>
+	<listitem>
+	  <para>
+	    Users in this group can use scanner(s).
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>ssh</term>
+	<listitem>
+	  <para>
+	    HELP: <filename>/usr/bin/ssh-agent</filename> is setgid to ssh, why I
+	    don't know.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>
+      Some users have no corresponding group.
+    </para>
+    
+    <variablelist>
+      <varlistentry>
+	<term>sshd</term>
+	<listitem>
+	  <para>
+	    HELP: This is in my <filename>/etc/passwd<filename>, but doesn't
+	    appear to be used for anything. It's probably a relic user that
+	    <command>sshd</command> used to use for its pid file or
+	    something similar.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>fetchmail</term>
+	<listitem>
+	  <para>
+	    Used by the <command>fetchmail</command> program.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>cupsys</term>
+	<listitem>
+	  <para>
+	    <acronym>CUPS</acronym> (Common Un*x Printing System) runs as this user. It is in
+	    group lp, so it can access printer devices. 
 	  </para>
 	</listitem>
       </varlistentry>
