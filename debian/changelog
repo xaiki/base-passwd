@@ -1,3 +1,15 @@
+base-passwd (3.5.10) UNRELEASED; urgency=low
+
+  * Remove preinst, for several reasons:
+    - the 'dpkg --assert-support-predepends' check isn't guaranteed to be
+      effective anyway (it tests the current version of dpkg on the system,
+      not the one that's performing the upgrade);
+    - dpkg has supported Pre-Depends since 1996;
+    - it unnecessarily required dpkg to have been configured when running
+      base-passwd.preinst (#316084).
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 28 Jun 2005 14:26:27 +0100
+
 base-passwd (3.5.9) unstable; urgency=low
 
   * Add and document static group plugdev, gid 46, for use by pmount and
