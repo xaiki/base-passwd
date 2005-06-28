@@ -746,8 +746,8 @@
 	<term>ssh</term>
 	<listitem>
 	  <para>
-	    HELP: <filename>/usr/bin/ssh-agent</filename> is setgid to ssh, why I
-	    don't know.
+	    <command>ssh-agent</filename> is setgid to ssh in order to
+	    prevent ptrace attacks.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -762,10 +762,9 @@
 	<term>sshd</term>
 	<listitem>
 	  <para>
-	    HELP: This is in my <filename>/etc/passwd<filename>, but doesn't
-	    appear to be used for anything. It's probably a relic user that
-	    <command>sshd</command> used to use for its pid file or
-	    something similar.
+	    Unprivileged user used by the privilege-separated
+	    <command>sshd</command> when communicating with the network
+	    before successful authentication.
 	  </para>
 	</listitem>
       </varlistentry>
