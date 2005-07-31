@@ -1,3 +1,9 @@
+base-passwd (3.5.11) UNRELEASED; urgency=low
+
+  * Update GPL notices with the FSF's new address.
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 31 Jul 2005 16:42:40 +0100
+
 base-passwd (3.5.10) unstable; urgency=low
 
   * Remove preinst, for several reasons:
