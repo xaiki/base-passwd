@@ -1,5 +1,5 @@
 Source: base-passwd
-Section: base
+Section: admin
 Priority: required
 Maintainer: Colin Watson <cjwatson@debian.org>
 Standards-Version: 3.6.0

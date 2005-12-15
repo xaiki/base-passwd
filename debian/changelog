@@ -1,3 +1,9 @@
+base-passwd (3.5.12) UNRELEASED; urgency=low
+
+  * Change section to admin, matching the override file.
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 15 Dec 2005 11:34:29 +0000
+
 base-passwd (3.5.11) unstable; urgency=low
 
   * Update GPL notices with the FSF's new address.
