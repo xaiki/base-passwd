@@ -3,6 +3,7 @@ base-passwd (3.5.11) UNRELEASED; urgency=low
   * Update GPL notices with the FSF's new address.
   * Add po4a infrastructure and French translation of update-passwd(8)
     (thanks, Nicolas François; closes: #326550).
+  * Fix syntax error in ssh group documentation.
 
  -- Colin Watson <cjwatson@debian.org>  Sun, 31 Jul 2005 16:42:40 +0100
 

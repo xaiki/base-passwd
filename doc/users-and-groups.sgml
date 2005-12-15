@@ -747,7 +747,7 @@
 	<term>ssh</term>
 	<listitem>
 	  <para>
-	    <command>ssh-agent</filename> is setgid to ssh in order to
+	    <command>ssh-agent</command> is setgid to ssh in order to
 	    prevent ptrace attacks.
 	  </para>
 	</listitem>
