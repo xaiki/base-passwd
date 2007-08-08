@@ -48,8 +48,10 @@ binary-arch: build
 	install -d -m 755 -o root -g root debian/tmp/usr/sbin
 	install -p -m 755 -o root -g root update-passwd debian/tmp/usr/sbin/
 
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	strip --strip-unneeded --remove-section=.comment \
 		--remove-section=.note debian/tmp/usr/sbin/update-passwd
+endif
 
 	install -d -m 755 -o root -g root \
 		debian/tmp/usr/share/man/man8 \
