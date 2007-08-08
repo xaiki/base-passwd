@@ -1,9 +1,9 @@
-base-passwd (3.5.12) UNRELEASED; urgency=low
+base-passwd (3.5.12) unstable; urgency=low
 
   * Change section to admin, matching the override file.
   * Support DEB_BUILD_OPTIONS=nostrip (closes: #436542).
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 15 Dec 2005 11:34:29 +0000
+ -- Colin Watson <cjwatson@debian.org>  Wed, 08 Aug 2007 11:44:44 +0100
 
 base-passwd (3.5.11) unstable; urgency=low
 
