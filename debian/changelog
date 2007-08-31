@@ -1,3 +1,11 @@
+base-passwd (3.5.13) UNRELEASED; urgency=low
+
+  * users-and-groups improvements from Justin Pryzby (closes: #440306):
+    - jabberd no longer runs as daemon.
+    - www-data no longer owns log files as of apache2.
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 31 Aug 2007 13:36:57 +0100
+
 base-passwd (3.5.12) unstable; urgency=low
 
   * Change section to admin, matching the override file.

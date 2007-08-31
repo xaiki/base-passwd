@@ -112,13 +112,13 @@
 	  <para>
 	    Some unprivileged daemons that need to be able to write to some
 	    files on disk run as daemon.daemon (<command>portmap</command>,
-	    <command>atd</command>, <command>jabberd</command>,
-	    <command>lambdamoo</command>, <command>mon</command>, and
-	    others). Daemons that don't need to own any files sometimes run
-	    as nobody.nogroup instead; it is generally better practice to
-	    use a dedicated user, and more complex or security-conscious
-	    daemons certainly do this. The daemon user is also handy for
-	    locally installed daemons, probably.
+	    <command>atd</command>, <command>lambdamoo</command>,
+	    <command>mon</command>, and others). Daemons that don't need to
+	    own any files sometimes run as nobody.nogroup instead; it is
+	    generally better practice to use a dedicated user, and more
+	    complex or security-conscious daemons certainly do this. The
+	    daemon user is also handy for locally installed daemons,
+	    probably.
 	  </para>
 	  <para>
 	    LSB 1.3 lists daemon as legacy, and says: "The 'daemon' UID/GID
@@ -291,7 +291,7 @@
 	    Some web servers run as www-data. Web content should
 	    <emphasis>not</emphasis> be owned by this user, or a compromised
 	    web server would be able to rewrite a web site. Data written out
-	    by web servers, including log files, will be owned by www-data.
+	    by web servers will be owned by www-data.
 	  </para>
 	</listitem>
       </varlistentry>
