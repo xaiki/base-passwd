@@ -30,7 +30,7 @@ else
 CFLAGS := -g -Wall
 endif
 
-Makefile: Makefile.in configure.in
+Makefile: Makefile.in configure.ac
 	CFLAGS="$(CFLAGS)" ./configure
 
 .PHONY: binary
