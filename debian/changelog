@@ -1,9 +1,9 @@
-base-passwd (3.5.14) UNRELEASED; urgency=low
+base-passwd (3.5.14) unstable; urgency=low
 
   * Allocate uid/gid 64030 for slurm (Gennaro Oliva, closes: #444412).
   * Update to Autoconf 2.61.
 
- -- Colin Watson <cjwatson@debian.org>  Fri, 28 Sep 2007 12:53:25 +0100
+ -- Colin Watson <cjwatson@debian.org>  Mon, 12 Nov 2007 10:40:26 +0000
 
 base-passwd (3.5.13) unstable; urgency=low
 
