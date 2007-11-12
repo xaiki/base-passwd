@@ -37,15 +37,15 @@ update-passwd: $(objects)
 	$(CC) $(LDFLAGS) -o $@ $^
 
 clean:
-	$(RM) update-passwd update-passwd.o core
+	rm -f update-passwd update-passwd.o core
 
 mrproper realclean: clean
-	$(RM) $(gen_configure)
-	$(RM) -r autom4te.cache
+	rm -f $(gen_configure)
+	rm -rf autom4te.cache
 
 cvsclean: mrproper
 	for i in $(gen_autoconf) $(gen_autoheader) ; do \
-	    $(RM) $(srcdir)/$$i ; \
+		rm -f $(srcdir)/$$i ; \
 	done
 
 .PHONY: all install clean mrproper cvsclean

@@ -4,10 +4,9 @@ AC_CONFIG_SRCDIR([update-passwd.c])
 AC_CONFIG_HEADER([config.h])
 AC_PREFIX_DEFAULT([/usr])
 
-dnl Lets see if all programs we need are installed
+dnl Let's see if all programs we need are installed
 AC_PROG_CC
 AC_PROG_INSTALL
-AC_CHECK_PROG([RM],[rm],[rm -f])
 
 dnl Scan for things we need
 AC_CHECK_FUNCS([putgrent])
