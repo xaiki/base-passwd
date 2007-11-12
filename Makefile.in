@@ -41,6 +41,7 @@ clean:
 
 mrproper realclean: clean
 	$(RM) $(gen_configure)
+	$(RM) -r autom4te.cache
 
 cvsclean: mrproper
 	for i in $(gen_autoconf) $(gen_autoheader) ; do \
