@@ -121,5 +121,9 @@ if [ "$changes" -gt 0 ] ; then
 	fi
 fi
 
+if searchpath install-docs; then
+	install-docs -i /usr/share/doc-base/users-and-groups
+fi
+
 exit 0
 
