@@ -96,6 +96,10 @@ endif
 	install -p -m 644 -o root -g root debian/doc-base \
 		debian/tmp/usr/share/doc-base/users-and-groups
 
+	install -d -m 755 -o root -g root debian/tmp/usr/share/lintian/overrides
+	install -p -m 644 -o root -g root debian/lintian \
+		debian/tmp/usr/share/lintian/overrides/base-passwd
+
 	install -d -m 755 -o root -g root debian/tmp/DEBIAN
 	install -p -m 755 -o root -g root debian/postinst debian/tmp/DEBIAN/
 	install -p -m 755 -o root -g root debian/prerm debian/tmp/DEBIAN/
