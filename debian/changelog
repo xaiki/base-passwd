@@ -1,3 +1,9 @@
+base-passwd (3.5.17) UNRELEASED; urgency=low
+
+  * hal was renamed to haldaemon in hal 0.5.7.1-1 (closes: #452631).
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 24 Nov 2007 09:24:06 +0000
+
 base-passwd (3.5.16) unstable; urgency=low
 
   * Register users-and-groups with doc-base (closes: #451680).

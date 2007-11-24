@@ -405,7 +405,7 @@
       </varlistentry>
 
       <varlistentry>
-	<term>hal</term>
+	<term>haldaemon</term>
 	<listitem>
 	  <para>
 	    Used by the hardware abstraction layer (<command>hal</command>).
