@@ -1,6 +1,10 @@
 base-passwd (3.5.17) UNRELEASED; urgency=low
 
   * hal was renamed to haldaemon in hal 0.5.7.1-1 (closes: #452631).
+  * Make the description of plugdev in users-and-groups slightly more
+    generic; I don't want to end up having to list all the programs that
+    implement it, but "can access removable devices" should be good enough
+    (closes: #285732).
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 24 Nov 2007 09:24:06 +0000
 
