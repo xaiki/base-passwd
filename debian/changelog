@@ -5,6 +5,8 @@ base-passwd (3.5.17) UNRELEASED; urgency=low
     generic; I don't want to end up having to list all the programs that
     implement it, but "can access removable devices" should be good enough
     (closes: #285732).
+  * Add Russian translation of update-passwd(8) (thanks, Yuri Kozlov;
+    closes: #461732).
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 24 Nov 2007 09:24:06 +0000
 
