@@ -1,3 +1,9 @@
+base-passwd (3.5.18) UNRELEASED; urgency=low
+
+  * Convert manual pages to UTF-8.
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 11 Feb 2008 11:20:03 +0000
+
 base-passwd (3.5.17) unstable; urgency=low
 
   * hal was renamed to haldaemon in hal 0.5.7.1-1 (closes: #452631).

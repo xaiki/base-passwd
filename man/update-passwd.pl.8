@@ -1,78 +1,78 @@
-.TH UPDATE\-PASSWD 8 "NarzÍdzia Debiana" "DEBIAN"
+.TH UPDATE\-PASSWD 8 "Narzƒôdzia Debiana" "DEBIAN"
 .SH NAZWA
 update\-passwd \- bezpiecznie aktualizuj /etc/passwd, /etc/shadow i /etc/group
-.SH SK£ADNIA
+.SH SK≈ÅADNIA
 .B update\-passwd
 .RI [ opcje ]
 .SH OPIS
 .B update\-passwd
-aktualizuje pliki /etc/passwd, /etc/shadow i /etc/group w dzia≥aj±cych
+aktualizuje pliki /etc/passwd, /etc/shadow i /etc/group w dzia≈ÇajƒÖcych
 systemach Debian.
-PorÛwnuje je z autorytatywnymi kopiami zawartymi w pakiecie
-base\-passwd, a nastÍpnie aktualizuje wszystkie wpisy w globalnym przedziale
+Por√≥wnuje je z autorytatywnymi kopiami zawartymi w pakiecie
+base\-passwd, a nastƒôpnie aktualizuje wszystkie wpisy w globalnym przedziale
 systemowym (to jest 0\(en99).
 .PP
 .SH OPCJE
 .B update\-passwd
-wykorzystuje standardow± sk≥adniÍ linii poleceÒ GNU, gdzie d≥ugie opcje
-poprzedzone s± dwoma znakami my∂lnika (\(oq\-\(cq).
+wykorzystuje standardowƒÖ sk≈Çadniƒô linii polece≈Ñ GNU, gdzie d≈Çugie opcje
+poprzedzone sƒÖ dwoma znakami my≈õlnika (\(oq\-\(cq).
 .TP
 .BR \-p ,\  \-\-passwd\-master=PLIK
-Uøyj PLIKu jako autorytatywnej kopii bazy danych "passwd".
-Domy∂lna warto∂Ê to
+U≈ºyj PLIKu jako autorytatywnej kopii bazy danych "passwd".
+Domy≈õlna warto≈õƒá to
 .IR /usr/share/base\-passwd/passwd.master .
 .TP
 .BR \-g ,\  \-\-group\-master=PLIK
-Uøyj PLIKu jako autorytatywnej kopii bazy danych "group".
-Domy∂lna warto∂Ê to
+U≈ºyj PLIKu jako autorytatywnej kopii bazy danych "group".
+Domy≈õlna warto≈õƒá to
 .IR /usr/share/base\-passwd/group.master .
 .TP
 .BR \-P ,\  \-\-passwd=PLIK
-Uøyj PLIKu jako systemowej bazy danych "passwd".
-Domy∂lna warto∂Ê to
+U≈ºyj PLIKu jako systemowej bazy danych "passwd".
+Domy≈õlna warto≈õƒá to
 .IR /etc/passwd .
 .TP
 .BR \-S ,\  \-\-shadow=PLIK
-Uøyj PLIKu jako systemowej bazy danych "shadow".
-Domy∂lna warto∂Ê to
+U≈ºyj PLIKu jako systemowej bazy danych "shadow".
+Domy≈õlna warto≈õƒá to
 .IR /etc/shadow .
 .TP
 .BR \-G ,\  \-\-group=PLIK
-Uøyj PLIKu jako systemowej bazy danych "group".
-Domy∂lna warto∂Ê to
+U≈ºyj PLIKu jako systemowej bazy danych "group".
+Domy≈õlna warto≈õƒá to
 .IR /etc/group .
 .TP
 .BR \-s ,\  \-\-sanity\-check
-Wykonaj tylko testy poprawno∂ci, niczego nie zmieniaj.
+Wykonaj tylko testy poprawno≈õci, niczego nie zmieniaj.
 .TP
 .BR \-v ,\  \-\-verbose
-Podawaj dok≥adne informacje o wykonywanych czynno∂ciach.
+Podawaj dok≈Çadne informacje o wykonywanych czynno≈õciach.
 .TP
 .BR \-n ,\  \-\-dry\-run
-Niczego nie zmieniaj, ale napisz co zosta≥oby wykonane.
+Niczego nie zmieniaj, ale napisz co zosta≈Çoby wykonane.
 .TP
 .BR \-L ,\  \-\-no\-locking
 Nie blokuj bazy danych kont.
-Opcji tej naleøy uøywaÊ tylko przy wy≥apywaniu b≥ÍdÛw,
+Opcji tej nale≈ºy u≈ºywaƒá tylko przy wy≈Çapywaniu b≈Çƒôd√≥w,
 nie w czasie normalnej pracy.
-.B Powtarzam: uøywaj tej opcji tylko je∂li masz pewno∂Ê, øe jej potrzebujesz!
+.B Powtarzam: u≈ºywaj tej opcji tylko je≈õli masz pewno≈õƒá, ≈ºe jej potrzebujesz!
 .TP
 .BR \-h ,\  \-\-help
-Pokaø instrukcjÍ uøycia
+Poka≈º instrukcjƒô u≈ºycia
 .BR update\-passwd .
 .TP
 .BR \-V ,\  \-\-version
-Pokaø wersjÍ.
-.SH B£ DY
+Poka≈º wersjƒô.
+.SH B≈ÅƒòDY
 W tym momencie
 .B update\-passwd
 nie sprawdza pliku shadow.
-Powinien sprawdzaÊ czy wpisy w passwd s± takøe w shadow i na odwrÛt,
-oraz czy tylko jeden z plikÛw zawiera has≥a.
+Powinien sprawdzaƒá czy wpisy w passwd sƒÖ tak≈ºe w shadow i na odwr√≥t,
+oraz czy tylko jeden z plik√≥w zawiera has≈Ça.
 .SH AUTOR
 Wichert Akkerman <wakkerma@debian.org>
 .PP
-Ten program zosta≥ napisany dla projektu Debian.
+Ten program zosta≈Ç napisany dla projektu Debian.
 Prawa autorskie: Copyright 1999\(en2002 Wichert Akkerman i
 copyright 2002, 2003 Colin Watson.
-Jest rozpowszechniany pod wersj± 2 Powszechnej Publicznej Licencji GNU.
+Jest rozpowszechniany pod wersjƒÖ 2 Powszechnej Publicznej Licencji GNU.
