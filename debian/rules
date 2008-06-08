@@ -33,7 +33,7 @@ clean:
 	$(MAKE) -C man clean
 	rm -rf debian/tmp debian/files debian/substvars
 
-ifeq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+ifeq (,$(filter noopt,$(DEB_BUILD_OPTIONS)))
 CFLAGS := -g -O2 -Wall
 else
 CFLAGS := -g -Wall
@@ -57,7 +57,7 @@ binary-arch: build
 	install -d -m 755 -o root -g root debian/tmp/usr/sbin
 	install -p -m 755 -o root -g root update-passwd debian/tmp/usr/sbin/
 
-ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+ifeq (,$(filter nostrip,$(DEB_BUILD_OPTIONS)))
 	strip --strip-unneeded --remove-section=.comment \
 		--remove-section=.note debian/tmp/usr/sbin/update-passwd
 endif
