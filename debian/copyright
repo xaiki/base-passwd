@@ -1,22 +1,21 @@
-This is the Debian prepackaged version of the Debian Base
-Password and Group files, plus the update-passwd utility to handle
-upgrades. The master files were originally written by Ian Murdock
-<imurdock@debian.org> and Bruce Perens <bruce@pixar.com>.
+Format-Specification: http://wiki.debian.org/Proposals/CopyrightFormat?action=recall&rev=179
+Upstream-Name: base-passwd
+Upstream-Maintainer: Colin Watson <cjwatson@debian.org>
 
-update-passwd is copyright 1999-2002 Wichert Akkerman
+Files: update-passwd.c, man/*
+Copyright: Copyright 1999-2002 Wichert Akkerman <wichert@deephackmode.org>
+ Copyright 2002, 2003, 2004 Colin Watson <cjwatson@debian.org>
+License: GPL-2
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of version 2 of the the GNU General Public License
-   as published by the Free Software Foundation.
+Files: passwd.master, group.master
+License: PD
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+Files: doc/*
+Copyright: Copyright 2001, 2002 Joey Hess
+ Copyright 2002, 2003, 2004, 2005, 2007 Colin Watson
+ Copyright 2007 David Mandelberg
+License: GPL-2
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software Foundation,
-   Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA. 
-
-On Debian systems, the complete text of the GNU General Public License
-can be found in `/usr/share/common-licenses/GPL'.
+License-Terms: GPL-2
+ On Debian and Debian-based systems, a copy of the GNU General Public
+ License version 2 is available in /usr/share/common-licenses/GPL-2.
