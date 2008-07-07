@@ -4,6 +4,7 @@ base-passwd (3.5.18) UNRELEASED; urgency=low
   * Update DEB_BUILD_OPTIONS parsing code from policy 3.8.0.
   * Update a few copyright notices.
   * Convert to machine-readable copyright format, wiki revision 179.
+  * Update to new section hierarchy from doc-base >= 0.8.10.
 
  -- Colin Watson <cjwatson@debian.org>  Mon, 11 Feb 2008 11:20:03 +0000
 
