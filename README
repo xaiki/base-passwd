@@ -46,6 +46,7 @@ Reserved uids:
     64020 | asterisk  | asterisk
     64025 | vpopmail  | vpopmail
     64030 | slurm     | slurm-llnl package
+    64035 | hacluster | heartbeat
 
 Reserved gids:
     gid   | name      | description
@@ -58,8 +59,9 @@ Reserved gids:
     64020 | asterisk  | asterisk
     64025 | vchkpw    | vpopmail group
     64030 | slurm     | slurm-llnl package
+    64035 | haclient  | heartbeat
 
-(Next uid/gid allocation: 64035.)
+(Next uid/gid allocation: 64040.)
 
 You *may not* use any uids or gids in the 60000-64999 range without *first*
 requesting an allocation from base-passwd@packages.debian.org and waiting
