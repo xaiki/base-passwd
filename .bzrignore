@@ -1,0 +1,10 @@
+./Makefile
+./config.h
+./config.log
+./config.status
+./update-passwd
+debian/files
+debian/substvars
+debian/tmp
+doc/users-and-groups.html
+doc/users-and-groups.txt
