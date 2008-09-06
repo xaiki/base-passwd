@@ -1,6 +1,7 @@
 base-passwd (3.5.19) UNRELEASED; urgency=low
 
   * Allocate uid/gid 64035 for hacluster/haclient (Horms, closes: #494070).
+  * Moved to bzr.debian.org; add Vcs-Bzr control field.
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 07 Aug 2008 09:59:08 +0100
 
