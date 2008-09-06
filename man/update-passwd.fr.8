@@ -1,0 +1,88 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH UPDATE\-PASSWD 8 "Utilitaires Debian" DEBIAN 
+.SH NOM
+update\-passwd \- met à jour /etc/passwd, /etc/shadow et /etc/group de façon
+sécurisée
+.SH SYNOPSIS
+\fBupdate\-passwd\fP [\fIoptions\fP]
+.SH DESCRIPTION
+\fBupdate\-passwd\fP gère les mises à jour de /etc/passwd, /etc/shadow et
+/etc/group sur les systèmes Debian. Il compare les fichiers actuels avec les
+originaux distribués avec le paquet base\-passwd, et met à jour toutes les
+entrées allouées globalement par le projet Debian (c'est\-à\-dire de 0 à 99).
+.PP
+.SH OPTIONS
+\fBupdate\-passwd\fP suit la syntaxe usuelle des commandes GNU, avec les options
+longues commençant par deux tirets («\ \-\ »).
+.TP 
+\fB\-p\fP,\ \fB\-\-passwd\-master=FICHIER\fP
+Utilise FICHIER comme original de la base de données «\ passwd\ ». La valeur
+par défaut est \fI/usr/share/base\-passwd/passwd.master\fP.
+.TP 
+\fB\-g\fP,\ \fB\-\-group\-master=FICHIER\fP
+Utilise FICHIER comme original de la base de données «\ group\ ». La valeur
+par défaut est \fI/usr/share/base\-passwd/group.master\fP.
+.TP 
+\fB\-P\fP,\ \fB\-\-passwd=FICHIER\fP
+Utilise FICHIER comme base de données «\ passwd\ » du système. La valeur par
+défaut est \fI/etc/passwd\fP.
+.TP 
+\fB\-S\fP,\ \fB\-\-shadow=FICHIER\fP
+Utilise FICHIER comme base de données «\ shadow\ » du système. La valeur par
+défaut est \fI/etc/shadow\fP.
+.TP 
+\fB\-G\fP,\ \fB\-\-group=FICHIER\fP
+Utilise FICHIER comme base de données «\ group\ » du système. La valeur par
+défaut est \fI/etc/group\fP.
+.TP 
+\fB\-s\fP,\ \fB\-\-sanity\-check\fP
+Ne réalise que les tests de contrôle, mais ne touche à rien.
+.TP 
+\fB\-v\fP,\ \fB\-\-verbose\fP
+Donne des informations précises sur ce qui est réalisé. Un second \fB\-v\fP
+donne encore plus de précisions.
+.TP 
+\fB\-n\fP,\ \fB\-\-dry\-run\fP
+Ne fait rien, montre seulement ce qui va être fait.
+.TP 
+\fB\-L\fP,\ \fB\-\-no\-locking\fP
+Ne cherche pas à verrouiller la base de données des comptes. Cette option ne
+devrait être utilisée qu'à des fins de débogage. \fBJ'insiste\ : n'utilisez
+pas cette option à moins d'être vraiment sûr d'en avoir besoin\ !\fP
+.TP 
+\fB\-h\fP,\ \fB\-\-help\fP
+Affiche un résumé d'aide pour l'utilisation de \fBupdate\-passwd\fP.
+.TP 
+\fB\-V\fP,\ \fB\-\-version\fP
+Affiche le numéro de version.
+.SH BOGUES
+Pour l'instant \fBupdate\-passwd\fP ne vérifie pas le fichier shadow. Il devrait
+vérifier si les entrées de passwd sont également dans le fichier shadow et
+vice versa, et que les mots de passe ne sont pas présents dans les deux
+fichiers.
+.SH AUTEUR
+Wichert Akkerman <wakkerma@debian.org>
+.PP
+Ce programme a été écrit pour le projet Debian, et est placé sous le
+copyright 1999\(en2002 Wichert Akkerman et le copyright 2002, 2003 Colin
+Watson. Il est distribué sous la licence publique générale du projet GNU («\
+GPL\ ») version 2.
+.SH TRADUCTION
+Ce document est une traduction, réalisée par Nicolas FRANÇOIS le
+8 août 2005.
+
+L'équipe de traduction a fait le maximum pour réaliser une adaptation
+française de qualité.
+
+La version anglaise la plus à jour de ce document est toujours consultable
+en ajoutant l'option «\ \-L C\ » à la commande \fBman\fR.
+
+N'hésitez pas à signaler à l'auteur ou à la liste de traduction
+.nh
+<\fIdebian\-l10\-french@lists.debian.org\fR>,
+.hy
+selon le cas, toute erreur dans cette page de manuel.
