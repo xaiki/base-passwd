@@ -698,6 +698,15 @@
 	    without needing root privileges. Compare with group 'adm', which
 	    is more related to monitoring/security.
 	  </para>
+	  <para>
+	    Note that the ability to modify <filename>/usr/local</filename>
+	    is effectively equivalent to root access (since
+	    <filename>/usr/local</filename> is intentionally on search paths
+	    ahead of <filename>/usr</filename>), and so you should only add
+	    trusted users to this group. Be careful in environments using
+	    NFS since acquiring another non-root user's privileges is often
+	    easier in such environments.
+	  </para>
 	</listitem>
       </varlistentry>
 
