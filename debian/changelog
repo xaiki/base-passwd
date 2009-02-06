@@ -1,9 +1,9 @@
-base-passwd (3.5.20) UNRELEASED; urgency=medium
+base-passwd (3.5.20) unstable; urgency=medium
 
   * Document that the staff group is typically root-equivalent (thanks, Guy
     Hulbert).
 
- -- Colin Watson <cjwatson@debian.org>  Fri, 06 Feb 2009 16:17:54 +0000
+ -- Colin Watson <cjwatson@debian.org>  Fri, 06 Feb 2009 16:20:12 +0000
 
 base-passwd (3.5.19) unstable; urgency=low
 
