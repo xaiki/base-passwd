@@ -537,8 +537,11 @@
 	<listitem>
 	  <para>
 	    The group's name stands for "Dialup IP". Being in group dip
-	    allows you to use a tool such as ppp or dip to dial up a
-	    connection.
+	    allows you to use tools such as <command>pppd</command>,
+	    <command>pon</command>, and <command>poff</command> to make
+	    dialup connections to other systems using predefined
+	    configuration file(s) in the <filename>/etc/ppp/peers</filename>
+	    directory.
 	  </para>
 	</listitem>
       </varlistentry>
