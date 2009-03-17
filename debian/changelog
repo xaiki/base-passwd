@@ -1,4 +1,4 @@
-base-passwd (3.5.21) UNRELEASED; urgency=low
+base-passwd (3.5.21) unstable; urgency=low
 
   * Set up the root user without a password by default, rather than giving
     it an empty password. In this day and age the latter is not really a
@@ -6,7 +6,7 @@ base-passwd (3.5.21) UNRELEASED; urgency=low
   * Update description of dip group, based on a suggestion by Osamu Aoki
     (closes: #512938).
 
- -- Colin Watson <cjwatson@debian.org>  Tue, 17 Mar 2009 13:24:53 +0000
+ -- Colin Watson <cjwatson@debian.org>  Tue, 17 Mar 2009 13:37:23 +0000
 
 base-passwd (3.5.20) unstable; urgency=medium
 
