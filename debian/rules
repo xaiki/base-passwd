@@ -75,7 +75,7 @@ endif
 		debian/tmp/usr/share/man/pl/man8/update-passwd.8
 	install -p -m 644 -o root -g root man/update-passwd.ru.8 \
 		debian/tmp/usr/share/man/ru/man8/update-passwd.8
-	gzip -9 debian/tmp/usr/share/man/man8/* \
+	gzip -9n debian/tmp/usr/share/man/man8/* \
 		debian/tmp/usr/share/man/fr/man8/* \
 		debian/tmp/usr/share/man/pl/man8/* \
 		debian/tmp/usr/share/man/ru/man8/*
@@ -88,13 +88,13 @@ endif
 
 	install -d -m 755 -o root -g root debian/tmp$(docdir)
 	install -p -m 644 -o root -g root debian/changelog debian/tmp$(docdir)/
-	gzip -9 debian/tmp$(docdir)/*
+	gzip -9n debian/tmp$(docdir)/*
 	install -p -m 644 -o root -g root README debian/tmp$(docdir)/
 	install -p -m 644 -o root -g root debian/copyright debian/tmp$(docdir)/
 	install -p -m 644 -o root -g root \
 		doc/users-and-groups.html doc/users-and-groups.txt \
 		debian/tmp$(docdir)/
-	gzip -9 debian/tmp$(docdir)/users-and-groups.txt
+	gzip -9n debian/tmp$(docdir)/users-and-groups.txt
 
 	install -d -m 755 -o root -g root debian/tmp/usr/share/doc-base
 	install -p -m 644 -o root -g root debian/doc-base \
