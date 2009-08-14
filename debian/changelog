@@ -1,6 +1,7 @@
 base-passwd (3.5.22) UNRELEASED; urgency=low
 
   * Compress files using gzip -n (cf. debhelper 6.0.6).
+  * Remove explicit calls to install-docs (cf. debhelper 7.2.3).
 
  -- Colin Watson <cjwatson@debian.org>  Wed, 03 Jun 2009 08:31:31 +0100
 
