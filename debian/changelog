@@ -3,6 +3,7 @@ base-passwd (3.5.23) UNRELEASED; urgency=low
   * Convert to source format 3.0 (native).
   * Update to current DEP-5 copyright proposal (thanks, Kyle Nitzsche;
     LP: #610108).
+  * Remove unused Lintian overrides.
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 27 Mar 2010 13:21:59 +0000
 
