@@ -4,6 +4,8 @@ base-passwd (3.5.23) UNRELEASED; urgency=low
   * Update to current DEP-5 copyright proposal (thanks, Kyle Nitzsche;
     LP: #610108).
   * Remove unused Lintian overrides.
+  * Add Spanish translation of update-passwd(8) (thanks, Omar Campagne;
+    closes: #604455).
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 27 Mar 2010 13:21:59 +0000
 
