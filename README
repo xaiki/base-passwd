@@ -30,36 +30,36 @@ The following uid/gid pairs have been allocated in the static range
 registry of allocations.
 
 Reserved uids:
-    uid   | name      | description
-    ------+-----------+---------------
-    63434 | netplan   | netplan
-    64000 | ftn       | fidogate
-    64001 | mysql     | mysql-server
-    64005 | tac-plus  | tac-plus user
-    64010 | alias     | qmail alias
-    64011 | qmaild    | qmail daemon
-    64012 | qmails    | qmail send
-    64013 | qmailr    | qmail remove
-    64015 | qmailq    | qmail queue
-    64016 | qmaill    | qmail log
-    64017 | qmailp    | qmail pw
-    64020 | asterisk  | asterisk
-    64025 | vpopmail  | vpopmail
-    64030 | slurm     | slurm-llnl package
-    64035 | hacluster | heartbeat
+    uid   | name              | description
+    ------+-------------------+---------------
+    63434 | netplan           | netplan
+    64000 | ftn               | fidogate
+    64001 | mysql             | mysql-server
+    64005 | tac-plus          | tac-plus user
+    64010 | alias             | qmail alias
+    64011 | qmaild            | qmail daemon
+    64012 | qmails            | qmail send
+    64013 | qmailr            | qmail remove
+    64015 | qmailq            | qmail queue
+    64016 | qmaill            | qmail log
+    64017 | qmailp            | qmail pw
+    64020 | asterisk          | asterisk
+    64025 | vpopmail          | vpopmail
+    64030 | slurm             | slurm-llnl package
+    64035 | hacluster         | heartbeat
 
 Reserved gids:
-    gid   | name      | description
-    ------+-----------+---------------
-    63434 | netplan   | netplan
-    64000 | ftn       | fidogate
-    64001 | mysql     | mysql-server
-    64005 | tac-plus  | tac-plus group
-    64010 | qmail     | qmail
-    64020 | asterisk  | asterisk
-    64025 | vchkpw    | vpopmail group
-    64030 | slurm     | slurm-llnl package
-    64035 | haclient  | heartbeat
+    gid   | name              | description
+    ------+-------------------+---------------
+    63434 | netplan           | netplan
+    64000 | ftn               | fidogate
+    64001 | mysql             | mysql-server
+    64005 | tac-plus          | tac-plus group
+    64010 | qmail             | qmail
+    64020 | asterisk          | asterisk
+    64025 | vchkpw            | vpopmail group
+    64030 | slurm             | slurm-llnl package
+    64035 | haclient          | heartbeat
 
 (Next uid/gid allocation: 64040.)
 
