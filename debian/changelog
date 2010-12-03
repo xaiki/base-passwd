@@ -6,6 +6,9 @@ base-passwd (3.5.23) UNRELEASED; urgency=low
   * Remove unused Lintian overrides.
   * Add Spanish translation of update-passwd(8) (thanks, Omar Campagne;
     closes: #604455).
+  * Allocate gid 64040-64044 (grsec-tpe, grsec-sock-all, grsec-sock-clt,
+    grsec-sock-srv, grsec-proc) for linux-grsec-base, by request of
+    Yves-Alexis Perez.
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 27 Mar 2010 13:21:59 +0000
 
