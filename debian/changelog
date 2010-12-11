@@ -2,7 +2,7 @@ base-passwd (3.5.23) UNRELEASED; urgency=low
 
   * Convert to source format 3.0 (native).
   * Update to current DEP-5 copyright proposal (thanks, Kyle Nitzsche;
-    LP: #610108).
+    part of LP #610108).
   * Remove unused Lintian overrides.
   * Add Spanish translation of update-passwd(8) (thanks, Omar Campagne;
     closes: #604455).
