@@ -9,6 +9,7 @@ base-passwd (3.5.23) UNRELEASED; urgency=low
   * Allocate gid 64040-64044 (grsec-tpe, grsec-sock-all, grsec-sock-clt,
     grsec-sock-srv, grsec-proc) for linux-grsec-base, by request of
     Yves-Alexis Perez.
+  * Update Vcs-Bzr field for Alioth changes.
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 27 Mar 2010 13:21:59 +0000
 

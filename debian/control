@@ -4,7 +4,7 @@ Priority: required
 Maintainer: Colin Watson <cjwatson@debian.org>
 Standards-Version: 3.6.0
 Build-Depends: sgmltools-lite, w3m, po4a
-Vcs-Bzr: http://bzr.debian.org/users/cjwatson/base-passwd/trunk
+Vcs-Bzr: http://anonscm.debian.org/bzr/users/cjwatson/base-passwd/trunk
 
 Package: base-passwd
 Architecture: any
