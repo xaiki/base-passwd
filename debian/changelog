@@ -10,6 +10,7 @@ base-passwd (3.5.23) UNRELEASED; urgency=low
     grsec-sock-srv, grsec-proc) for linux-grsec-base, by request of
     Yves-Alexis Perez.
   * Update Vcs-Bzr field for Alioth changes.
+  * Allow cross-building (thanks, Peter Pearse and Wookey; closes: #631954).
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 27 Mar 2010 13:21:59 +0000
 

@@ -13,8 +13,10 @@ DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
 ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
   confflags += --build=$(DEB_HOST_GNU_TYPE)
+  STRIP = strip
 else
   confflags += --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
+  STRIP = $(DEB_HOST_GNU_TYPE)-strip
 endif
 
 .PHONY: all build
@@ -58,7 +60,7 @@ binary-arch: build
 	install -p -m 755 -o root -g root update-passwd debian/tmp/usr/sbin/
 
 ifeq (,$(filter nostrip,$(DEB_BUILD_OPTIONS)))
-	strip --strip-unneeded --remove-section=.comment \
+	$(STRIP) --strip-unneeded --remove-section=.comment \
 		--remove-section=.note debian/tmp/usr/sbin/update-passwd
 endif
 
