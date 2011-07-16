@@ -1,4 +1,4 @@
-base-passwd (3.5.23) UNRELEASED; urgency=low
+base-passwd (3.5.23) unstable; urgency=low
 
   * Convert to source format 3.0 (native).
   * Update to current DEP-5 copyright proposal (thanks, Kyle Nitzsche; part
@@ -17,7 +17,7 @@ base-passwd (3.5.23) UNRELEASED; urgency=low
   * Fix typo in description of -v in update-passwd(8), and unfuzzy
     translations (thanks, Helge Kreutzmann; closes: #625900).
 
- -- Colin Watson <cjwatson@debian.org>  Sat, 27 Mar 2010 13:21:59 +0000
+ -- Colin Watson <cjwatson@debian.org>  Sat, 16 Jul 2011 12:52:47 +0100
 
 base-passwd (3.5.22) unstable; urgency=low
 
