@@ -8,3 +8,6 @@ debian/substvars
 debian/tmp
 doc/users-and-groups.html
 doc/users-and-groups.txt
+man/update-passwd.es.8
+man/update-passwd.fr.8
+man/update-passwd.ru.8
