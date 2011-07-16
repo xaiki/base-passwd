@@ -19,11 +19,15 @@ else
   STRIP = $(DEB_HOST_GNU_TYPE)-strip
 endif
 
-.PHONY: all build
-all build: Makefile
+.PHONY: all build build-arch
+all build build-arch: Makefile
 	$(MAKE) 
 	$(MAKE) -C doc
 	$(MAKE) -C man
+
+.PHONY: build-indep
+build-indep:
+	@echo Nothing to do
 
 .PHONY: clean
 clean:
