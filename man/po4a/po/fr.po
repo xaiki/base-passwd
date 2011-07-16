@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: base-passwd\n"
 "POT-Creation-Date: 2010-11-22 11:40+0000\n"
 "PO-Revision-Date: 2005-08-08  1:29+0200\n"
-"Last-Translator: Nicolas Fran?ois <nicolas.francois@centraliens.net>\n"
+"Last-Translator: Nicolas François <nicolas.francois@centraliens.net>\n"
 "Language-Team: Debian French Team <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -41,8 +41,8 @@ msgstr "NOM"
 #: ../update-passwd.8:4
 msgid "update-passwd - safely update /etc/passwd, /etc/shadow and /etc/group"
 msgstr ""
-"update-passwd - met ? jour /etc/passwd, /etc/shadow et /etc/group de fa?on "
-"s?curis?e"
+"update-passwd - met à jour /etc/passwd, /etc/shadow et /etc/group de façon "
+"sécurisée"
 
 #. type: SH
 #: ../update-passwd.8:4
@@ -61,7 +61,7 @@ msgstr "B<update-passwd> [I<options>]"
 msgid "DESCRIPTION"
 msgstr "DESCRIPTION"
 
-# NOTE: c'est ?tonnant pour 0 (root)
+# NOTE: c'est étonnant pour 0 (root)
 #. type: Plain text
 #: ../update-passwd.8:14
 msgid ""
@@ -70,10 +70,10 @@ msgid ""
 "distributed in the base-passwd package, and updates all entries in the "
 "global system range (that is, 0\\(en99)."
 msgstr ""
-"B<update-passwd> g?re les mises ? jour de /etc/passwd, /etc/shadow et /etc/"
-"group sur les syst?mes Debian. Il compare les fichiers actuels avec les "
-"originaux distribu?s avec le paquet base-passwd, et met ? jour toutes les "
-"entr?es allou?es globalement par le projet Debian (c'est-?-dire de 0 ? 99)."
+"B<update-passwd> gère les mises à jour de /etc/passwd, /etc/shadow et /etc/"
+"group sur les systèmes Debian. Il compare les fichiers actuels avec les "
+"originaux distribués avec le paquet base-passwd, et met à jour toutes les "
+"entrées allouées globalement par le projet Debian (c'est-à-dire de 0 à 99)."
 
 #. type: SH
 #: ../update-passwd.8:15
@@ -88,15 +88,15 @@ msgid ""
 "options starting with two dashes (\\(oq-\\(cq)."
 msgstr ""
 "B<update-passwd> suit la syntaxe usuelle des commandes GNU, avec les options "
-"longues commen?ant par deux tirets (?\\ -\\ ?)."
+"longues commençant par deux tirets («\\ -\\ »)."
 
 #. type: TP
 #: ../update-passwd.8:19
 #, no-wrap
 msgid "B<-p>,\\ B<--passwd-master=FILE>"
-msgstr "B<-p>,?B<--passwd-master=FICHIER>"
+msgstr "B<-p>, B<--passwd-master=FICHIER>"
 
-# NOTE: j'?site ? traduire passwd. Il ne s'agit pas des mots de pase, mais
+# NOTE: j'ésite à traduire passwd. Il ne s'agit pas des mots de pase, mais
 #       de tout ce qu'il y a autour.
 #. type: Plain text
 #: ../update-passwd.8:24
@@ -104,14 +104,14 @@ msgid ""
 "Use FILE as the master copy of the passwd database.  The default value is I</"
 "usr/share/base-passwd/passwd.master>."
 msgstr ""
-"Utilise FICHIER comme original de la base de donn?es ?\\ passwd\\ ?. La "
-"valeur par d?faut est I</usr/share/base-passwd/passwd.master>."
+"Utilise FICHIER comme original de la base de données «\\ passwd\\ ». La "
+"valeur par défaut est I</usr/share/base-passwd/passwd.master>."
 
 #. type: TP
 #: ../update-passwd.8:24
 #, no-wrap
 msgid "B<-g>,\\ B<--group-master=FILE>"
-msgstr "B<-g>,?B<--group-master=FICHIER>"
+msgstr "B<-g>, B<--group-master=FICHIER>"
 
 #. type: Plain text
 #: ../update-passwd.8:29
@@ -119,67 +119,67 @@ msgid ""
 "Use FILE as the master copy of the group database.  The default value is I</"
 "usr/share/base-passwd/group.master>."
 msgstr ""
-"Utilise FICHIER comme original de la base de donn?es ?\\ group\\ ?. La "
-"valeur par d?faut est I</usr/share/base-passwd/group.master>."
+"Utilise FICHIER comme original de la base de données «\\ group\\ ». La "
+"valeur par défaut est I</usr/share/base-passwd/group.master>."
 
 #. type: TP
 #: ../update-passwd.8:29
 #, no-wrap
 msgid "B<-P>,\\ B<--passwd=FILE>"
-msgstr "B<-P>,?B<--passwd=FICHIER>"
+msgstr "B<-P>, B<--passwd=FICHIER>"
 
 #. type: Plain text
 #: ../update-passwd.8:34
 msgid ""
 "Use FILE as the system passwd database.  The default value is I</etc/passwd>."
 msgstr ""
-"Utilise FICHIER comme base de donn?es ?\\ passwd\\ ? du syst?me. La valeur "
-"par d?faut est I</etc/passwd>."
+"Utilise FICHIER comme base de données «\\ passwd\\ » du système. La valeur "
+"par défaut est I</etc/passwd>."
 
 #. type: TP
 #: ../update-passwd.8:34
 #, no-wrap
 msgid "B<-S>,\\ B<--shadow=FILE>"
-msgstr "B<-S>,?B<--shadow=FICHIER>"
+msgstr "B<-S>, B<--shadow=FICHIER>"
 
 #. type: Plain text
 #: ../update-passwd.8:39
 msgid ""
 "Use FILE as the system shadow database.  The default value is I</etc/shadow>."
 msgstr ""
-"Utilise FICHIER comme base de donn?es ?\\ shadow\\ ? du syst?me. La valeur "
-"par d?faut est I</etc/shadow>."
+"Utilise FICHIER comme base de données «\\ shadow\\ » du système. La valeur "
+"par défaut est I</etc/shadow>."
 
 #. type: TP
 #: ../update-passwd.8:39
 #, no-wrap
 msgid "B<-G>,\\ B<--group=FILE>"
-msgstr "B<-G>,?B<--group=FICHIER>"
+msgstr "B<-G>, B<--group=FICHIER>"
 
 #. type: Plain text
 #: ../update-passwd.8:44
 msgid ""
 "Use FILE as the system group database.  The default value is I</etc/group>."
 msgstr ""
-"Utilise FICHIER comme base de donn?es ?\\ group\\ ? du syst?me. La valeur "
-"par d?faut est I</etc/group>."
+"Utilise FICHIER comme base de données «\\ group\\ » du système. La valeur "
+"par défaut est I</etc/group>."
 
 #. type: TP
 #: ../update-passwd.8:44
 #, no-wrap
 msgid "B<-s>,\\ B<--sanity-check>"
-msgstr "B<-s>,?B<--sanity-check>"
+msgstr "B<-s>, B<--sanity-check>"
 
 #. type: Plain text
 #: ../update-passwd.8:47
 msgid "Only perform sanity-checks but don't do anything."
-msgstr "Ne r?alise que les tests de contr?le, mais ne touche ? rien."
+msgstr "Ne réalise que les tests de contrôle, mais ne touche à rien."
 
 #. type: TP
 #: ../update-passwd.8:47
 #, no-wrap
 msgid "B<-v>,\\ B<--verbose>"
-msgstr "B<-v>,?B<--verbose>"
+msgstr "B<-v>, B<--verbose>"
 
 #. type: Plain text
 #: ../update-passwd.8:51
@@ -187,25 +187,25 @@ msgid ""
 "Give detailed information about we are doing.  A second -v gives additional "
 "detail."
 msgstr ""
-"Donne des informations pr?cises sur ce qui est r?alis?. Un second B<-v> "
-"donne encore plus de pr?cisions."
+"Donne des informations précises sur ce qui est réalisé. Un second B<-v> "
+"donne encore plus de précisions."
 
 #. type: TP
 #: ../update-passwd.8:51
 #, no-wrap
 msgid "B<-n>,\\ B<--dry-run>"
-msgstr "B<-n>,?B<--dry-run>"
+msgstr "B<-n>, B<--dry-run>"
 
 #. type: Plain text
 #: ../update-passwd.8:54
 msgid "Don't do anything but only show what we would do."
-msgstr "Ne fait rien, montre seulement ce qui va ?tre fait."
+msgstr "Ne fait rien, montre seulement ce qui va être fait."
 
 #. type: TP
 #: ../update-passwd.8:54
 #, no-wrap
 msgid "B<-L>,\\ B<--no-locking>"
-msgstr "B<-L>,?B<--no-locking>"
+msgstr "B<-L>, B<--no-locking>"
 
 #. type: Plain text
 #: ../update-passwd.8:59
@@ -214,31 +214,31 @@ msgid ""
 "debugging purposes.  B<I repeat: do not do this unless you are really sure "
 "you need this!>"
 msgstr ""
-"Ne cherche pas ? verrouiller la base de donn?es des comptes. Cette option ne "
-"devrait ?tre utilis?e qu'? des fins de d?bogage. B<J'insiste\\ : n'utilisez "
-"pas cette option ? moins d'?tre vraiment s?r d'en avoir besoin\\ !>"
+"Ne cherche pas à verrouiller la base de données des comptes. Cette option ne "
+"devrait être utilisée qu'à des fins de débogage. B<J'insiste\\ : n'utilisez "
+"pas cette option à moins d'être vraiment sûr d'en avoir besoin\\ !>"
 
 #. type: TP
 #: ../update-passwd.8:59
 #, no-wrap
 msgid "B<-h>,\\ B<--help>"
-msgstr "B<-h>,?B<--help>"
+msgstr "B<-h>, B<--help>"
 
 #. type: Plain text
 #: ../update-passwd.8:63
 msgid "Show a summary of how to use B<update-passwd>."
-msgstr "Affiche un r?sum? d'aide pour l'utilisation de B<update-passwd>."
+msgstr "Affiche un résumé d'aide pour l'utilisation de B<update-passwd>."
 
 #. type: TP
 #: ../update-passwd.8:63
 #, no-wrap
 msgid "B<-V>,\\ B<--version>"
-msgstr "B<-V>,?B<--version>"
+msgstr "B<-V>, B<--version>"
 
 #. type: Plain text
 #: ../update-passwd.8:66
 msgid "Show the version number"
-msgstr "Affiche le num?ro de version."
+msgstr "Affiche le numéro de version."
 
 #. type: SH
 #: ../update-passwd.8:66
@@ -253,9 +253,9 @@ msgid ""
 "check if the entries in the passwd are also in shadow and vice versa, and "
 "that passwords are not present in both files."
 msgstr ""
-"Pour l'instant B<update-passwd> ne v?rifie pas le fichier shadow. Il devrait "
-"v?rifier si les entr?es de passwd sont ?galement dans le fichier shadow et "
-"vice versa, et que les mots de passe ne sont pas pr?sents dans les deux "
+"Pour l'instant B<update-passwd> ne vérifie pas le fichier shadow. Il devrait "
+"vérifier si les entrées de passwd sont également dans le fichier shadow et "
+"vice versa, et que les mots de passe ne sont pas présents dans les deux "
 "fichiers."
 
 #. type: SH
@@ -276,7 +276,7 @@ msgid ""
 "1999\\(en2002 Wichert Akkerman and copyright 2002, 2003 Colin Watson.  It is "
 "distributed under version 2 of the GNU General Public License."
 msgstr ""
-"Ce programme a ?t? ?crit pour le projet Debian, et est plac? sous le "
+"Ce programme a été écrit pour le projet Debian, et est placé sous le "
 "copyright 1999\\(en2002 Wichert Akkerman et le copyright 2002, 2003 Colin "
-"Watson. Il est distribu? sous la licence publique g?n?rale du projet GNU "
-"(?\\ GPL\\ ?) version 2."
+"Watson. Il est distribué sous la licence publique générale du projet GNU "
+"(«\\ GPL\\ ») version 2."
