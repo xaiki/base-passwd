@@ -1,21 +1,19 @@
 base-passwd (3.5.23) UNRELEASED; urgency=low
 
   * Convert to source format 3.0 (native).
-  * Update to current DEP-5 copyright proposal (thanks, Kyle Nitzsche;
-    part of LP #610108).
+  * Update to current DEP-5 copyright proposal (thanks, Kyle Nitzsche; part
+    of LP #610108).
   * Remove unused Lintian overrides.
-  * Add Spanish translation of update-passwd(8) (thanks, Omar Campagne;
-    closes: #604455).
+  * Add translations of update-passwd(8):
+    - Spanish (thanks, Omar Campagne; closes: #604455).
+    - Japanese (thanks, KURASAWA Nozomu; closes: #614377).
+    - German (thanks, Helge Kreutzmann; closes: #625898).
   * Allocate gid 64040-64044 (grsec-tpe, grsec-sock-all, grsec-sock-clt,
     grsec-sock-srv, grsec-proc) for linux-grsec-base, by request of
     Yves-Alexis Perez.
   * Update Vcs-Bzr field for Alioth changes.
   * Allow cross-building (thanks, Peter Pearse and Wookey; closes: #631954).
   * Add build-arch and build-indep targets.
-  * Add Japanese translation of update-passwd(8) (thanks, KURASAWA Nozomu;
-    closes: #614377).
-  * Add German translation of update-passwd(8) (thanks, Helge Kreutzmann;
-    closes: #625898).
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 27 Mar 2010 13:21:59 +0000
 
