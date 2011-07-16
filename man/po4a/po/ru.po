@@ -187,7 +187,7 @@ msgstr "B<-v>,\\ B<--verbose>"
 #. type: Plain text
 #: ../update-passwd.8:51
 msgid ""
-"Give detailed information about we are doing.  A second -v gives additional "
+"Give detailed information about what we are doing.  A second -v gives additional "
 "detail."
 msgstr ""
 "Показывать подробную информацию о всех выполняемых действиях. Если указать "

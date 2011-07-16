@@ -14,6 +14,8 @@ base-passwd (3.5.23) UNRELEASED; urgency=low
   * Update Vcs-Bzr field for Alioth changes.
   * Allow cross-building (thanks, Peter Pearse and Wookey; closes: #631954).
   * Add build-arch and build-indep targets.
+  * Fix typo in description of -v in update-passwd(8), and unfuzzy
+    translations (thanks, Helge Kreutzmann; closes: #625900).
 
  -- Colin Watson <cjwatson@debian.org>  Sat, 27 Mar 2010 13:21:59 +0000
 
