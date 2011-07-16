@@ -70,6 +70,7 @@ endif
 
 	install -d -m 755 -o root -g root \
 		debian/tmp/usr/share/man/man8 \
+		debian/tmp/usr/share/man/de/man8 \
 		debian/tmp/usr/share/man/es/man8 \
 		debian/tmp/usr/share/man/fr/man8 \
 		debian/tmp/usr/share/man/ja/man8 \
@@ -77,6 +78,8 @@ endif
 		debian/tmp/usr/share/man/ru/man8
 	install -p -m 644 -o root -g root man/update-passwd.8 \
 		debian/tmp/usr/share/man/man8/
+	install -p -m 644 -o root -g root man/update-passwd.de.8 \
+		debian/tmp/usr/share/man/de/man8/update-passwd.8
 	install -p -m 644 -o root -g root man/update-passwd.es.8 \
 		debian/tmp/usr/share/man/es/man8/update-passwd.8
 	install -p -m 644 -o root -g root man/update-passwd.fr.8 \
@@ -88,6 +91,7 @@ endif
 	install -p -m 644 -o root -g root man/update-passwd.ru.8 \
 		debian/tmp/usr/share/man/ru/man8/update-passwd.8
 	gzip -9n debian/tmp/usr/share/man/man8/* \
+		debian/tmp/usr/share/man/de/man8/* \
 		debian/tmp/usr/share/man/es/man8/* \
 		debian/tmp/usr/share/man/fr/man8/* \
 		debian/tmp/usr/share/man/ja/man8/* \
