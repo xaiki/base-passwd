@@ -8,6 +8,7 @@ Vcs-Bzr: http://anonscm.debian.org/bzr/users/cjwatson/base-passwd/trunk
 
 Package: base-passwd
 Architecture: any
+Multi-Arch: foreign
 Depends: ${shlibs:Pre-Depends}
 Essential: yes
 Replaces: base

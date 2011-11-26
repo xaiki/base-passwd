@@ -1,3 +1,9 @@
+base-passwd (3.5.24) UNRELEASED; urgency=low
+
+  * Mark base-passwd Multi-Arch: foreign.
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 26 Nov 2011 13:12:52 +0000
+
 base-passwd (3.5.23) unstable; urgency=low
 
   * Convert to source format 3.0 (native).
