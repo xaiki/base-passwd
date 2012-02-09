@@ -153,8 +153,11 @@
 	<term>sys</term>
 	<listitem>
 	  <para>
-	    HELP: As with bin, except I don't even know what it was good for
-	    historically.
+	    Historically, the sys user and group
+	    <ulink url="http://article.olduse.net/109@Autzoo.UUCP">owned the
+	    kernel sources and some related items like the include
+	    files</ulink>, but this was obsoleted long ago in favour of bin
+	    (now itself legacy; see above).
 	  </para>
 	  <para>
 	    I'm told that <filename>/var/spool/cups</filename> is owned by
