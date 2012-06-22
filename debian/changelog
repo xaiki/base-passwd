@@ -2,6 +2,8 @@ base-passwd (3.5.25) UNRELEASED; urgency=low
 
   * users-and-groups: Document historical meaning of sys user/group (thanks
     to Mantas M. for the tip).
+  * Use dpkg-buildflags to enable hardening options (based on a patch from
+    Moritz Muehlenhoff; closes: #655501).
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 09 Feb 2012 00:41:29 +0000
 

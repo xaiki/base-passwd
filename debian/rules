@@ -39,14 +39,13 @@ clean:
 	$(MAKE) -C man clean
 	rm -rf debian/tmp debian/files debian/substvars
 
-ifeq (,$(filter noopt,$(DEB_BUILD_OPTIONS)))
-CFLAGS := -g -O2 -Wall
-else
-CFLAGS := -g -Wall
-endif
+CFLAGS = $(shell dpkg-buildflags --get CFLAGS)
+CFLAGS += $(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS += -Wall
+LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
 
 Makefile: Makefile.in configure.ac
-	CFLAGS="$(CFLAGS)" ./configure $(confflags)
+	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" ./configure $(confflags)
 
 .PHONY: binary
 binary: binary-arch binary-indep
