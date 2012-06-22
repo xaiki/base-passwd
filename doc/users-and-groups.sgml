@@ -602,9 +602,10 @@
 	<term>sudo</term>
 	<listitem>
 	  <para>
-	    Members of this group do not need to type their password when
-	    using <command>sudo</command>. See
-	    <filename>/usr/share/doc/sudo/OPTIONS</filename>.
+	    Members of this group may run any command as any user when using
+	    <command>sudo</command> or <command>pkexec</command> (from the
+	    policykit-1 package, independently of whether the sudo package
+	    is installed).
 	  </para>
 	</listitem>
       </varlistentry>

@@ -4,6 +4,9 @@ base-passwd (3.5.25) UNRELEASED; urgency=low
     to Mantas M. for the tip).
   * Use dpkg-buildflags to enable hardening options (based on a patch from
     Moritz Muehlenhoff; closes: #655501).
+  * Update users-and-groups documentation of the sudo group to describe
+    current behaviour and mention pkexec (thanks, Luca Capello; closes:
+    #650553).
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 09 Feb 2012 00:41:29 +0000
 
