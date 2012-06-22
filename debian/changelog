@@ -1,4 +1,4 @@
-base-passwd (3.5.25) UNRELEASED; urgency=low
+base-passwd (3.5.25) unstable; urgency=low
 
   * users-and-groups: Document historical meaning of sys user/group (thanks
     to Mantas M. for the tip).
@@ -8,7 +8,7 @@ base-passwd (3.5.25) UNRELEASED; urgency=low
     current behaviour and mention pkexec (thanks, Luca Capello; closes:
     #650553).
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 09 Feb 2012 00:41:29 +0000
+ -- Colin Watson <cjwatson@debian.org>  Fri, 22 Jun 2012 11:40:25 +0100
 
 base-passwd (3.5.24) unstable; urgency=low
 
