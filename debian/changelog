@@ -1,3 +1,11 @@
+base-passwd (3.5.26) UNRELEASED; urgency=low
+
+  * Build-depend on dpkg (>= 1.16.4) | sgml-base (<< 1.26+nmu2) to ensure
+    that #675613 does not cause incorrect generation of documentation
+    (closes: #678570).
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 23 Jun 2012 09:33:56 +0100
+
 base-passwd (3.5.25) unstable; urgency=low
 
   * users-and-groups: Document historical meaning of sys user/group (thanks
