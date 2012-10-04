@@ -1,3 +1,9 @@
+base-passwd (3.5.27) UNRELEASED; urgency=low
+
+  * Update to Autoconf 2.69.
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 04 Oct 2012 13:21:19 +0100
+
 base-passwd (3.5.26) unstable; urgency=low
 
   * Build-depend on dpkg (>= 1.16.4) | sgml-base (<< 1.26+nmu2) to ensure
