@@ -4,7 +4,7 @@ top_srcdir	= @top_srcdir@
 
 # Compilation tools
 CC		= @CC@
-CFLAGS		= @CFLAGS@ @DEFS@ -I.
+CFLAGS		= @CPPFLAGS@ @CFLAGS@ @DEFS@ -I.
 LDFLAGS		= @LDFLAGS@
 
 # Other tools
@@ -12,8 +12,9 @@ INSTALL		= @INSTALL@
 INSTALL_DATA	= @INSTALL_DATA@
 
 # Installation locations
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
 sbindir		= @sbindir@
-mandir		= @mandir@
 
 # Files used
 sources		= update-passwd.c
@@ -24,12 +25,13 @@ gen_configure	= config.cache config.status config.log \
 		  confdefhs.h config.h Makefile
 
 all: update-passwd
+	$(MAKE) -C doc all
+	$(MAKE) -C man all
 
 install: all
 	mkdir -p $(DESTDIR)$(sbindir)
 	$(INSTALL) update-passwd $(DESTDIR)$(sbindir)/
-	mkdir -p $(DESTDIR)$(mandir)/man8
-	$(INSTALL_DATA) man/update-passwd.8 $(DESTDIR)$(mandir)/man8/
+	$(MAKE) -C man install
 
 update-passwd.o: version.h
 
@@ -38,6 +40,8 @@ update-passwd: $(objects)
 
 clean:
 	rm -f update-passwd update-passwd.o core
+	$(MAKE) -C doc clean
+	$(MAKE) -C man clean
 
 mrproper realclean: clean
 	rm -f $(gen_configure)
@@ -49,4 +53,3 @@ cvsclean: mrproper
 	done
 
 .PHONY: all install clean mrproper cvsclean
-

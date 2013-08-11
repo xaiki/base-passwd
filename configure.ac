@@ -12,6 +12,5 @@ dnl Scan for things we need
 AC_CHECK_FUNCS([putgrent])
 
 dnl Finally output everything
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile man/Makefile])
 AC_OUTPUT
-

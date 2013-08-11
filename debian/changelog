@@ -1,6 +1,11 @@
 base-passwd (3.5.27) UNRELEASED; urgency=low
 
   * Update to Autoconf 2.69.
+  * Convert packaging to a modern debhelper style.  The original reason for
+    avoiding helper tools in base-passwd was to ease bootstrapping; but
+    nowadays the sensible way to bootstrap is to cross-build, and all the
+    helper tools are Multi-Arch: foreign so can safely be used in
+    cross-building environments.
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 04 Oct 2012 13:21:19 +0100
 
