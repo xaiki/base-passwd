@@ -121,5 +121,6 @@ if [ "$changes" -gt 0 ] ; then
 	fi
 fi
 
-exit 0
+#DEBHELPER#
 
+exit 0
