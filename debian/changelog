@@ -1,4 +1,4 @@
-base-passwd (3.5.27) UNRELEASED; urgency=low
+base-passwd (3.5.27) unstable; urgency=low
 
   * Update to Autoconf 2.69.
   * Convert packaging to a modern debhelper style.  The original reason for
@@ -7,7 +7,7 @@ base-passwd (3.5.27) UNRELEASED; urgency=low
     helper tools are Multi-Arch: foreign so can safely be used in
     cross-building environments.
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 04 Oct 2012 13:21:19 +0100
+ -- Colin Watson <cjwatson@debian.org>  Sun, 11 Aug 2013 11:04:58 +0100
 
 base-passwd (3.5.26) unstable; urgency=low
 
