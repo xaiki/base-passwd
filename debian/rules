@@ -11,3 +11,6 @@ override_dh_auto_clean:
 
 override_dh_shlibdeps:
 	dh_shlibdeps -- -dPre-Depends
+
+override_dh_builddeb:
+	dh_builddeb -- -Zgzip
