@@ -1,8 +1,8 @@
-./Makefile
-./config.h
-./config.log
-./config.status
-./update-passwd
+/Makefile
+/config.h
+/config.log
+/config.status
+/update-passwd
 debian/*.debhelper*
 debian/*.substvars
 debian/base-passwd
