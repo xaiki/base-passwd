@@ -2,6 +2,7 @@ base-passwd (3.5.29) UNRELEASED; urgency=low
 
   * Use dh-autoreconf.
   * Switch to git; adjust Vcs-* fields.
+  * Only update POT/PO files at clean time if man/Makefile exists.
 
  -- Colin Watson <cjwatson@debian.org>  Wed, 16 Oct 2013 07:40:24 +0100
 

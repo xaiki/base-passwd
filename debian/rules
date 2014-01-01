@@ -6,7 +6,7 @@ export DEB_CFLAGS_MAINT_APPEND := -Wall
 
 override_dh_auto_clean:
 	# make sure the POT and POs are up to date
-	$(MAKE) -C man update
+	[ ! -f man/Makefile ] || $(MAKE) -C man update
 	-$(MAKE) mrproper
 
 override_dh_shlibdeps:
