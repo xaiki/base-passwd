@@ -1,10 +1,15 @@
+**/*.o
 /Makefile
+/autom4te.cache
 /config.h
+/config.h.in
 /config.log
 /config.status
+/configure
 /update-passwd
 debian/*.debhelper*
 debian/*.substvars
+debian/autoreconf.*
 debian/base-passwd
 debian/files
 debian/substvars
