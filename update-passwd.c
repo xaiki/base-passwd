@@ -1248,12 +1248,7 @@ int put_file_in_place(const char* source, const char* target) {
     if (opt_verbose>2)
 	printf("Replacing \"%s\" with \"%s\"\n", target, source);
 
-    asprintf(&uf, "%s%s", target, BACKUP_EXTENSION);
-
-    if (uf==NULL) {
-	fprintf(stderr, "put_file_in_place: Not enough memory available\n");
-	return 0;
-    }
+    uf=xasprintf("%s%s", target, BACKUP_EXTENSION);
 
     if (!copy_filemodes(target, source)) {
 	free(uf);
@@ -1288,13 +1283,7 @@ int commit_files() {
     if (opt_verbose==2)
 	printf("Writing passwd-file to %s\n", sys_passwd);
 
-    asprintf(&wf, "%s%s", sys_passwd, WRITE_EXTENSION);
-
-    if (wf==NULL) {
-	fprintf(stderr, "Not enough memory available while committing "
-			"passwd-file\n");
-	return 0;
-    }
+    wf=xasprintf("%s%s", sys_passwd, WRITE_EXTENSION);
 
     if (!write_passwd(system_accounts, wf)) {
 	free(wf);
@@ -1312,13 +1301,7 @@ int commit_files() {
 	if (opt_verbose==2)
 	    printf("Writing shadow-file to %s\n", sys_shadow);
 
-	asprintf(&wf, "%s%s", sys_shadow, WRITE_EXTENSION);
-
-	if (wf==NULL) {
-	    fprintf(stderr, "Not enough memory available while committing "
-			    "shadow-file\n");
-	    return 0;
-	}
+	wf=xasprintf("%s%s", sys_shadow, WRITE_EXTENSION);
 
 	if (!write_shadow(system_shadow, wf)) {
 	    free(wf);
@@ -1336,13 +1319,7 @@ int commit_files() {
     if (opt_verbose==2)
 	printf("Writing group-file to %s\n", sys_group);
 
-    asprintf(&wf, "%s%s", sys_group, WRITE_EXTENSION);
-
-    if (wf==NULL) {
-	fprintf(stderr, "Not enough memory available while committing "
-			"group-file\n");
-	return 0;
-    }
+    wf=xasprintf("%s%s", sys_group, WRITE_EXTENSION);
 
     if (!write_group(system_groups, wf)) {
 	free(wf);
