@@ -9,6 +9,15 @@ override_dh_auto_clean:
 	[ ! -f man/Makefile ] || $(MAKE) -C man update
 	-$(MAKE) mrproper
 
+override_dh_installdebconf:
+	touch debian/base-passwd.substvars
+	mv debian/base-passwd.substvars debian/base-passwd.substvars.real
+	dh_installdebconf
+	sed 's/^misc:Depends=/misc:Recommends=/' \
+		debian/base-passwd.substvars \
+		>debian/base-passwd.substvars.real
+	mv debian/base-passwd.substvars.real debian/base-passwd.substvars
+
 override_dh_shlibdeps:
 	dh_shlibdeps -- -dPre-Depends
 
