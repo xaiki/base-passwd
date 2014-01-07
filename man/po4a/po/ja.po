@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base-passwd\n"
-"POT-Creation-Date: 2010-11-22 11:40+0000\n"
+"POT-Creation-Date: 2014-01-07 14:00+0000\n"
 "PO-Revision-Date: 2011-02-18 22:39+0900\n"
 "Last-Translator: KURASAWA Nozomu <nabetaro@caldron.jp>\n"
 "Language-Team: Japanese <debian-doc@debian.or.jp>\n"
@@ -183,8 +183,8 @@ msgstr "B<-v>,\\ B<--verbose>"
 #. type: Plain text
 #: ../update-passwd.8:51
 msgid ""
-"Give detailed information about what we are doing.  A second -v gives additional "
-"detail."
+"Give detailed information about what we are doing.  A second -v gives "
+"additional detail."
 msgstr "処理内容の詳細を提供します。2 個目の -v で、 さらに詳細になります。"
 
 #. type: TP
@@ -240,11 +240,36 @@ msgstr "バージョン番号を表示します。"
 #. type: SH
 #: ../update-passwd.8:66
 #, no-wrap
+msgid "ENVIRONMENT"
+msgstr ""
+
+#. type: TP
+#: ../update-passwd.8:67
+#, no-wrap
+msgid "DEBIAN_HAS_FRONTEND"
+msgstr ""
+
+#. type: Plain text
+#: ../update-passwd.8:81
+msgid ""
+"If this environment variable is sent and the B<--dry-run> flag was not "
+"given, B<update-passwd> uses debconf to prompt for whether to make changes.  "
+"Each proposed change will produce a separate prompt.  User or group "
+"removals, UID or GID changes, and home directory changes will be asked with "
+"high priority.  User or group additions and shell changes will be asked with "
+"medium priority.  Questions about whether to move entries above the NIS "
+"compat inclusion entry or whether to change the GECOS of a user are asked at "
+"low priority."
+msgstr ""
+
+#. type: SH
+#: ../update-passwd.8:81
+#, no-wrap
 msgid "BUGS"
 msgstr "バグ"
 
 #. type: Plain text
-#: ../update-passwd.8:72
+#: ../update-passwd.8:87
 msgid ""
 "At this moment B<update-passwd> does not verify the shadow-file.  It should "
 "check if the entries in the passwd are also in shadow and vice versa, and "
@@ -255,18 +280,18 @@ msgstr ""
 "にないかチェックするべきです。"
 
 #. type: SH
-#: ../update-passwd.8:72
+#: ../update-passwd.8:87
 #, no-wrap
 msgid "AUTHOR"
 msgstr "著者"
 
 #. type: Plain text
-#: ../update-passwd.8:74
+#: ../update-passwd.8:89
 msgid "Wichert Akkerman E<lt>wakkerma@debian.orgE<gt>"
 msgstr "Wichert Akkerman E<lt>wakkerma@debian.orgE<gt>"
 
 #. type: Plain text
-#: ../update-passwd.8:78
+#: ../update-passwd.8:93
 msgid ""
 "This program was written for the Debian project, and is copyright "
 "1999\\(en2002 Wichert Akkerman and copyright 2002, 2003 Colin Watson.  It is "
