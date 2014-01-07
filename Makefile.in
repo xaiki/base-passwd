@@ -22,7 +22,7 @@ objects		= $(patsubst %.c, %.o, $(sources))
 gen_autoheader	= config.h.in
 gen_autoconf	= configure
 gen_configure	= config.cache config.status config.log \
-		  confdefhs.h config.h Makefile
+		  confdefhs.h config.h Makefile man/Makefile
 
 all: update-passwd
 	$(MAKE) -C doc all
