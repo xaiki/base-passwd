@@ -67,7 +67,7 @@ if [ "$2" = "3.2.2" ] && [ -f /etc/passwd.org ] ; then
 	cat <<EOF
 
 You are upgrading from version 3.2.2 of base-passwd which had a nasty
-bug: it swapped the uid and gid of local accounts. If you have not
+bug: it swapped the uid and gid of local accounts.  If you have not
 fixed this problem manually I can undo the changes by restoring your
 previous passwd file from the backup /etc/passwd.org.
 
@@ -91,7 +91,7 @@ if ! update-passwd --dry-run > $tmp ; then
 		cat <<EOF
 
 update-passwd has found some differences between your system accounts
-and the current Debian defaults. It is advisable to allow update-passwd
+and the current Debian defaults.  It is advisable to allow update-passwd
 to change your system; without those changes some packages might not work
 correctly.  For more documentation on the Debian account policies, please
 see /usr/share/doc/base-passwd/README.
@@ -118,7 +118,7 @@ EOF
 	elif [ "$a" = "n" ] ; then
 		cat <<EOF
 
-Okay, I will not update your system. If you want to make this update later
+Okay, I will not update your system.  If you want to make this update later
 please check the update-passwd utility.
 
 EOF
