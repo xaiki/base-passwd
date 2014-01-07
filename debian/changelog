@@ -5,6 +5,7 @@ base-passwd (3.5.30) UNRELEASED; urgency=medium
   * Change the shell of all global static users other than root (which
     retains /bin/sh) and sync (as /bin/sync is rather harmless) to
     /usr/sbin/nologin (closes: #274229; LP: #216813, #248844).
+  * Policy version 3.9.5.
 
   [ Russ Allbery ]
   * Add support for debconf prompting to update-passwd (closes: #184979).
