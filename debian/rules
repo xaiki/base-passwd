@@ -4,11 +4,6 @@
 
 export DEB_CFLAGS_MAINT_APPEND := -Wall
 
-override_dh_auto_clean:
-	# make sure the POT and POs are up to date
-	[ ! -f man/Makefile ] || $(MAKE) -C man update
-	-$(MAKE) mrproper
-
 override_dh_installdebconf:
 	touch debian/base-passwd.substvars
 	mv debian/base-passwd.substvars debian/base-passwd.substvars.real

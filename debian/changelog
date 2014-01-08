@@ -3,6 +3,7 @@ base-passwd (3.5.31) UNRELEASED; urgency=medium
   * Pick up version number for "update-passwd --version" from autoconf,
     rather than having a separate manually-updated and out-of-date
     version.h.
+  * Convert hand-crafted Makefiles to Automake.
 
  -- Colin Watson <cjwatson@debian.org>  Wed, 08 Jan 2014 15:47:35 +0000
 
