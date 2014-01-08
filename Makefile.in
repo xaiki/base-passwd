@@ -33,8 +33,6 @@ install: all
 	$(INSTALL) update-passwd $(DESTDIR)$(sbindir)/
 	$(MAKE) -C man install
 
-update-passwd.o: version.h
-
 update-passwd: $(objects)
 	$(CC) $(LDFLAGS) -o $@ $^ -ldebconfclient
 

@@ -21,8 +21,6 @@
 #include "config.h"
 #endif
 
-#include "version.h"
-
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
@@ -614,7 +612,7 @@ void usage() {
 /* Simple function to print our name and version
  */
 void version() {
-    printf("update-passwd %s\n", VERSION);
+    printf("update-passwd %s\n", PACKAGE_VERSION);
 }
 
 
