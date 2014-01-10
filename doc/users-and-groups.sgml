@@ -361,8 +361,10 @@
 	<term>gnats</term>
 	<listitem>
 	  <para>
-	    HELP: Evidently used by <command>gnats</command>. And it needs a
-	    static set why?
+	    Used by <command>gnats</command>. This has a statically
+	    allocated user and group for purely historical reasons (it could
+	    equally well use a dynamic system user and group), but it's
+	    cumbersome to change now.
 	  </para>
 	</listitem>
       </varlistentry>
