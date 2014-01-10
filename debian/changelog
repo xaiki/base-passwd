@@ -1,4 +1,4 @@
-base-passwd (3.5.31) UNRELEASED; urgency=medium
+base-passwd (3.5.31) unstable; urgency=medium
 
   * Pick up version number for "update-passwd --version" from autoconf,
     rather than having a separate manually-updated and out-of-date
@@ -6,7 +6,7 @@ base-passwd (3.5.31) UNRELEASED; urgency=medium
   * Convert hand-crafted Makefiles to Automake.
   * users-and-groups: Add a little more commentary on gnats.
 
- -- Colin Watson <cjwatson@debian.org>  Wed, 08 Jan 2014 15:47:35 +0000
+ -- Colin Watson <cjwatson@debian.org>  Fri, 10 Jan 2014 13:39:58 +0000
 
 base-passwd (3.5.30) unstable; urgency=medium
 
