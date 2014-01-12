@@ -1,3 +1,10 @@
+base-passwd (3.5.32) UNRELEASED; urgency=medium
+
+  * Debconf translations:
+    - Portuguese (thanks, Américo Monteiro; closes: #735036).
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 12 Jan 2014 10:10:06 +0000
+
 base-passwd (3.5.31) unstable; urgency=medium
 
   * Pick up version number for "update-passwd --version" from autoconf,
