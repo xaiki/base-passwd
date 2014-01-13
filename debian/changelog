@@ -2,6 +2,8 @@ base-passwd (3.5.32) UNRELEASED; urgency=medium
 
   * Debconf translations:
     - Portuguese (thanks, Américo Monteiro; closes: #735036).
+  * update-passwd(8) translations:
+    - German (thanks, Helge Kreutzmann; closes: #735149).
 
  -- Colin Watson <cjwatson@debian.org>  Sun, 12 Jan 2014 10:10:06 +0000
 
