@@ -2,6 +2,7 @@ base-passwd (3.5.32) UNRELEASED; urgency=medium
 
   * Debconf translations:
     - Portuguese (thanks, Américo Monteiro; closes: #735036).
+    - Russian (thanks, Yuri Kozlov; closes: #735480).
   * update-passwd(8) translations:
     - German (thanks, Helge Kreutzmann; closes: #735149).
     - Portuguese (thanks, Américo Monteiro; closes: #735247).
