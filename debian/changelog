@@ -1,3 +1,10 @@
+base-passwd (3.5.33) UNRELEASED; urgency=medium
+
+  * Debconf translations:
+    - French (thanks, Steve Petruzzello; closes: #736506).
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 24 Jan 2014 13:47:34 +0000
+
 base-passwd (3.5.32) unstable; urgency=medium
 
   * Debconf translations:
