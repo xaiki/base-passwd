@@ -1,6 +1,5 @@
 dnl Initialize the autoconf process
-AC_INIT([base-passwd],
-	m4_esyscmd_s([head -n1 debian/changelog | sed -n 's/.*(\(.*\)).*/\1/p']))
+AC_INIT([base-passwd], [3.5.33])
 AC_CONFIG_SRCDIR([update-passwd.c])
 AC_CONFIG_HEADER([config.h])
 AC_PREFIX_DEFAULT([/usr])
