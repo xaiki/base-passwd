@@ -16,3 +16,17 @@ list:*:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
 irc:*:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
 gnats:*:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
 nobody:*:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+libuuid:*:100:101::/var/lib/libuuid:/usr/sbin/nologin
+messagebus:*:101:105::/var/run/dbus:/usr/sbin/nologin
+avahi:*:102:106:Avahi mDNS daemon,,,:/var/run/avahi-daemon:/usr/sbin/nologin
+usbmux:*:103:46:usbmux daemon,,,:/home/usbmux:/usr/sbin/nologin
+dnsmasq:*:104:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+polkitd:*:105:65534::/home/polkitd:/usr/sbin/nologin
+colord:*:106:112:colord colour management daemon,,,:/var/lib/colord:/usr/sbin/nologin
+pulse:*:107:114:PulseAudio daemon,,,:/var/run/pulse:/usr/sbin/nologin
+rtkit:*:108:116:RealtimeKit,,,:/proc:/usr/sbin/nologin
+Debian-gdm:*:109:117:Gnome Display Manager:/var/lib/gdm3:/usr/sbin/nologin
+gnome-initial-setup:*:110:65534::/run/gnome-initial-setup/:/usr/sbin/nologin
+elasticsearch:*:111:118::/usr/share/elasticsearch:/usr/sbin/nologin
+ntp:*:112:119::/home/ntp:/usr/sbin/nologin
+metrics:*:113:120:Endless Metrics Daemon::/usr/sbin/nologin
