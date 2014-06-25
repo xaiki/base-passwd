@@ -31,3 +31,4 @@ elasticsearch:*:111:118::/usr/share/elasticsearch:/usr/sbin/nologin
 ntp:*:112:119::/home/ntp:/usr/sbin/nologin
 metrics:*:113:120:Endless Metrics Daemon::/usr/sbin/nologin
 geoclue:*:114:122::/var/lib/geoclue:/usr/sbin/nologin
+speech-dispatcher:*:115:29:Speech Dispatcher,,,:/var/run/speech-dispatcher:/usr/sbin/nologin
