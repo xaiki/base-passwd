@@ -58,3 +58,4 @@ elasticsearch:x:118:
 ntp:x:119:
 metrics:x:120:
 systemd-journal:x:121:
+geoclue:x:122:
