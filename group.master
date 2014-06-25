@@ -57,3 +57,4 @@ Debian-gdm:x:117:
 elasticsearch:x:118:
 ntp:x:119:
 metrics:x:120:
+systemd-journal:x:121:
