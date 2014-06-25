@@ -22,3 +22,8 @@ clean-local:
 po4a-stamp: update-passwd.8
 	cd po4a && po4a po4a.cfg
 	touch $@
+
+EXTRA_DIST = \
+	update-passwd.8 \
+	update-passwd.pl.8 \
+	po4a
