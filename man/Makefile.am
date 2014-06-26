@@ -10,7 +10,7 @@ install-data-local: po4a/po/base-passwd.pot
 	$(INSTALL_DATA) $(srcdir)/update-passwd.8 $(DESTDIR)$(mandir)/man8/
 	set -e; for lang in $(LANGS); do \
 		mkdir -p $(DESTDIR)$(mandir)/$$lang/man8; \
-		$(INSTALL_DATA) update-passwd.$$lang.8 \
+		$(INSTALL_DATA) $(top_builddir)/update-passwd.$$lang.8 \
 			$(DESTDIR)$(mandir)/$$lang/man8/update-passwd.8; \
 	done
 # RAW_LANGS files live in $(srcdir)
@@ -28,14 +28,14 @@ uninstall-local:
 
 clean-local:
 	set -e; for lang in $(LANGS); do \
-		rm -f update-passwd.$$lang.8; \
+		rm -f $(top_builddir)/update-passwd.$$lang.8; \
 	done
 
 po4a-stamp: update-passwd.8
-	cp -a $(srcdir)/po4a $(srcdir)/update-passwd.8 $(builddir)
-	cd po4a && po4a po4a.cfg
-	chmod -R +w $(builddir)/po4a $(builddir)/update-passwd.8
-	rm -rf $(builddir)/po4a $(builddir)/update-passwd.8
+	cp -a $(srcdir)/po4a $(srcdir)/update-passwd.8 $(top_builddir)
+	cd $(top_builddir)/po4a && po4a po4a.cfg
+	chmod -R +w $(top_builddir)/po4a $(top_builddir)/update-passwd.8
+	rm -rf $(top_builddir)/po4a $(top_builddir)/update-passwd.8
 	touch $@
 
 EXTRA_DIST = \
