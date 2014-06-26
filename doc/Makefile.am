@@ -9,7 +9,7 @@ users-and-groups.html: users-and-groups.sgml
 	mv $(top_builddir)/users-and-groups.html $(builddir)
 	rm -f $(top_builddir)/users-and-groups.sgml
 
-users-and-groups.txt: users-and-groups.sgml
+users-and-groups.txt: users-and-groups.sgml users-and-groups.html
 	cp $(srcdir)/users-and-groups.sgml $(top_builddir)
 	sgmltools -b txt $(top_builddir)/users-and-groups.sgml
 	mv $(top_builddir)/users-and-groups.txt $(builddir)
