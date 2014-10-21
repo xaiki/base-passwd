@@ -33,3 +33,4 @@ metrics:*:113:120:Endless Metrics Daemon::/usr/sbin/nologin
 geoclue:*:114:122::/var/lib/geoclue:/usr/sbin/nologin
 speech-dispatcher:*:115:29:Speech Dispatcher,,,:/var/run/speech-dispatcher:/usr/sbin/nologin
 app-manager:*:116:123:Endless App Manager:/var/endless:/usr/sbin/nologin
+hplip:*:117:7:HPLIP system user,,,:/var/run/hplip:/usr/sbin/nologin
