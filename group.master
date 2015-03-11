@@ -37,7 +37,7 @@ staff:*:50:
 games:*:60:
 users:*:100:
 nogroup:*:65534:
-libuuid:x:101:
+uuidd:x:101:
 crontab:x:102:
 fuse:x:103:
 ssl-cert:x:104:

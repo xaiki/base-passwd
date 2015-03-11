@@ -16,7 +16,7 @@ list:*:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
 irc:*:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
 gnats:*:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
 nobody:*:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
-libuuid:*:100:101::/var/lib/libuuid:/usr/sbin/nologin
+uuidd:x:100:101::/run/uuidd:/bin/false
 messagebus:*:101:105::/var/run/dbus:/usr/sbin/nologin
 avahi:*:102:106:Avahi mDNS daemon,,,:/var/run/avahi-daemon:/usr/sbin/nologin
 usbmux:*:103:46:usbmux daemon,,,:/home/usbmux:/usr/sbin/nologin
